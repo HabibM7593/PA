@@ -18,6 +18,7 @@ import com.example.benevent.R;
 import com.example.benevent.ui.fragment.EventFragment;
 import com.example.benevent.ui.fragment.FeedbackFragment;
 import com.example.benevent.ui.fragment.HomeFragment;
+import com.example.benevent.ui.fragment.QRcodeFragment;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -160,13 +161,20 @@ public class FragmentManagerActivity extends AppCompatActivity
             fragment = new HomeFragment();
             setTitle("Home");
         }
+
         if(id == R.id.nav_feedback){
             fragment = new FeedbackFragment();
             setTitle("Feedback");
         }
+
         if(id == R.id.nav_event){
             fragment = new EventFragment();
             setTitle("Event");
+        }
+
+        if(id == R.id.nav_qrcode){
+            fragment = new QRcodeFragment();
+            setTitle("QR Code");
         }
 
 
