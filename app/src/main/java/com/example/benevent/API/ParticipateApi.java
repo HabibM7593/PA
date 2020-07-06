@@ -1,11 +1,13 @@
 package com.example.benevent.API;
 
-import com.example.benevent.Models.Feedback;
+
+import com.example.benevent.Models.ParticipationValide;
+
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.PATCH;
 
 public interface ParticipateApi {
-    @PATCH("events")
-    Call<Void> sendFeedback(@Body Feedback feedback);
+    @PATCH("participation")
+    Call<Void> ConfirmParticipation(@Body ParticipationValide participationValide);
 }
