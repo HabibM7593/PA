@@ -16,6 +16,9 @@ import com.example.benevent.API.NetworkClient;
 import com.example.benevent.Models.Feedback;
 import com.example.benevent.R;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import androidx.fragment.app.Fragment;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -81,10 +84,10 @@ public class FeedbackFragment extends Fragment {
         // Inflate the layout for this fragment
         int iduser = pref.getInt("userid",0);
         View view = inflater.inflate(R.layout.fragment_feedback, container, false);
-        final EditText titrefeedback = (EditText) view.findViewById(R.id.edobjetfeedback);
-        final EditText contentfeedback = (EditText) view.findViewById(R.id.edcontentfeedback);
-        final Switch switchbug = (Switch) view.findViewById(R.id.switchbug);
-        final Button sendfeedback = (Button) view.findViewById(R.id.btn_feedback);
+        final EditText titrefeedback = (EditText) view.findViewById(R.id.object_feedback);
+        final EditText contentfeedback = (EditText) view.findViewById(R.id.content_feedback);
+        final Switch switchbug = (Switch) view.findViewById(R.id.switch_bug);
+        final Button sendfeedback = (Button) view.findViewById(R.id.button_feedback);
         sendfeedback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -92,7 +95,10 @@ public class FeedbackFragment extends Fragment {
                 if (switchbug.isChecked()){
                     type=1;
                 }else type=2;
-                SendFeedback(new Feedback(titrefeedback.getText().toString(),contentfeedback.getText().toString(),type, "ANDROID",iduser));
+                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                Date date = new Date();
+                System.out.println(formatter.format(date));
+                SendFeedback(new Feedback(iduser,titrefeedback.getText().toString(),contentfeedback.getText().toString(),formatter.format(date),"",type, "ANDROID"));
             }
         });
         return view;
