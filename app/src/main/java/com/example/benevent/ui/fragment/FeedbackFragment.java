@@ -1,5 +1,6 @@
 package com.example.benevent.ui.fragment;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -21,6 +22,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
+import static android.content.Context.MODE_PRIVATE;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -28,6 +31,8 @@ import retrofit2.Retrofit;
  * create an instance of this fragment.
  */
 public class FeedbackFragment extends Fragment {
+
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -62,6 +67,7 @@ public class FeedbackFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
@@ -71,7 +77,9 @@ public class FeedbackFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        SharedPreferences pref = this.getActivity().getSharedPreferences("login", MODE_PRIVATE);
         // Inflate the layout for this fragment
+        int iduser = pref.getInt("userid",0);
         View view = inflater.inflate(R.layout.fragment_feedback, container, false);
         final EditText titrefeedback = (EditText) view.findViewById(R.id.edobjetfeedback);
         final EditText contentfeedback = (EditText) view.findViewById(R.id.edcontentfeedback);
@@ -84,8 +92,7 @@ public class FeedbackFragment extends Fragment {
                 if (switchbug.isChecked()){
                     type=1;
                 }else type=2;
-                Log.d("test","test");
-                SendFeedback(new Feedback(titrefeedback.getText().toString(),contentfeedback.getText().toString(),type, "ANDROID"));
+                SendFeedback(new Feedback(titrefeedback.getText().toString(),contentfeedback.getText().toString(),type, "ANDROID",iduser));
             }
         });
         return view;

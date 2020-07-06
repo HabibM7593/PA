@@ -3,7 +3,7 @@ package com.example.benevent.Models;
 import java.util.Date;
 
 public class User {
-    int id ;
+    int idu ;
     String name;
     String firstname;
     Date age;
@@ -14,8 +14,8 @@ public class User {
     String address;
     String description;
 
-    public User(int id, String name, String firstname, Date age, String email, String password, String phone, String profilepicture, String address, String description) {
-        this.id = id;
+    public User(int idu, String name, String firstname, Date age, String email, String password, String phone, String profilepicture, String address, String description) {
+        this.idu = idu;
         this.name = name;
         this.firstname = firstname;
         this.age = age;
@@ -32,11 +32,11 @@ public class User {
     }
 
     public int getId() {
-        return id;
+        return idu;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId(int idu) {
+        this.idu = idu;
     }
 
     public String getName() {

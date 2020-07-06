@@ -1,16 +1,25 @@
 package com.example.benevent.Models;
 public class Feedback {
+    int idu;
     String title;
     String content;
     int idty;
     String plateform;
 
-    public Feedback(String title, String content, int idty,String plateform) {
+    public Feedback(String title, String content, int idty,String plateform, int idu) {
         this.title = title;
         this.content = content;
         this.idty = idty;
         this.plateform = plateform;
+        this.idu = idu;
+    }
 
+    public int getIdu() {
+        return idu;
+    }
+
+    public void setIdu(int idu) {
+        this.idu = idu;
     }
 
     public String getPlateform() {
