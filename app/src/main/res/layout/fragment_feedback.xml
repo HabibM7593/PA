@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.fragment.FeedbackFragment">
+
+    <Button
+        android:id="@+id/btn_feedback"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="send feedback"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/switchbug" />
+
+    <EditText
+        android:id="@+id/edobjetfeedback"
+        android:layout_width="350dp"
+        android:layout_height="48dp"
+        android:ems="10"
+        android:hint="objet"
+        android:inputType="textPersonName"
+        android:maxLength="50"
+        app:layout_constraintBottom_toTopOf="@+id/switchbug"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/edcontentfeedback"
+        android:layout_width="350dp"
+        android:layout_height="135dp"
+        android:ems="10"
+        android:hint="Content limit 255char"
+        android:inputType="text|textMultiLine"
+        android:maxLength="255"
+        android:singleLine="false"
+        app:layout_constraintBottom_toTopOf="@+id/switchbug"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edobjetfeedback" />
+
+    <Switch
+        android:id="@+id/switchbug"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Decalrer un bug ?"
+        app:layout_constraintBottom_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
