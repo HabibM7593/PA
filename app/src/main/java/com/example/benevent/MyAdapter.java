@@ -57,7 +57,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         Date dateEvent = event.getDateDeb();
         Date dateToday = new Date();
-        
+
         holder.nameEventTV.setText(event.getName());
 
         if (dateEvent.after(dateToday)) {

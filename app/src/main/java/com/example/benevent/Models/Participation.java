@@ -1,12 +1,12 @@
 package com.example.benevent.Models;
 
-public class ParticipationValide {
+public class Participation {
     int idev;
     int idu;
     boolean participate;
     boolean status;
 
-    public ParticipationValide(int idev, int idu, boolean participate, boolean status) {
+    public Participation(int idev, int idu, boolean participate, boolean status) {
         this.idev = idev;
         this.idu = idu;
         this.participate = participate;
