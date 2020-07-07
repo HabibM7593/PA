@@ -1,5 +1,7 @@
 package com.example.benevent.Models;
 
+import android.util.Log;
+
 import java.util.Date;
 
 public class Event {
@@ -9,7 +11,7 @@ public class Event {
     Date dateDeb;
     Date dateFin;
     String location;
-    int maxbenevole;
+    int maxBenevole;
     String info;
     int idcat;
     int idas;
@@ -18,14 +20,14 @@ public class Event {
         this.name = name;
     }
 
-    public Event(int idev, String name, String description, Date dateDeb, Date dateFin, String location, int maxbenevole, String info, int idcat, int idas) {
+    public Event(int idev, String name, String description, Date dateDeb, Date dateFin, String location, int maxBenevole, String info, int idcat, int idas) {
         this.idev = idev;
         this.name = name;
         this.description = description;
         this.dateDeb = dateDeb;
         this.dateFin = dateFin;
         this.location = location;
-        this.maxbenevole = maxbenevole;
+        this.maxBenevole = maxBenevole;
         this.info = info;
         this.idcat = idcat;
         this.idas = idas;
@@ -83,12 +85,10 @@ public class Event {
         this.location = location;
     }
 
-    public int getMaxbenevole() {
-        return maxbenevole;
-    }
+    public int getMaxbenevole() { return maxBenevole; }
 
     public void setMaxbenevole(int maxbenevole) {
-        this.maxbenevole = maxbenevole;
+        this.maxBenevole = maxBenevole;
     }
 
     public String getInfo() {

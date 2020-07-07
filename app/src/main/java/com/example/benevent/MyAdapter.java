@@ -26,6 +26,7 @@ import java.util.List;
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
     private List<Event> listEvents;
+
     public List<Event> getListEvents() {
         return listEvents;
     }
@@ -62,7 +63,9 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         bt1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EventDetailsFragment edFragment = new EventDetailsFragment();
+                Event newEvent = listEvents.get(vh.getAdapterPosition()) ;
+
+                EventDetailsFragment edFragment = new EventDetailsFragment(newEvent);
                 ((FragmentActivity) v.getContext()).getSupportFragmentManager().beginTransaction()
                         .replace(R.id.frame_event, edFragment)
                         .commit();

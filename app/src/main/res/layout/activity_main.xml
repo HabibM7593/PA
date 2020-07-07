@@ -35,7 +35,7 @@
         android:inputType="textEmailAddress"
         android:hint="Adresse Mail"
         android:gravity="center"
-        android:background="@drawable/back_border"
+        android:background="@drawable/background_border"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginBottom="30dp"
@@ -50,7 +50,7 @@
         android:inputType="textPassword"
         android:hint="Mot de passe"
         android:gravity="center"
-        android:background="@drawable/back_border"
+        android:background="@drawable/background_border"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

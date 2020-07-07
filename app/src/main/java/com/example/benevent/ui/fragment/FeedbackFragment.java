@@ -42,7 +42,7 @@ public class FeedbackFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         SharedPreferences pref = this.getActivity().getSharedPreferences("login", MODE_PRIVATE);
-        // Inflate the layout for this fragment
+
         int iduser = pref.getInt("userid",0);
         View view = inflater.inflate(R.layout.fragment_feedback, container, false);
         final EditText titrefeedback = (EditText) view.findViewById(R.id.object_feedback);

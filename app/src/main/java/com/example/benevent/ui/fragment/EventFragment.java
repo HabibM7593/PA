@@ -5,12 +5,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -46,13 +43,14 @@ public class EventFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_event, container, false);
 
         recyclerView = root.findViewById(R.id.recycler_event);
+
         EventApi event = retrofit.create(EventApi.class);
-        Call call = event.getEvents();
+        Call callEvent = event.getEvents();
 
         final FragmentActivity Event = getActivity();
         LLM = new LinearLayoutManager(Event);
         recyclerView.setLayoutManager(LLM);
-        call.enqueue(
+        callEvent.enqueue(
                 new Callback<List<Event>>() {
 
                     @Override
