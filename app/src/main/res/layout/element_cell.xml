@@ -1,17 +1,40 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="80dp"
-    android:orientation="horizontal">
+    android:layout_marginTop="5dp"
+    android:layout_marginRight="3dp"
+    android:layout_marginLeft="3dp"
+    android:orientation="horizontal"
+    android:background="@drawable/background_border">
 
-    <TextView
-        android:id="@+id/element_cell_text"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text=""
-        android:textSize="25dp"
-        tools:text="test" />
+        <TextView
+            android:id="@+id/name_event"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textSize="25dp"
+            android:layout_marginLeft="10dp"
+            android:textColor="@color/colorBlack"
+            tools:text="test" />
 
+        <ImageButton
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignBaseline="@+id/name_event"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/right_chevron"
+            android:background="@android:color/white"/>
 
-</LinearLayout>
+        <TextView
+            android:id="@+id/date_event"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginTop="35dp"
+            android:layout_marginLeft="25dp"
+            android:textSize="15dp"
+            android:textColor="@color/colorBlack"
+            tools:text="test date" />
+
+</RelativeLayout>
 

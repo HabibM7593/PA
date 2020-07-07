@@ -10,6 +10,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.benevent.Models.Event;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
@@ -30,12 +32,13 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         public View view;
-
-        public TextView textView;
+        public TextView nameEventTV;
+        public TextView dateEventTV;
         public MyViewHolder(View v) {
             super(v);
             view = v;
-            textView = v.findViewById(R.id.element_cell_text);
+            nameEventTV = v.findViewById(R.id.name_event);
+            dateEventTV = v.findViewById(R.id.date_event);
         }
     }
     @NonNull
@@ -50,7 +53,23 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         Event event = listEvents.get(position);
-        holder.textView.setText(listEvents.get(position).getName());
+
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        Date dateEvent = event.getDateDeb();
+        Date dateToday = new Date();
+        
+        holder.nameEventTV.setText(event.getName());
+
+        if (dateEvent.after(dateToday)) {
+            holder.dateEventTV.setText("Debutera le " + formatter.format(dateEvent));
+            holder.dateEventTV.setTextColor(0xFF82C26E);
+        } else if (dateEvent.equals(dateToday)) {
+            holder.dateEventTV.setText("Débuté depuis le " + formatter.format(dateEvent));
+            holder.dateEventTV.setTextColor(0XFF858181);
+        } else if (dateEvent.before(dateToday)) {
+            holder.dateEventTV.setText("Terminé le " + formatter.format(dateEvent));
+            holder.dateEventTV.setTextColor(0XFFEB1C1C);
+        }
     }
 
     @Override
