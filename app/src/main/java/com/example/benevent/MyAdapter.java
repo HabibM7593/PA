@@ -1,22 +1,31 @@
 package com.example.benevent;
 
+import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.benevent.Models.Event;
+import com.example.benevent.ui.fragment.EventDetailsFragment;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
-    private List<Event> listEvents;
 
+    private List<Event> listEvents;
     public List<Event> getListEvents() {
         return listEvents;
     }
@@ -31,9 +40,11 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
+
         public View view;
         public TextView nameEventTV;
         public TextView dateEventTV;
+
         public MyViewHolder(View v) {
             super(v);
             view = v;
@@ -47,6 +58,16 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         View v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.element_cell, parent, false);
         MyViewHolder vh = new MyViewHolder(v);
+        ImageButton bt1 = v.findViewById(R.id.button_event_view);
+        bt1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EventDetailsFragment edFragment = new EventDetailsFragment();
+                ((FragmentActivity) v.getContext()).getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.frame_event, edFragment)
+                        .commit();
+            }
+        });
         return vh;
     }
 

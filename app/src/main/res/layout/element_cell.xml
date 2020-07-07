@@ -18,6 +18,7 @@
             tools:text="test" />
 
         <ImageButton
+            android:id="@+id/button_event_view"
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_alignParentRight="true"

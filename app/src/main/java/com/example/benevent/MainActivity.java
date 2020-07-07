@@ -29,7 +29,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    Context context= this ;
+    Context context = this ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

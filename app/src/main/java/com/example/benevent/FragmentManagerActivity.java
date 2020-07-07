@@ -1,6 +1,7 @@
 package com.example.benevent;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -8,11 +9,14 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.benevent.API.NetworkClient;
 import com.example.benevent.API.UserApi;
+import com.example.benevent.Models.Event;
 import com.example.benevent.Models.User;
 import com.example.benevent.R;
 import com.example.benevent.ui.fragment.EventFragment;
