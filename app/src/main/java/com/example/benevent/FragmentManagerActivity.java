@@ -49,6 +49,8 @@ public class FragmentManagerActivity extends AppCompatActivity
 
     Retrofit retrofit = NetworkClient.getRetrofitClient();
 
+    Context context = this ;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -195,6 +197,32 @@ public class FragmentManagerActivity extends AppCompatActivity
         return true;
     }
 
+    public void LogOut(MenuItem item) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        builder.setTitle("Déconnexion");
+        builder.setMessage("Voulez-vous vraiment vous déconnecter ?");
+
+        builder.setPositiveButton("Déconnexion", new DialogInterface.OnClickListener() {
+
+            public void onClick(DialogInterface dialog, int which) {
+                Intent intent = new Intent(context, MainActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        builder.setNegativeButton("Non", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+
+        AlertDialog alert = builder.create();
+        alert.show();
+    }
+
     @Override
     public void onFragmentInteraction(String title) {
 
@@ -206,5 +234,4 @@ public class FragmentManagerActivity extends AppCompatActivity
         fragmentTransaction.replace(R.id.frame, fragment);
         fragmentTransaction.commit();
     }
-
 }

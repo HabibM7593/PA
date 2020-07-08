@@ -9,6 +9,7 @@
         app:showAsAction="never" />
     <item
         android:id="@+id/action_login_out"
-        android:title="log out"
+        android:title="Déconnexion"
+        android:onClick="LogOut"
         app:showAsAction="never" />
 </menu>

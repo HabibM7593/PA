@@ -20,4 +20,9 @@
     <string name="feedback_content_string">Maximum 255 caractères</string>
     <string name="object_feedback_string">objet</string>
     <string name="title_feedback">Envoyer un Feedback</string>
+    <string name="hint_email">Adresse Mail</string>
+    <string name="app_logo">Logo</string>
+    <string name="hint_password">Mot de passe</string>
+    <string name="connexion_label">Connexion</string>
+    <string name="signup_label">S\'inscrire</string>
 </resources>
