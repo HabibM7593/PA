@@ -9,6 +9,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -17,6 +18,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.benevent.API.NetworkClient;
@@ -30,11 +32,22 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     Context context = this ;
+    public TextView signupTV;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        signupTV = findViewById(R.id.no_account_button);
+        signupTV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, SignupActivity.class);
+                startActivity(intent);
+                //overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
+            }
+        });
     }
 
     public void Signin(View view){
@@ -48,9 +61,9 @@ public class MainActivity extends AppCompatActivity {
     private void loginUser(Login login){
         Retrofit retrofit = NetworkClient.getRetrofitClient();
 
-        UserApi userAPI = retrofit.create(UserApi.class);
+        UserApi userApi = retrofit.create(UserApi.class);
 
-        Call call = userAPI.logUser(login);
+        Call call = userApi.logUser(login);
         /*
         This is the line which actually sends a network request. Calling enqueue() executes a call asynchronously. It has two callback listeners which will invoked on the main thread
         */
@@ -71,15 +84,15 @@ public class MainActivity extends AppCompatActivity {
                     editor.apply();
                     Intent intent = new Intent(context, FragmentManagerActivity.class);
                     startActivity(intent);
-                }
-                else{
-                    Toast.makeText(getApplicationContext(),"Verifiez vos identifiants",Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(getApplicationContext(), "Verifiez vos identifiants", Toast.LENGTH_LONG).show();
                 }
             }
+
             @Override
             public void onFailure(Call call, Throwable t) {
-                Log.e("test", "onFailure: "+t );
-                Toast.makeText(getApplicationContext(),t.toString(),Toast.LENGTH_LONG).show();
+                Log.e("FailSignin", "onFailure : " + t );
+                Toast.makeText(getApplicationContext(), t.toString(), Toast.LENGTH_LONG).show();
             }
         });
     }
