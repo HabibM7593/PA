@@ -22,6 +22,7 @@
 
         <ImageButton
             android:id="@+id/button_event_view"
+            android:contentDescription="@string/view_arrow"
 
             android:layout_width="20dp"
             android:layout_height="20dp"

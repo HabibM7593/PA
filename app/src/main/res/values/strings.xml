@@ -36,4 +36,17 @@
     <string name="back_arrow">Back Arrow</string>
 
     <string name="no_account">Pas encore de compte ?</string>
+    <string name="asso_logo">asso logo</string>
+    <string name="view_arrow">view arrow</string>
+    <string name="hint_asso">asso</string>
+    <string name="hint_event_name">nom de l\'évent</string>
+    <string name="calendar_logo">calendar logo</string>
+    <string name="hint_event_dateD">dateDeb de l\'évent</string>
+    <string name="hint_event_dateF">dateFin de l\'évent</string>
+    <string name="place_logo">place logo</string>
+    <string name="hint_localisation">localisation de l\'évent</string>
+    <string name="group_logo">group logo</string>
+    <string name="hint_event_maxB">maxBenevole de l\'évent</string>
+    <string name="info_label">Informations :</string>
+    <string name="hint_event_desc">description de l\'évent</string>
 </resources>
