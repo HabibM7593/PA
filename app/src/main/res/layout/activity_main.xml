@@ -109,7 +109,7 @@
 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingStart="0dp"
+        android:paddingStart="5dp"
         android:paddingEnd="100dp"
 
         android:text="@string/signup_label"

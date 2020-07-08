@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Benevent</string>
 
+    <!--Nav view name-->
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Android Studio</string>
@@ -8,45 +9,49 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
+    <!--Menu Name-->
     <string name="menu_home">Home</string>
     <string name="menu_event">Evènements</string>
     <string name="menu_feedback">Feedback</string>
     <string name="menu_qrcode">Scan Event</string>
     <string name="action_settings">Settings</string>
 
+    <!--Hint Strings-->
     <string name="hint_name">Nom</string>
     <string name="hint_firstname">Prénom</string>
     <string name="hint_age">Date de naissance</string>
     <string name="hint_email">Adresse Mail</string>
     <string name="hint_password">Mot de passe</string>
+    <string name="hint_asso">asso</string>
+    <string name="hint_event_name">nom de l\'évent</string>
+    <string name="hint_event_dateD">dateDeb de l\'évent</string>
+    <string name="hint_event_dateF">dateFin de l\'évent</string>
+    <string name="hint_localisation">localisation de l\'évent</string>
+    <string name="hint_event_maxB">maxBenevole de l\'évent</string>
+    <string name="hint_event_desc">description de l\'évent</string>
 
+    <!--Other-->
     <string name="connexion_label">Connexion</string>
     <string name="signup_label">S\'inscrire</string>
-
-
-
     <string name="bienvenue">Bienvenue sur Benevent</string>
     <string name="bug_text">Déclarer un bug ?</string>
     <string name="feedback_string">Envoyer le feedback</string>
     <string name="feedback_content_string">Maximum 255 caractères</string>
     <string name="object_feedback_string">objet</string>
     <string name="title_feedback">Envoyer un Feedback</string>
-
     <string name="app_logo">Logo</string>
     <string name="back_arrow">Back Arrow</string>
-
     <string name="no_account">Pas encore de compte ?</string>
     <string name="asso_logo">asso logo</string>
     <string name="view_arrow">view arrow</string>
-    <string name="hint_asso">asso</string>
-    <string name="hint_event_name">nom de l\'évent</string>
     <string name="calendar_logo">calendar logo</string>
-    <string name="hint_event_dateD">dateDeb de l\'évent</string>
-    <string name="hint_event_dateF">dateFin de l\'évent</string>
     <string name="place_logo">place logo</string>
-    <string name="hint_localisation">localisation de l\'évent</string>
     <string name="group_logo">group logo</string>
-    <string name="hint_event_maxB">maxBenevole de l\'évent</string>
     <string name="info_label">Informations :</string>
-    <string name="hint_event_desc">description de l\'évent</string>
+    <string name="qr_edit_text">Enter Text Here</string>
+    <string name="qr_button_generate">Click Here TO generate qr code</string>
+    <string name="qr_button_scan">Scan Your QR Code</string>
+    <string name="text_here">TextHere</string>
+    <string name="qrcode">QrCode</string>
+
 </resources>
