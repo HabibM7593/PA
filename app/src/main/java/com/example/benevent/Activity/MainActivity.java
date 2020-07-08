@@ -1,7 +1,6 @@
-package com.example.benevent;
+package com.example.benevent.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -9,14 +8,11 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,6 +21,7 @@ import com.example.benevent.API.NetworkClient;
 import com.example.benevent.API.UserApi;
 import com.example.benevent.Models.Login;
 import com.example.benevent.Models.User;
+import com.example.benevent.R;
 
 
 import java.util.List;

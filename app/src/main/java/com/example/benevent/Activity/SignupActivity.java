@@ -1,4 +1,4 @@
-package com.example.benevent;
+package com.example.benevent.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -13,12 +13,11 @@ import android.widget.Toast;
 import com.example.benevent.API.NetworkClient;
 import com.example.benevent.API.UserApi;
 import com.example.benevent.Models.Signup;
-import com.example.benevent.Models.User;
+import com.example.benevent.R;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;

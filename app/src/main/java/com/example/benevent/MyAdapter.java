@@ -59,8 +59,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         View v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.element_cell, parent, false);
         MyViewHolder vh = new MyViewHolder(v);
-        ImageButton bt1 = v.findViewById(R.id.button_event_view);
-        bt1.setOnClickListener(new View.OnClickListener() {
+        ImageButton buttonDetailShow = v.findViewById(R.id.button_event_view);
+        buttonDetailShow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Event newEvent = listEvents.get(vh.getAdapterPosition()) ;
