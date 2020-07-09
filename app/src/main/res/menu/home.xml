@@ -5,11 +5,11 @@
     <item
         android:id="@+id/action_settings"
         android:orderInCategory="100"
-        android:title="setting"
+        android:title="@string/action_settings"
         app:showAsAction="never" />
     <item
         android:id="@+id/action_login_out"
-        android:title="Déconnexion"
+        android:title="@string/action_logout"
         android:onClick="LogOut"
         app:showAsAction="never" />
 </menu>

@@ -3,23 +3,21 @@ package com.example.benevent.ui.fragment;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.benevent.API.AssociationApi;
 import com.example.benevent.API.NetworkClient;
 import com.example.benevent.Models.Association;
 import com.example.benevent.Models.Event;
-import com.example.benevent.MyAdapter;
 import com.example.benevent.R;
 
-import org.w3c.dom.Text;
-
-import java.net.URI;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -33,6 +31,7 @@ public class EventDetailsFragment extends Fragment {
 
     Event selectedEvent;
     String nameAsso;
+
     public TextView nameEventTV;
     public TextView dateDebEventTV;
     public TextView dateFinEventTV;
@@ -57,6 +56,18 @@ public class EventDetailsFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View v = inflater.inflate(R.layout.fragment_event_details, container, false);
+
+        ImageButton buttonDetailBack = v.findViewById(R.id.back_button_details);
+        buttonDetailBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                EventFragment eFragment = new EventFragment();
+                ((FragmentActivity) v.getContext()).getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.frame_event_detail, eFragment)
+                        .commit();
+            }
+        });
 
         AssociationApi association = retrofit.create(AssociationApi.class);
         Call callAsso = association.getAsso(selectedEvent.getIdas());

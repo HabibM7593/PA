@@ -14,12 +14,12 @@ import android.widget.TextView;
 
 import com.example.benevent.API.NetworkClient;
 import com.example.benevent.API.UserApi;
-import com.example.benevent.Activity.MainActivity;
 import com.example.benevent.Models.User;
 import com.example.benevent.R;
+import com.example.benevent.ui.fragment.AssociationFragment;
 import com.example.benevent.ui.fragment.EventFragment;
+import com.example.benevent.ui.fragment.FeedFragment;
 import com.example.benevent.ui.fragment.FeedbackFragment;
-import com.example.benevent.ui.fragment.HomeFragment;
 import com.example.benevent.ui.fragment.QRcodeFragment;
 import com.google.android.material.navigation.NavigationView;
 
@@ -41,7 +41,7 @@ import retrofit2.Retrofit;
 public class FragmentManagerActivity extends AppCompatActivity
         implements
 
-        HomeFragment.OnFragmentInteractionListener,
+        FeedFragment.OnFragmentInteractionListener,
 
         NavigationView.OnNavigationItemSelectedListener {
 
@@ -55,7 +55,7 @@ public class FragmentManagerActivity extends AppCompatActivity
         setContentView(R.layout.activity_menu);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        setTitle("Home");
+        setTitle("Feed");
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -63,8 +63,8 @@ public class FragmentManagerActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
-        navigationView.setCheckedItem(R.id.nav_home);
-        Fragment fragment = new HomeFragment();
+        navigationView.setCheckedItem(R.id.nav_feed);
+        Fragment fragment = new FeedFragment();
         displaySelectedFragment(fragment);
     }
 
@@ -161,22 +161,27 @@ public class FragmentManagerActivity extends AppCompatActivity
         //NOTE: creating fragment object
         Fragment fragment = null;
 
-        if (id == R.id.nav_home){
-            fragment = new HomeFragment();
-            setTitle("Home");
+        if (id == R.id.nav_feed){
+            fragment = new FeedFragment();
+            setTitle("Feed");
         }
 
-        if(id == R.id.nav_feedback){
+        if (id == R.id.nav_asso){
+            fragment = new AssociationFragment();
+            setTitle("Associations");
+        }
+
+        if (id == R.id.nav_feedback){
             fragment = new FeedbackFragment();
             setTitle("Feedback");
         }
 
-        if(id == R.id.nav_event){
+        if (id == R.id.nav_event){
             fragment = new EventFragment();
             setTitle("Event");
         }
 
-        if(id == R.id.nav_qrcode){
+        if (id == R.id.nav_qrcode){
             fragment = new QRcodeFragment();
             setTitle("QR Code");
         }

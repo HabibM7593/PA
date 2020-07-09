@@ -1,29 +1,24 @@
-package com.example.benevent;
+package com.example.benevent.Adapter;
 
-import android.content.Context;
-import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.benevent.Models.Event;
+import com.example.benevent.R;
 import com.example.benevent.ui.fragment.EventDetailsFragment;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
+public class MyEventAdapter extends RecyclerView.Adapter<MyEventAdapter.MyViewHolder> {
 
     private List<Event> listEvents;
 
@@ -36,7 +31,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         notifyDataSetChanged();
     }
 
-    public MyAdapter(List<Event> listEvents) {
+    public MyEventAdapter(List<Event> listEvents) {
         this.listEvents = listEvents;
     }
 
@@ -57,7 +52,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.element_cell, parent, false);
+                .inflate(R.layout.element_cell_event, parent, false);
         MyViewHolder vh = new MyViewHolder(v);
         ImageButton buttonDetailShow = v.findViewById(R.id.button_event_view);
         buttonDetailShow.setOnClickListener(new View.OnClickListener() {

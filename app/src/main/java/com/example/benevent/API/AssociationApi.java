@@ -11,4 +11,7 @@ import retrofit2.http.Path;
 public interface AssociationApi {
     @GET("association/{idas}")
     Call<List<Association>> getAsso(@Path("idas") int id);
+
+    @GET("associations")
+    Call<List<Association>> getAllAssos();
 }

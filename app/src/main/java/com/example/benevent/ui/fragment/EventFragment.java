@@ -15,7 +15,7 @@ import com.example.benevent.API.EventApi;
 import com.example.benevent.API.NetworkClient;
 import com.example.benevent.Models.Event;
 import com.example.benevent.R;
-import com.example.benevent.MyAdapter;
+import com.example.benevent.Adapter.MyEventAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,7 +58,7 @@ public class EventFragment extends Fragment {
                         if(response.code()==200) {
                             List<Event> events = response.body();
                             listevent.addAll(events);
-                            MyAdapter adapter = new MyAdapter(listevent);
+                            MyEventAdapter adapter = new MyEventAdapter(listevent);
                             recyclerView.setAdapter(adapter);
                         }
                     }
