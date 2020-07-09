@@ -1,7 +1,5 @@
 package com.example.benevent.Models;
 
-import java.util.Date;
-
 public class Association {
     int idas;
     String name;

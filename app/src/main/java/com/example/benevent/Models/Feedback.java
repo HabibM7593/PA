@@ -6,6 +6,7 @@ public class Feedback {
     String content;
     String date;
     String status;
+    int note;
     int idty;
     String plateform;
 
@@ -17,6 +18,25 @@ public class Feedback {
         this.status = status;
         this.idty = idty;
         this.plateform = plateform;
+    }
+
+    public Feedback(int idu, String title, String content, String date, String status, int note, int idty, String plateform) {
+        this.idu = idu;
+        this.title = title;
+        this.content = content;
+        this.date = date;
+        this.status = status;
+        this.note = note;
+        this.idty = idty;
+        this.plateform = plateform;
+    }
+
+    public int getNote() {
+        return note;
+    }
+
+    public void setNote(int note) {
+        this.note = note;
     }
 
     public String getDate() {

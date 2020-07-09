@@ -58,7 +58,11 @@ public class SignupActivity extends AppCompatActivity {
         String age = formatter2.format(ageDate);
 
 
-        signUser(new Signup(nameET.getText().toString(),firstnameET.getText().toString(),age,emailET.getText().toString(),passwordET.getText().toString()));
+        if(nameET.getText().toString().equals("")||firstnameET.getText().toString().equals("")||age.equals("")||emailET.getText().toString().equals("")||passwordET.getText().toString().equals("")){
+            Toast.makeText(getApplicationContext(), "Faites attention à ne pas envoyer de champs vides", Toast.LENGTH_LONG).show();
+        }else{
+            signUser(new Signup(nameET.getText().toString(),firstnameET.getText().toString(),age,emailET.getText().toString(),passwordET.getText().toString()));
+        }
 
     }
 

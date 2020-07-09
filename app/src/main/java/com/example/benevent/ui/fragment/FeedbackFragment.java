@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RatingBar;
 import android.widget.Switch;
 import android.widget.Toast;
 
@@ -43,30 +44,53 @@ public class FeedbackFragment extends Fragment {
                              Bundle savedInstanceState) {
         SharedPreferences pref = this.getActivity().getSharedPreferences("login", MODE_PRIVATE);
 
-        int iduser = pref.getInt("userid",0);
+        int iduser = pref.getInt("userid", 0);
         View view = inflater.inflate(R.layout.fragment_feedback, container, false);
         final EditText titrefeedback = (EditText) view.findViewById(R.id.object_feedback);
         final EditText contentfeedback = (EditText) view.findViewById(R.id.content_feedback);
         final Switch switchbug = (Switch) view.findViewById(R.id.switch_bug);
         final Button sendfeedback = (Button) view.findViewById(R.id.button_feedback);
+        RatingBar ratingbar = (RatingBar) view.findViewById(R.id.rating);
+        ratingbar.setStepSize(1);
+        switchbug.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (switchbug.isChecked()) {
+                    ratingbar.setVisibility(View.INVISIBLE);
+                } else {
+                    ratingbar.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+
         sendfeedback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int type;
-                if (switchbug.isChecked()){
-                    type=1;
-                }else type=2;
                 SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 Date date = new Date();
-                System.out.println(formatter.format(date));
-                SendFeedback(new Feedback(iduser,titrefeedback.getText().toString(),contentfeedback.getText().toString(),formatter.format(date),"",type, "ANDROID"));
+                int type;
+                if (switchbug.isChecked()) {
+                    type = 1;
+                    if (titrefeedback.getText().toString().equals("") || contentfeedback.getText().toString().equals("")) {
+                        Toast.makeText(getActivity().getApplicationContext(),"Faites attention à ne pas envoyer de champs vides",Toast.LENGTH_SHORT).show();
+                    }else{
+                        SendFeedback(new Feedback(iduser, titrefeedback.getText().toString(), contentfeedback.getText().toString(), formatter.format(date), "", type, "ANDROID"));
+                    }
+                } else {
+                    type = 2;
+                    if (titrefeedback.getText().toString().equals("") || contentfeedback.getText().toString().equals("")) {
+                        Toast.makeText(getActivity().getApplicationContext(),"Faites attention à ne pas envoyer de champs vides",Toast.LENGTH_SHORT).show();
+                    }else{
+                        SendFeedback(new Feedback(iduser, titrefeedback.getText().toString(), contentfeedback.getText().toString(), formatter.format(date), "", (int) ratingbar.getRating(), type, "ANDROID"));
+                    }
+                }
             }
         });
         return view;
     }
 
 
-    private void SendFeedback(Feedback feedback){
+    private void SendFeedback(Feedback feedback) {
         Retrofit retrofit = NetworkClient.getRetrofitClient();
 
         FeedbackApi feedbackApi = retrofit.create(FeedbackApi.class);
@@ -78,16 +102,17 @@ public class FeedbackFragment extends Fragment {
             public void onResponse(Call<String> call, Response<String> response) {
                 Log.d("test", String.valueOf(response.code()));
                 if (response.code() == 200) {
-                    Toast.makeText(getActivity().getApplicationContext(),"Votre retour a bien ete pris en compte", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity().getApplicationContext(), "Votre retour a bien ete pris en compte", Toast.LENGTH_LONG).show();
                 }
-                if(response.code()== 500){
-                    Toast.makeText(getActivity().getApplicationContext(),"Veuillez reessayer plus tard", Toast.LENGTH_LONG).show();
+                if (response.code() == 500) {
+                    Toast.makeText(getActivity().getApplicationContext(), "Veuillez reessayer plus tard", Toast.LENGTH_LONG).show();
                 }
             }
+
             @Override
             public void onFailure(Call<String> call, Throwable t) {
-                Log.e("test", "onFailure: "+t );
-                Toast.makeText(getActivity().getApplicationContext(),t.toString(), Toast.LENGTH_LONG).show();
+                Log.e("test", "onFailure: " + t);
+                Toast.makeText(getActivity().getApplicationContext(), t.toString(), Toast.LENGTH_LONG).show();
             }
         });
     }
