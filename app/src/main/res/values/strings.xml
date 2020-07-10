@@ -71,4 +71,5 @@
     <string name="qr_button_scan">Scan Your QR Code</string>
     <string name="text_here">TextHere</string>
     <string name="qrcode">QrCode</string>
+    <string name="menu_category">Categories</string>
 </resources>

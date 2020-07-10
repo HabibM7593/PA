@@ -17,6 +17,7 @@ import com.example.benevent.API.UserApi;
 import com.example.benevent.Models.User;
 import com.example.benevent.R;
 import com.example.benevent.ui.fragment.AssociationFragment;
+import com.example.benevent.ui.fragment.CategoryFragment;
 import com.example.benevent.ui.fragment.EventFragment;
 import com.example.benevent.ui.fragment.FeedFragment;
 import com.example.benevent.ui.fragment.FeedbackFragment;
@@ -164,6 +165,11 @@ public class FragmentManagerActivity extends AppCompatActivity
         if (id == R.id.nav_feed){
             fragment = new FeedFragment();
             setTitle("Feed");
+        }
+
+        if (id == R.id.nav_category){
+            fragment = new CategoryFragment();
+            setTitle("Categories");
         }
 
         if (id == R.id.nav_asso){
