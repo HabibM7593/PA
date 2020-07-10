@@ -34,12 +34,13 @@ public class AssociationFragment extends Fragment {
 
     private RecyclerView recyclerView;
     private LinearLayoutManager LLM;
+    String filter = "";
     List<Association> listAsso = new ArrayList<>();
     List<Category> listCat = new ArrayList<>();
     Retrofit retrofit = NetworkClient.getRetrofitClient();
 
-    public AssociationFragment() {
-        // Required empty public constructor
+    public AssociationFragment(String filter) {
+        this.filter = filter;
     }
 
     @Override
@@ -78,6 +79,9 @@ public class AssociationFragment extends Fragment {
                                         @Override
                                         public void onResponse(Call<List<Category>> call, Response<List<Category>> responseCat) {
                                             if(responseCat.code()==200) {
+                                                if(filter != ""){
+                                                }
+
                                                 List<Category> category = responseCat.body();
                                                 listCat.addAll(category);
                                                 MyAssoAdapter adapter = new MyAssoAdapter(listAsso,listCat);

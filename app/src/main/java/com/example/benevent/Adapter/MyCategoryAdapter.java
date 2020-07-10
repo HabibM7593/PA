@@ -10,9 +10,11 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.benevent.Models.Association;
 import com.example.benevent.Models.Category;
 import com.example.benevent.Models.Event;
 import com.example.benevent.R;
+import com.example.benevent.ui.fragment.AssociationFragment;
 import com.example.benevent.ui.fragment.EventDetailsFragment;
 
 import java.text.SimpleDateFormat;
@@ -56,12 +58,12 @@ public class MyCategoryAdapter extends RecyclerView.Adapter<MyCategoryAdapter.My
         buttonDetailShow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Category newCategory = listCategory.get(vh.getAdapterPosition()) ;
+                //Category category = listCategory.get(vh.getAdapterPosition());
+                AssociationFragment aFragment = new AssociationFragment();
 
-                /*EventDetailsFragment edFragment = new EventDetailsFragment(newEvent);
                 ((FragmentActivity) v.getContext()).getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.frame_event, edFragment)
-                        .commit();*/
+                        .replace(R.id.frame_category, aFragment)
+                        .commit();
             }
         });
         return vh;

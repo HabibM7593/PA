@@ -57,7 +57,7 @@ public class AssociationDetailsFragment extends Fragment {
         buttonDetailBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AssociationFragment aFragment = new AssociationFragment();
+                AssociationFragment aFragment = new AssociationFragment(categoryAssociation.getName());
                 ((FragmentActivity) v.getContext()).getSupportFragmentManager().beginTransaction()
                         .replace(R.id.frame_asso_details, aFragment)
                         .commit();
