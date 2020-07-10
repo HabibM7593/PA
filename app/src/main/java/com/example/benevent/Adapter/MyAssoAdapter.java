@@ -68,7 +68,7 @@ public class MyAssoAdapter extends RecyclerView.Adapter<MyAssoAdapter.MyViewHold
             @Override
             public void onClick(View v) {
                 Association newAssociation = listAssos.get(vh.getAdapterPosition());
-                Category newCategory = listCategory.get(vh.getAdapterPosition());
+                Category newCategory = listCategory.get(newAssociation.getIdcat()-1);
 
                 AssociationDetailsFragment adFragment = new AssociationDetailsFragment(newAssociation, newCategory);
                 ((FragmentActivity) v.getContext()).getSupportFragmentManager().beginTransaction()
@@ -82,7 +82,7 @@ public class MyAssoAdapter extends RecyclerView.Adapter<MyAssoAdapter.MyViewHold
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         Association association = listAssos.get(position);
-        Category category = listCategory.get(association.getIdcat());
+        Category category = listCategory.get(association.getIdcat()-1);
 
         holder.nameAssoTV.setText(association.getName());
         holder.catAssoTV.setText(category.getName());
