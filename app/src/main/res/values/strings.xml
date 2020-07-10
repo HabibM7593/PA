@@ -33,11 +33,29 @@
     <string name="hint_localisation">localisation de l\'évent</string>
     <string name="hint_event_maxB">maxBenevole de l\'évent</string>
     <string name="hint_event_desc">description de l\'évent</string>
+    <string name="hint_website">Site internet</string>
+    <string name="hint_support">support de l\'asso</string>
+    <string name="hint_category_name">category</string>
+    <string name="hint_phone">N° de telephone</string>
 
-    <!--Other-->
+    <!--Logo Strings-->
+    <string name="asso_logo">asso logo</string>
+    <string name="calendar_logo">calendar logo</string>
+    <string name="place_logo">place logo</string>
+    <string name="group_logo">group logo</string>
+    <string name="info_logo">logo d\'informations</string>
+
+    <!--Label Strings-->
     <string name="connexion_label">Connexion</string>
     <string name="signup_label">S\'inscrire</string>
+    <string name="email_label">Adresse @ :</string>
+    <string name="phone_label">téléphone :</string>
+    <string name="website_label">Site internet :</string>
+    <string name="support_label">Soutenir :</string>
+    <string name="info_label">Informations :</string>
     <string name="scan_qrcode_label">Scan QRcode</string>
+
+    <!--Other-->
     <string name="bienvenue">Bienvenue sur Benevent</string>
     <string name="bug_text">Déclarer un bug ?</string>
     <string name="feedback_string">Envoyer le feedback</string>
@@ -47,20 +65,10 @@
     <string name="app_logo">Logo</string>
     <string name="back_arrow">Back Arrow</string>
     <string name="no_account">Pas encore de compte ?</string>
-    <string name="asso_logo">asso logo</string>
     <string name="view_arrow">view arrow</string>
-    <string name="calendar_logo">calendar logo</string>
-    <string name="place_logo">place logo</string>
-    <string name="group_logo">group logo</string>
-    <string name="info_label">Informations :</string>
     <string name="qr_edit_text">Enter Text Here</string>
     <string name="qr_button_generate">Click Here TO generate qr code</string>
     <string name="qr_button_scan">Scan Your QR Code</string>
     <string name="text_here">TextHere</string>
     <string name="qrcode">QrCode</string>
-    <string name="hint_category_name">category</string>
-    <string name="info_logo">logo d\'informations</string>
-    <string name="email_label">Adresse @ :</string>
-    <string name="hint_phone">N° de telephone</string>
-    <string name="phone_label">téléphone :</string>
 </resources>
