@@ -37,6 +37,7 @@
     <!--Other-->
     <string name="connexion_label">Connexion</string>
     <string name="signup_label">S\'inscrire</string>
+    <string name="scan_qrcode_label">Scan QRcode</string>
     <string name="bienvenue">Bienvenue sur Benevent</string>
     <string name="bug_text">Déclarer un bug ?</string>
     <string name="feedback_string">Envoyer le feedback</string>

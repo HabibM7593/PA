@@ -1,7 +1,9 @@
 package com.example.benevent.ui.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 
@@ -9,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -17,11 +20,14 @@ import com.example.benevent.API.NetworkClient;
 import com.example.benevent.Models.Association;
 import com.example.benevent.Models.Event;
 import com.example.benevent.R;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import androidx.lifecycle.Lifecycle;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -58,6 +64,7 @@ public class EventDetailsFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_event_details, container, false);
 
         ImageButton buttonDetailBack = v.findViewById(R.id.back_button_details_event);
+        Button buttonQRcode = v.findViewById(R.id.button_scan_qrcode);
         buttonDetailBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -66,6 +73,20 @@ public class EventDetailsFragment extends Fragment {
                 ((FragmentActivity) v.getContext()).getSupportFragmentManager().beginTransaction()
                         .replace(R.id.frame_event_detail, eFragment)
                         .commit();
+            }
+        });
+
+        buttonQRcode.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                IntentIntegrator integrator = IntentIntegrator.forSupportFragment(EventDetailsFragment.this);
+                integrator.setPrompt("Scan");
+                integrator.setBeepEnabled(true);
+                //The following line if you want QR code
+                integrator.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE_TYPES);
+                integrator.setOrientationLocked(true);
+                integrator.setBarcodeImageEnabled(true);
+                integrator.initiateScan();
             }
         });
 
@@ -82,6 +103,9 @@ public class EventDetailsFragment extends Fragment {
                             nameAsso = associations.get(0).getName();
                             assoTV = v.findViewById(R.id.asso_event_details);
                             assoTV.setText(nameAsso);
+                            if (selectedEvent.getDateDeb().before(new Date()) && selectedEvent.getDateFin().after(new Date())){
+                                buttonQRcode.setVisibility(View.VISIBLE);
+                            }
                         }
                     }
 
@@ -103,7 +127,6 @@ public class EventDetailsFragment extends Fragment {
         descEventTV = v.findViewById(R.id.desc_event_details);
         maxBEventTV = v.findViewById(R.id.maxB_event_details);
 
-
         nameEventTV.setText(selectedEvent.getName());
         dateDebEventTV.setText("du : " + formatter.format(dateDebEvent));
         dateFinEventTV.setText("au : " + formatter.format(dateFinEvent));
@@ -113,5 +136,16 @@ public class EventDetailsFragment extends Fragment {
 
 
         return v;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        IntentResult intentResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+        if (intentResult != null){
+            if (intentResult.getContents() == null){
+            }else {
+            }
+        }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 }

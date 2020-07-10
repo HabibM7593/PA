@@ -203,5 +203,21 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintStart_toStartOf="@+id/desc_text" />
 
+        <Button
+            android:id="@+id/button_scan_qrcode"
+
+            android:layout_width="100dp"
+            android:layout_height="30dp"
+            android:background="@drawable/round_corner"
+            android:visibility="invisible"
+            android:text="@string/scan_qrcode_label"
+            android:textColor="@color/colorWhite"
+
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/desc_event_details" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

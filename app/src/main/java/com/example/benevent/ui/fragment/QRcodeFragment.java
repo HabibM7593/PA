@@ -74,7 +74,6 @@ public class QRcodeFragment extends Fragment {
                 tv_qr_readTxt.setText("annulé");
             }else {
                 tv_qr_readTxt.setText(intentResult.getContents());
-
             }
         }
         super.onActivityResult(requestCode, resultCode, data);

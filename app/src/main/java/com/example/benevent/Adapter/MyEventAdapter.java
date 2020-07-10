@@ -74,19 +74,20 @@ public class MyEventAdapter extends RecyclerView.Adapter<MyEventAdapter.MyViewHo
         Event event = listEvents.get(position);
 
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-        Date dateEvent = event.getDateDeb();
+        Date dateDebutEvent = event.getDateDeb();
+        Date dateFinEvent = event.getDateFin();
         Date dateToday = new Date();
 
         holder.nameEventTV.setText(event.getName());
 
-        if (dateEvent.after(dateToday)) {
-            holder.dateEventTV.setText("Debutera le " + formatter.format(dateEvent));
+        if (dateDebutEvent.after(dateToday)) {
+            holder.dateEventTV.setText("Debutera le " + formatter.format(dateDebutEvent));
             holder.dateEventTV.setTextColor(0xFF82C26E);
-        } else if (dateEvent.equals(dateToday)) {
-            holder.dateEventTV.setText("Débuté depuis le " + formatter.format(dateEvent));
+        } else if (dateDebutEvent.before(dateToday) && dateFinEvent.after(dateToday)) {
+            holder.dateEventTV.setText("Débuté depuis le " + formatter.format(dateDebutEvent));
             holder.dateEventTV.setTextColor(0XFF858181);
-        } else if (dateEvent.before(dateToday)) {
-            holder.dateEventTV.setText("Terminé le " + formatter.format(dateEvent));
+        } else if (dateFinEvent.before(dateToday)) {
+            holder.dateEventTV.setText("Terminé le " + formatter.format(dateDebutEvent));
             holder.dateEventTV.setTextColor(0XFFEB1C1C);
         }
     }
