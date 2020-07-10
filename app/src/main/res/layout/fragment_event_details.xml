@@ -16,7 +16,7 @@
         android:layout_height="match_parent" >
 
         <ImageButton
-            android:id="@+id/back_button_details"
+            android:id="@+id/back_button_details_event"
             android:contentDescription="@string/back_arrow"
 
             android:layout_width="20dp"
@@ -80,7 +80,7 @@
             android:layout_width="20dp"
             android:layout_height="20dp"
 
-            android:src="@drawable/calendar_logo"
+            android:src="@drawable/ic_calendar"
 
             android:layout_marginTop="20dp"
             app:layout_constraintTop_toBottomOf="@+id/name_event_details"
@@ -121,7 +121,7 @@
 
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:src="@drawable/place_logo"
+            android:src="@drawable/ic_place"
 
             android:layout_marginStart="50dp"
             app:layout_constraintTop_toTopOf="@+id/calendar_logo"
@@ -149,7 +149,7 @@
 
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:src="@drawable/group_logo"
+            android:src="@drawable/ic_group"
 
             android:layout_marginTop="20dp"
             app:layout_constraintTop_toBottomOf="@+id/calendar_logo"

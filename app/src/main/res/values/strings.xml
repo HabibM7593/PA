@@ -57,4 +57,9 @@
     <string name="qr_button_scan">Scan Your QR Code</string>
     <string name="text_here">TextHere</string>
     <string name="qrcode">QrCode</string>
+    <string name="hint_category_name">category</string>
+    <string name="info_logo">logo d\'informations</string>
+    <string name="email_label">Adresse @ :</string>
+    <string name="hint_phone">N° de telephone</string>
+    <string name="phone_label">téléphone :</string>
 </resources>

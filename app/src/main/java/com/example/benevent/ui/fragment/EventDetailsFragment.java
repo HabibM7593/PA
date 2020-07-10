@@ -57,7 +57,7 @@ public class EventDetailsFragment extends Fragment {
 
         View v = inflater.inflate(R.layout.fragment_event_details, container, false);
 
-        ImageButton buttonDetailBack = v.findViewById(R.id.back_button_details);
+        ImageButton buttonDetailBack = v.findViewById(R.id.back_button_details_event);
         buttonDetailBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
