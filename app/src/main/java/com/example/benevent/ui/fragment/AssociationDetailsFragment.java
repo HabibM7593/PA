@@ -24,6 +24,8 @@ import retrofit2.Retrofit;
 public class AssociationDetailsFragment extends Fragment {
 
     Association selectedAssociation;
+    Category categoryAssociation;
+
     String nameCategory;
 
     public TextView nameAssoTV;
@@ -35,7 +37,10 @@ public class AssociationDetailsFragment extends Fragment {
 
     Retrofit retrofit = NetworkClient.getRetrofitClient();
 
-    public AssociationDetailsFragment(Association selectedAssociation) { this.selectedAssociation = selectedAssociation; }
+    public AssociationDetailsFragment(Association selectedAssociation, Category categoryAssociation) {
+        this.selectedAssociation = selectedAssociation;
+        this.categoryAssociation = categoryAssociation;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -67,6 +72,7 @@ public class AssociationDetailsFragment extends Fragment {
         supportTV = v.findViewById(R.id.support_asso_details);
 
         nameAssoTV.setText(selectedAssociation.getName() + " / " + selectedAssociation.getAcronym());
+        nameCategoryTV.setText(categoryAssociation.getName());
         emailTV.setText(selectedAssociation.getEmail());
         phoneTV.setText(selectedAssociation.getPhone());
         websiteTV.setText(selectedAssociation.getWebsite());
