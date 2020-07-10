@@ -1,3 +1,5 @@
+
+
 package com.example.benevent.Adapter;
 
 import android.view.LayoutInflater;
@@ -12,12 +14,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.benevent.Models.Association;
 import com.example.benevent.Models.Category;
-import com.example.benevent.Models.Event;
 import com.example.benevent.R;
-import com.example.benevent.ui.fragment.EventDetailsFragment;
+import com.example.benevent.ui.fragment.AssociationDetailsFragment;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 public class MyAssoAdapter extends RecyclerView.Adapter<MyAssoAdapter.MyViewHolder> {
@@ -70,10 +69,10 @@ public class MyAssoAdapter extends RecyclerView.Adapter<MyAssoAdapter.MyViewHold
             public void onClick(View v) {
                 Association newAssociation = listAssos.get(vh.getAdapterPosition()) ;
 
-                /*EventDetailsFragment edFragment = new EventDetailsFragment(newEvent);
+                AssociationDetailsFragment adFragment = new AssociationDetailsFragment(newAssociation);
                 ((FragmentActivity) v.getContext()).getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.frame_event, edFragment)
-                        .commit();*/
+                        .replace(R.id.frame_asso, adFragment)
+                        .commit();
             }
         });
         return vh;
@@ -93,3 +92,4 @@ public class MyAssoAdapter extends RecyclerView.Adapter<MyAssoAdapter.MyViewHold
         return listAssos.size();
     }
 }
+
