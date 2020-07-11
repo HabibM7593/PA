@@ -9,6 +9,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Path;
 
 public interface EventApi {
-    @GET("events/{idu}")
+    @GET("events/user/{idu}")
     Call<List<Event>> getEvents(@Path("idu") int idu);
+
 }

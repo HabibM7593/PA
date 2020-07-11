@@ -9,21 +9,43 @@ public class Post {
     int idu;
     int idas;
     int idev;
+    String eventname;
+    String assoname;
 
-    public Post(int idpo, String message, Date date, int idas, int idev) {
+    public Post(int idpo, String message, Date date, int idas, int idev, String eventname, String assoname) {
         this.idpo = idpo;
         this.message = message;
         this.date = date;
         this.idas = idas;
         this.idev = idev;
+        this.eventname = eventname;
+        this.assoname = assoname;
     }
 
-    public Post(int idpo, int idu, String message, Date date, int idev) {
+    public Post(int idpo, int idu, String message, Date date, int idev, String eventname, String assoname) {
         this.idpo = idpo;
         this.message = message;
         this.date = date;
         this.idu = idu;
         this.idev = idev;
+        this.eventname = eventname;
+        this.assoname = assoname;
+    }
+
+    public String getEventname() {
+        return eventname;
+    }
+
+    public void setEventname(String eventname) {
+        this.eventname = eventname;
+    }
+
+    public String getAssoname() {
+        return assoname;
+    }
+
+    public void setAssoname(String assoname) {
+        this.assoname = assoname;
     }
 
     public int getIdpo() {

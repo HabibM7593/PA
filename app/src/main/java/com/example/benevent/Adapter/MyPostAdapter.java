@@ -1,5 +1,7 @@
 package com.example.benevent.Adapter;
 
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -29,22 +31,6 @@ public class MyPostAdapter extends RecyclerView.Adapter<MyPostAdapter.MyViewHold
         notifyDataSetChanged();
     }
 
-    @NonNull
-    @Override
-    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return null;
-    }
-
-    @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-
-    }
-
-    @Override
-    public int getItemCount() {
-        return 0;
-    }
-
     public static class MyViewHolder extends RecyclerView.ViewHolder {
 
         public View view;
@@ -58,4 +44,30 @@ public class MyPostAdapter extends RecyclerView.Adapter<MyPostAdapter.MyViewHold
             contentPostTV = v.findViewById(R.id.content_post);
         }
     }
+
+    @NonNull
+    @Override
+    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        Log.d("TAG", "onCreateViewHolder: test");
+        View v = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.element_cell_post, parent, false);
+        MyPostAdapter.MyViewHolder vh = new MyPostAdapter.MyViewHolder(v);
+
+        return vh;
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+        Post post = listpost.get(position);
+        Log.d("TAG", "onBindViewHolder: "+post.getMessage());
+
+        holder.contentPostTV.setText(post.getMessage());
+        holder.nameAssoPostTV.setText(post.getAssoname());
+    }
+
+    @Override
+    public int getItemCount() {
+        return listpost.size();
+    }
+
 }

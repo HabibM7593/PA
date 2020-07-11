@@ -1,6 +1,7 @@
 package com.example.benevent.ui.fragment;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -14,11 +15,15 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.benevent.API.AssociationApi;
 import com.example.benevent.API.NetworkClient;
+import com.example.benevent.API.ParticipateApi;
 import com.example.benevent.Models.Association;
 import com.example.benevent.Models.Event;
+import com.example.benevent.Models.Follow;
+import com.example.benevent.Models.Participation;
 import com.example.benevent.R;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
@@ -32,6 +37,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
+
+import static android.content.Context.MODE_PRIVATE;
 
 public class EventDetailsFragment extends Fragment {
 
@@ -65,6 +72,34 @@ public class EventDetailsFragment extends Fragment {
 
         ImageButton buttonDetailBack = v.findViewById(R.id.back_button_details_event);
         Button buttonQRcode = v.findViewById(R.id.button_scan_qrcode);
+        Button buttoninscription = v.findViewById(R.id.button_inscription_event);
+        SharedPreferences pref = this.getActivity().getSharedPreferences("login", MODE_PRIVATE);
+        int iduser = pref.getInt("userid", 0);
+
+        if (selectedEvent.getDateDeb().after(new Date())){
+            buttoninscription.setVisibility(View.VISIBLE);
+        }
+        Participation participation = new Participation(selectedEvent.getIdev(),iduser);
+        ParticipateApi participateApi = retrofit.create(ParticipateApi.class);
+        Call call = participateApi.checkFollow(participation.getIdev(),participation.getIdu());
+        call.enqueue(new Callback<List<Follow>>(){
+
+            @Override
+            public void onResponse(Call<List<Follow>> call, Response<List<Follow>> response) {
+                if(response.code()==200){
+                    List<Follow> follows =response.body();
+                    if (follows.size()==1){
+                        buttoninscription.setText("Se Désinscrire");
+                        buttoninscription.setBackgroundColor(0xFFFF0000);
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Follow>> call, Throwable t) {
+                Toast.makeText(getActivity().getApplicationContext(), "Echec", Toast.LENGTH_LONG).show();
+            }
+        });
         buttonDetailBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -73,6 +108,48 @@ public class EventDetailsFragment extends Fragment {
                 ((FragmentActivity) v.getContext()).getSupportFragmentManager().beginTransaction()
                         .replace(R.id.frame_event_detail, eFragment)
                         .commit();
+            }
+        });
+
+        buttoninscription.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Participation participation = new Participation(selectedEvent.getIdev(),iduser,false,true);
+                ParticipateApi participateApi = retrofit.create(ParticipateApi.class);
+                if (buttoninscription.getText().equals("Inscription")){
+                    buttoninscription.setText("Se Désinscrire");
+                    buttoninscription.setBackgroundColor(0xFFFF0000);
+                    Call call = participateApi.UpdateParticipation(participation);
+                    call.enqueue(new Callback<String>(){
+
+                        @Override
+                        public void onResponse(Call<String> call, Response<String> response) {
+                            Toast.makeText(getActivity().getApplicationContext(), "Vous suivez cette association", Toast.LENGTH_LONG).show();
+
+                        }
+
+                        @Override
+                        public void onFailure(Call<String> call, Throwable t) {
+                            Toast.makeText(getActivity().getApplicationContext(), "Echec", Toast.LENGTH_LONG).show();
+
+                        }
+                    });
+                }else{
+                    buttoninscription.setText("Inscription");
+                    buttoninscription.setBackgroundColor(R.drawable.round_corner);
+                    Call call = participateApi.RefuseParticipation(participation);
+                    call.enqueue(new Callback<String>(){
+                        @Override
+                        public void onResponse(Call<String> call, Response<String> response) {
+                            Toast.makeText(getActivity().getApplicationContext(), "Vous ne suivez plus cette association", Toast.LENGTH_LONG).show();
+                        }
+
+                        @Override
+                        public void onFailure(Call<String> call, Throwable t) {
+                            Toast.makeText(getActivity().getApplicationContext(), "Echec", Toast.LENGTH_LONG).show();
+                        }
+                    });
+                }
             }
         });
 

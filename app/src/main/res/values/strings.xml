@@ -73,4 +73,5 @@
     <string name="qrcode">QrCode</string>
     <string name="menu_category">Categories</string>
     <string name="btn_suivre">Suivre</string>
+    <string name="inscrire_label">Inscription</string>
 </resources>

@@ -88,7 +88,6 @@ public class AssociationFragment extends Fragment {
                                                     listCat.addAll(curCat);
                                                     MyAssoAdapter adapter = new MyAssoAdapter(listAsso,result.get(0));
                                                     recyclerView.setAdapter(adapter);
-
                                             }
                                         }
                                         @Override

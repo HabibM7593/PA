@@ -13,6 +13,11 @@ public class Participation {
         this.status = status;
     }
 
+    public Participation(int idev, int idu) {
+        this.idev = idev;
+        this.idu = idu;
+    }
+
     public int getIdev() {
         return idev;
     }
