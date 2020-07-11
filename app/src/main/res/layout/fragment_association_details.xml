@@ -218,5 +218,19 @@
             app:layout_constraintBottom_toBottomOf="@+id/support_asso_label"
             app:layout_constraintStart_toEndOf="@+id/support_asso_label"/>
 
+        <Button
+            android:id="@+id/button_follow"
+
+            android:layout_width="100dp"
+            android:layout_height="30dp"
+            android:background="@drawable/round_corner"
+            android:text="@string/btn_suivre"
+            android:textColor="@color/colorWhite"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/support_asso_label" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

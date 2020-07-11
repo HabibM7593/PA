@@ -67,44 +67,30 @@ public class AssociationFragment extends Fragment {
         recyclerView.setLayoutManager(LLM);
         callAsso.enqueue(
                 new Callback<List<Association>>() {
-
                     @Override
                     public void onResponse(Call<List<Association>> call, Response<List<Association>> responseAsso) {
                         if(responseAsso.code()==200) {
-
                             Call callCat = categoryApi.getCat();
-
                             callCat.enqueue(
                                     new Callback<List<Category>>() {
-
                                         @Override
                                         public void onResponse(Call<List<Category>> call, Response<List<Category>> responseCat) {
                                             if(responseCat.code()==200) {
-                                                if(!filter.equals("")){
                                                     List<Category> curCat =responseCat.body();
-                                                    Predicate<Category> byAge1 = category -> category.getName().equals(filter);
-
+                                                    Predicate<Category> filtercat = category -> category.getName().equals(filter);
                                                     List<Category> result = curCat.stream()
-                                                            .filter(byAge1)
+                                                            .filter(filtercat)
                                                             .collect(Collectors.toList());
-                                                    Log.d("TAG", "onResponse: "+result.get(0).getName());
-                                                    Log.d("TAG", "onResponse: "+result.get(0).getIdcat());
                                                     List<Association> associations = responseAsso.body();
-                                                    Predicate<Association> byAge = association -> association.getIdcat()==result.get(0).getIdcat();
-                                                    List<Association> filteredAsso = associations.stream().filter(byAge).collect(Collectors.toList());
+                                                    Predicate<Association> byIdcat = association -> association.getIdcat()==result.get(0).getIdcat();
+                                                    List<Association> filteredAsso = associations.stream().filter(byIdcat).collect(Collectors.toList());
                                                     listAsso.addAll(filteredAsso);
-                                                }else{
-                                                    List<Association> associations = responseAsso.body();
-                                                    listAsso.addAll(associations);
-                                                }
+                                                    listCat.addAll(curCat);
+                                                    MyAssoAdapter adapter = new MyAssoAdapter(listAsso,result.get(0));
+                                                    recyclerView.setAdapter(adapter);
 
-                                                List<Category> category = responseCat.body();
-                                                listCat.addAll(category);
-                                                MyAssoAdapter adapter = new MyAssoAdapter(listAsso,listCat);
-                                                recyclerView.setAdapter(adapter);
                                             }
                                         }
-
                                         @Override
                                         public void onFailure(Call call, Throwable t) {
                                             Log.d("FailCategory", "onFailure : " + t);

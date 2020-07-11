@@ -2,6 +2,7 @@
 
 package com.example.benevent.Adapter;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,26 +23,26 @@ import java.util.List;
 public class MyAssoAdapter extends RecyclerView.Adapter<MyAssoAdapter.MyViewHolder> {
 
     private List<Association> listAssos;
-    private List<Category> listCategory;
+    private Category category;
 
     public List<Association> getListAssos() {
         return listAssos;
     }
 
-    public List<Category> getListCategory() { return listCategory; }
+    public Category getListCategory() { return category; }
 
     public void setListAssos(List<Association> listAssos) {
         this.listAssos = listAssos;
         notifyDataSetChanged();
     }
 
-    public void setListCategory(List<Category> listCategory) {
-        this.listCategory = listCategory;
+    public void setListCategory(Category listCategory) {
+        this.category = listCategory;
     }
 
-    public MyAssoAdapter(List<Association> listAssos, List<Category> listCategory) {
+    public MyAssoAdapter(List<Association> listAssos, Category category) {
         this.listAssos = listAssos;
-        this.listCategory = listCategory;
+        this.category = category;
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
@@ -68,9 +69,8 @@ public class MyAssoAdapter extends RecyclerView.Adapter<MyAssoAdapter.MyViewHold
             @Override
             public void onClick(View v) {
                 Association newAssociation = listAssos.get(vh.getAdapterPosition());
-                Category newCategory = listCategory.get(newAssociation.getIdcat()-1);
 
-                AssociationDetailsFragment adFragment = new AssociationDetailsFragment(newAssociation, newCategory);
+                AssociationDetailsFragment adFragment = new AssociationDetailsFragment(newAssociation, category);
                 ((FragmentActivity) v.getContext()).getSupportFragmentManager().beginTransaction()
                         .replace(R.id.frame_asso, adFragment)
                         .commit();
@@ -82,7 +82,10 @@ public class MyAssoAdapter extends RecyclerView.Adapter<MyAssoAdapter.MyViewHold
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         Association association = listAssos.get(position);
-        Category category = listCategory.get(association.getIdcat()-1);
+        Log.d("TAG", "onBindViewHolder: asso idcat "+association.getIdcat());
+
+        Log.d("TAG", "onBindViewHolder: cat name"+category.getName());
+        Log.d("TAG", "onBindViewHolder: cat id"+category.getIdcat());
 
         holder.nameAssoTV.setText(association.getName());
         holder.catAssoTV.setText(category.getName());

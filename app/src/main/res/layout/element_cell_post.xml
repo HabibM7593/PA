@@ -1,0 +1,38 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="80dp"
+    android:layout_marginTop="5dp"
+    android:layout_marginRight="3dp"
+    android:layout_marginLeft="3dp"
+    android:orientation="horizontal"
+    android:background="@drawable/background_border" >
+
+    <TextView
+        android:id="@+id/name_asso_post"
+
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+
+        tools:text="test"
+        android:textSize="25sp"
+        android:textColor="@color/colorBlack"
+
+        android:layout_marginStart="10dp" />
+
+
+    <TextView
+        android:id="@+id/content_post"
+
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+
+        tools:text="test category"
+        android:textSize="15sp"
+        android:textColor="@color/colorBlack"
+
+        android:layout_marginTop="35dp"
+        android:layout_marginStart="25dp" />
+
+</RelativeLayout>
+

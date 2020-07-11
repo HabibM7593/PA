@@ -1,5 +1,6 @@
 package com.example.benevent.Adapter;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -59,6 +60,7 @@ public class MyCategoryAdapter extends RecyclerView.Adapter<MyCategoryAdapter.My
             @Override
             public void onClick(View v) {
                 Category category = listCategory.get(vh.getAdapterPosition());
+                Log.d("TAG", "onClick: "+category.getName());
                 AssociationFragment aFragment = new AssociationFragment(category.getName());
 
                 ((FragmentActivity) v.getContext()).getSupportFragmentManager().beginTransaction()

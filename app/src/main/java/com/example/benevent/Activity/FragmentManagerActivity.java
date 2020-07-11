@@ -87,10 +87,10 @@ public class FragmentManagerActivity extends AppCompatActivity
         } else {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
-            builder.setTitle("Confirm");
-            builder.setMessage("Are you sure?");
+            builder.setTitle("Attention");
+            builder.setMessage("Voulez-vous quitter l'application ?");
 
-            builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+            builder.setPositiveButton("OUI", new DialogInterface.OnClickListener() {
 
                 public void onClick(DialogInterface dialog, int which) {
                     Intent a = new Intent(Intent.ACTION_MAIN);
@@ -100,7 +100,7 @@ public class FragmentManagerActivity extends AppCompatActivity
                 }
             });
 
-            builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+            builder.setNegativeButton("NON", new DialogInterface.OnClickListener() {
 
                 @Override
                 public void onClick(DialogInterface dialog, int which) {

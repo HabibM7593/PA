@@ -1,5 +1,6 @@
 package com.example.benevent.ui.fragment;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -25,6 +26,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
+import static android.content.Context.MODE_PRIVATE;
+
 public class EventFragment extends Fragment {
 
     private RecyclerView recyclerView;
@@ -43,9 +46,11 @@ public class EventFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_event, container, false);
 
         recyclerView = root.findViewById(R.id.recycler_event);
+        SharedPreferences pref = this.getActivity().getSharedPreferences("login", MODE_PRIVATE);
+        int iduser = pref.getInt("userid", 0);
 
         EventApi event = retrofit.create(EventApi.class);
-        Call callEvent = event.getEvents();
+        Call callEvent = event.getEvents(iduser);
 
         final FragmentActivity Event = getActivity();
         LLM = new LinearLayoutManager(Event);
