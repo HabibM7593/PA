@@ -23,6 +23,8 @@ import com.example.benevent.R;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -69,8 +71,7 @@ public class AssociationFragment extends Fragment {
                     @Override
                     public void onResponse(Call<List<Association>> call, Response<List<Association>> responseAsso) {
                         if(responseAsso.code()==200) {
-                            List<Association> associations = responseAsso.body();
-                            listAsso.addAll(associations);
+
                             Call callCat = categoryApi.getCat();
 
                             callCat.enqueue(
@@ -79,7 +80,22 @@ public class AssociationFragment extends Fragment {
                                         @Override
                                         public void onResponse(Call<List<Category>> call, Response<List<Category>> responseCat) {
                                             if(responseCat.code()==200) {
-                                                if(filter != ""){
+                                                if(!filter.equals("")){
+                                                    List<Category> curCat =responseCat.body();
+                                                    Predicate<Category> byAge1 = category -> category.getName().equals(filter);
+
+                                                    List<Category> result = curCat.stream()
+                                                            .filter(byAge1)
+                                                            .collect(Collectors.toList());
+                                                    Log.d("TAG", "onResponse: "+result.get(0).getName());
+                                                    Log.d("TAG", "onResponse: "+result.get(0).getIdcat());
+                                                    List<Association> associations = responseAsso.body();
+                                                    Predicate<Association> byAge = association -> association.getIdcat()==result.get(0).getIdcat();
+                                                    List<Association> filteredAsso = associations.stream().filter(byAge).collect(Collectors.toList());
+                                                    listAsso.addAll(filteredAsso);
+                                                }else{
+                                                    List<Association> associations = responseAsso.body();
+                                                    listAsso.addAll(associations);
                                                 }
 
                                                 List<Category> category = responseCat.body();

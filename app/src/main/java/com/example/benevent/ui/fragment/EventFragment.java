@@ -57,7 +57,11 @@ public class EventFragment extends Fragment {
                     public void onResponse(Call<List<Event>> call, Response<List<Event>> response) {
                         if(response.code()==200) {
                             List<Event> events = response.body();
-                            listevent.addAll(events);
+                            for(int i=0;i<events.size();i++){
+                                if (events.get(i).getFakeevent()==0){
+                                    listevent.add(events.get(i));
+                                }
+                            }
                             MyEventAdapter adapter = new MyEventAdapter(listevent);
                             recyclerView.setAdapter(adapter);
                         }

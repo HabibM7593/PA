@@ -15,12 +15,13 @@ public class Event {
     String info;
     int idcat;
     int idas;
+    int fakeevent;
 
     public Event(String name) {
         this.name = name;
     }
 
-    public Event(int idev, String name, String description, Date dateDeb, Date dateFin, String location, int maxBenevole, String info, int idcat, int idas) {
+    public Event(int idev, String name, String description, Date dateDeb, Date dateFin, String location, int maxBenevole, String info, int idcat, int idas, int fakeevent) {
         this.idev = idev;
         this.name = name;
         this.description = description;
@@ -31,11 +32,34 @@ public class Event {
         this.info = info;
         this.idcat = idcat;
         this.idas = idas;
+        this.fakeevent = fakeevent;
     }
 
     public Event() {
 
     }
+
+    public int getFakeevent() {
+        return fakeevent;
+    }
+
+    public void setFakeevent(int fakeevent) {
+        this.fakeevent = fakeevent;
+    }
+
+    public void setDateFin(Date dateFin) {
+        this.dateFin = dateFin;
+    }
+
+    public int getMaxBenevole() {
+        return maxBenevole;
+    }
+
+    public void setMaxBenevole(int maxBenevole) {
+        this.maxBenevole = maxBenevole;
+    }
+
+
 
     public int getIdev() {
         return idev;

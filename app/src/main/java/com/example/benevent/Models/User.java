@@ -10,11 +10,11 @@ public class User {
     String email;
     String password;
     String phone;
-    String profilepicture;
+    String profilpicture;
     String address;
     String description;
 
-    public User(int idu, String name, String firstname, Date age, String email, String password, String phone, String profilepicture, String address, String description) {
+    public User(int idu, String name, String firstname, Date age, String email, String password, String phone, String profilpicture, String address, String description) {
         this.idu = idu;
         this.name = name;
         this.firstname = firstname;
@@ -22,7 +22,7 @@ public class User {
         this.email = email;
         this.password = password;
         this.phone = phone;
-        this.profilepicture = profilepicture;
+        this.profilpicture = profilpicture;
         this.address = address;
         this.description = description;
     }
@@ -87,9 +87,9 @@ public class User {
         this.phone = phone;
     }
 
-    public String getProfilepicture() { return profilepicture; }
+    public String getProfilpicture() { return profilpicture; }
 
-    public void setProfilepicture(String profilepicture) { this.profilepicture = profilepicture; }
+    public void setProfilpicture(String profilpicture) { this.profilpicture = profilpicture; }
 
     public String getAddress() {
         return address;

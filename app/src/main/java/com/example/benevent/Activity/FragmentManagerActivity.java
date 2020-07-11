@@ -5,7 +5,11 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.os.NetworkOnMainThreadException;
+import android.os.StrictMode;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -32,6 +36,11 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.List;
 
 import retrofit2.Call;
@@ -48,7 +57,7 @@ public class FragmentManagerActivity extends AppCompatActivity
 
     Retrofit retrofit = NetworkClient.getRetrofitClient();
 
-    Context context = this ;
+    Context context = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +76,7 @@ public class FragmentManagerActivity extends AppCompatActivity
         navigationView.setCheckedItem(R.id.nav_feed);
         Fragment fragment = new FeedFragment();
         displaySelectedFragment(fragment);
+
     }
 
     @Override
@@ -107,35 +117,29 @@ public class FragmentManagerActivity extends AppCompatActivity
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         SharedPreferences pref = getApplicationContext().getSharedPreferences("login", MODE_PRIVATE);
-        String name = pref.getString("username","");
+        String name = pref.getString("username", "");
         String email = pref.getString("email", "");
+        String profilpic = pref.getString("profilpicture", "");
 
         getMenuInflater().inflate(R.menu.home, menu); // Inflate the menu; this adds items to the action bar if it is present.
-        UserApi user = retrofit.create(UserApi.class);
-        Call<List<User>> call = user.getUser(2);
-        call.enqueue(
-                new Callback<List<User>>() {
-                    @Override
-                    public void onResponse(Call<List<User>> call, Response<List<User>> response) {
-                        if(response.code()==200) {
-                            List<User> user = response.body();
-                            TextView nameV = findViewById(R.id.menu_name);
-                            TextView emailV = findViewById(R.id.menu_email);
-                            ImageView pp = findViewById(R.id.menu_pp);
-                            nameV.setText(name);
-                            emailV.setText(email);
+        Log.d("TAG", "onResponse: " + profilpic);
+        TextView nameV = findViewById(R.id.menu_name);
+        TextView emailV = findViewById(R.id.menu_email);
+        ImageView pp = findViewById(R.id.menu_pp);
+        nameV.setText(name);
+        emailV.setText(email);
 
-                            /*Uri uri = Uri.parse(user.get(0).getProfilepicture());
-                            pp.setImageURI(uri);*/
-                        }
-                    }
+        try {
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
+                    .permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+            URL url = new URL(profilpic);
+            Bitmap bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+            pp.setImageBitmap(bmp);
+        } catch (IOException | NetworkOnMainThreadException e) {
+            e.printStackTrace();
+        }
 
-                    @Override
-                    public void onFailure(Call call, Throwable t) {
-                        Log.d("FailUser", "onFailure: " + t);
-                    }
-                }
-        );
         return true;
     }
 
@@ -162,32 +166,27 @@ public class FragmentManagerActivity extends AppCompatActivity
         //NOTE: creating fragment object
         Fragment fragment = null;
 
-        if (id == R.id.nav_feed){
+        if (id == R.id.nav_feed) {
             fragment = new FeedFragment();
             setTitle("Feed");
         }
 
-        if (id == R.id.nav_category){
+        if (id == R.id.nav_asso) {
             fragment = new CategoryFragment();
-            setTitle("Categories");
-        }
-
-        if (id == R.id.nav_asso){
-            fragment = new AssociationFragment();
             setTitle("Associations");
         }
 
-        if (id == R.id.nav_feedback){
+        if (id == R.id.nav_feedback) {
             fragment = new FeedbackFragment();
             setTitle("Feedback");
         }
 
-        if (id == R.id.nav_event){
+        if (id == R.id.nav_event) {
             fragment = new EventFragment();
             setTitle("Event");
         }
 
-        if (id == R.id.nav_qrcode){
+        if (id == R.id.nav_qrcode) {
             fragment = new QRcodeFragment();
             setTitle("QR Code");
         }

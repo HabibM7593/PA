@@ -58,8 +58,8 @@ public class MyCategoryAdapter extends RecyclerView.Adapter<MyCategoryAdapter.My
         buttonDetailShow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Category category = listCategory.get(vh.getAdapterPosition());
-                AssociationFragment aFragment = new AssociationFragment();
+                Category category = listCategory.get(vh.getAdapterPosition());
+                AssociationFragment aFragment = new AssociationFragment(category.getName());
 
                 ((FragmentActivity) v.getContext()).getSupportFragmentManager().beginTransaction()
                         .replace(R.id.frame_category, aFragment)
