@@ -78,7 +78,7 @@ public class AssociationDetailsFragment extends Fragment {
                     List<Follow> follows =response.body();
                     if (follows.size()==1){
                         followAsso.setText("Ne plus suivre");
-                        followAsso.setBackgroundColor(0xFFFF0000);
+                        followAsso.setBackgroundResource(R.drawable.round_corner_red);
                     }
                 }
             }
@@ -104,7 +104,7 @@ public class AssociationDetailsFragment extends Fragment {
 
                 if (followAsso.getText().equals("Suivre")){
                     followAsso.setText("Ne plus suivre");
-                    followAsso.setBackgroundColor(0xFFFF0000);
+                    followAsso.setBackgroundResource(R.drawable.round_corner_red);
                     Call call = followApi.followAsso(follow);
                     call.enqueue(new Callback<String>(){
 
@@ -122,7 +122,7 @@ public class AssociationDetailsFragment extends Fragment {
                     });
                 }else{
                     followAsso.setText("Suivre");
-                    followAsso.setBackgroundColor(R.drawable.round_corner_blue);
+                    followAsso.setBackgroundResource(R.drawable.round_corner_blue);
                     Call call = followApi.unfollowAsso(follow);
                     call.enqueue(new Callback<String>(){
                         @Override
