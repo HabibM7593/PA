@@ -37,8 +37,6 @@ public class AssociationDetailsFragment extends Fragment {
     Association selectedAssociation;
     Category categoryAssociation;
 
-    String nameCategory;
-
     public TextView nameAssoTV;
     public TextView nameCategoryTV;
     public TextView emailTV;

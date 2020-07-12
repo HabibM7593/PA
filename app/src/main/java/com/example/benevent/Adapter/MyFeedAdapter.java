@@ -14,11 +14,11 @@ import java.util.List;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class MyPostAdapter extends RecyclerView.Adapter<MyPostAdapter.MyViewHolder> {
+public class MyFeedAdapter extends RecyclerView.Adapter<MyFeedAdapter.MyViewHolder> {
 
     List<Post> listpost;
 
-    public MyPostAdapter(List<Post> listpost) {
+    public MyFeedAdapter(List<Post> listpost) {
         this.listpost = listpost;
     }
 
@@ -40,8 +40,8 @@ public class MyPostAdapter extends RecyclerView.Adapter<MyPostAdapter.MyViewHold
         public MyViewHolder(View v) {
             super(v);
             view = v;
-            nameAssoPostTV = v.findViewById(R.id.name_asso_post);
-            contentPostTV = v.findViewById(R.id.content_post);
+            nameAssoPostTV = v.findViewById(R.id.name_feed);
+            contentPostTV = v.findViewById(R.id.content_feed);
         }
     }
 
@@ -50,8 +50,8 @@ public class MyPostAdapter extends RecyclerView.Adapter<MyPostAdapter.MyViewHold
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         Log.d("TAG", "onCreateViewHolder: test");
         View v = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.element_cell_post, parent, false);
-        MyPostAdapter.MyViewHolder vh = new MyPostAdapter.MyViewHolder(v);
+                .inflate(R.layout.element_cell_feed, parent, false);
+        MyFeedAdapter.MyViewHolder vh = new MyFeedAdapter.MyViewHolder(v);
 
         return vh;
     }
@@ -59,7 +59,7 @@ public class MyPostAdapter extends RecyclerView.Adapter<MyPostAdapter.MyViewHold
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         Post post = listpost.get(position);
-        Log.d("TAG", "onBindViewHolder: "+post.getMessage());
+        Log.d("TAG", "onBindViewHolder: " + post.getMessage());
 
         holder.contentPostTV.setText(post.getMessage());
         holder.nameAssoPostTV.setText(post.getAssoname());

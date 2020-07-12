@@ -8,31 +8,42 @@
     android:orientation="horizontal"
     android:background="@drawable/background_border" >
 
+    <ImageView
+        android:id="@+id/image_feed"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginStart="10dp"
+        android:src="@mipmap/ic_launcher"
+        />
+
+
     <TextView
-        android:id="@+id/name_asso_post"
+        android:id="@+id/name_feed"
 
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
 
         tools:text="test"
-        android:textSize="25sp"
-        android:textColor="@color/colorBlack"
+        android:textSize="20sp"
 
-        android:layout_marginStart="10dp" />
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="70dp" />
 
 
     <TextView
-        android:id="@+id/content_post"
+        android:id="@+id/content_feed"
 
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
 
         tools:text="test category"
         android:textSize="15sp"
+        android:textStyle="italic"
         android:textColor="@color/colorBlack"
 
-        android:layout_marginTop="35dp"
-        android:layout_marginStart="25dp" />
+        android:layout_marginTop="30dp"
+        android:layout_marginStart="70dp" />
 
 </RelativeLayout>
 

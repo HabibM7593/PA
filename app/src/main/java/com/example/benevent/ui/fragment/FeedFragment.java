@@ -14,17 +14,13 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.benevent.API.CategoryApi;
 import com.example.benevent.API.NetworkClient;
 import com.example.benevent.API.PostApi;
-import com.example.benevent.Adapter.MyEventAdapter;
-import com.example.benevent.Adapter.MyPostAdapter;
-import com.example.benevent.Models.Category;
+import com.example.benevent.Adapter.MyFeedAdapter;
 import com.example.benevent.Models.Post;
 import com.example.benevent.R;
 
@@ -67,10 +63,8 @@ public class FeedFragment extends Fragment {
         call.enqueue(new Callback<List<Post>>() {
             @Override
             public void onResponse(Call<List<Post>> call, Response<List<Post>> response) {
-                //Log.d("TAG", "onResponse: OKAAAAAY");
-                List<Post> listepost =response.body();
-                //Log.d("TAG", "onResponse: "+listepost.get(0).getMessage());
-                MyPostAdapter adapter = new MyPostAdapter(listepost);
+                List<Post> listepost = response.body();
+                MyFeedAdapter adapter = new MyFeedAdapter(listepost);
                 recyclerView.setAdapter(adapter);
             }
 
@@ -82,13 +76,6 @@ public class FeedFragment extends Fragment {
 
 
         return view ;
-    }
-
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri.toString());
-        }
     }
 
     @Override
