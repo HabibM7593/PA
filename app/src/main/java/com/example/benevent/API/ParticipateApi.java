@@ -1,6 +1,7 @@
 package com.example.benevent.API;
 
 
+import com.example.benevent.Models.Follow;
 import com.example.benevent.Models.Participation;
 import com.example.benevent.Models.User;
 
@@ -24,6 +25,6 @@ public interface ParticipateApi {
     Call<Void> RefuseParticipation(@Body Participation participation);
 
     @GET("participate/{idev}/{idu}")
-    Call<List<User>> checkFollow(@Path("idev") int idev, @Path("idu") int idu);
+    Call<List<Participation>> checkParticipation(@Path("idev") int idev, @Path("idu") int idu);
 
 }

@@ -52,6 +52,7 @@ public class EventDetailsFragment extends Fragment {
     public TextView descEventTV;
     public TextView maxBEventTV;
     public TextView assoTV;
+    int valideParticipation = 0;
 
     Retrofit retrofit = NetworkClient.getRetrofitClient();
 
@@ -81,23 +82,29 @@ public class EventDetailsFragment extends Fragment {
         }
         Participation participation = new Participation(selectedEvent.getIdev(),iduser);
         ParticipateApi participateApi = retrofit.create(ParticipateApi.class);
-        Call call = participateApi.checkFollow(participation.getIdev(),participation.getIdu());
-        call.enqueue(new Callback<List<Follow>>(){
-
+        Call call = participateApi.checkParticipation(participation.getIdev(),participation.getIdu());
+        call.enqueue(new Callback<List<Participation>>(){
             @Override
-            public void onResponse(Call<List<Follow>> call, Response<List<Follow>> response) {
+            public void onResponse(Call<List<Participation>> call, Response<List<Participation>> response) {
                 if(response.code()==200){
-                    List<Follow> follows =response.body();
-                    if (follows.size()==1){
+                    List<Participation> participation =response.body();
+                    if (participation.size()==1){
                         buttoninscription.setText("Se Désinscrire");
                         buttoninscription.setBackgroundColor(0xFFFF0000);
+                        if (participation.get(0).isStatus()==1){
+                            valideParticipation=1;
+                        }else{
+                            valideParticipation=0;
+                        }
+                    }else{
+                        valideParticipation=0;
                     }
                 }
             }
 
             @Override
-            public void onFailure(Call<List<Follow>> call, Throwable t) {
-                Toast.makeText(getActivity().getApplicationContext(), "Echec", Toast.LENGTH_LONG).show();
+            public void onFailure(Call<List<Participation>> call, Throwable t) {
+                Toast.makeText(getActivity().getApplicationContext(), "Echec de recuperation du status de participation "+t, Toast.LENGTH_LONG).show();
             }
         });
         buttonDetailBack.setOnClickListener(new View.OnClickListener() {
@@ -114,34 +121,33 @@ public class EventDetailsFragment extends Fragment {
         buttoninscription.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Participation participation = new Participation(selectedEvent.getIdev(),iduser,false,true);
+                Participation participation;
                 ParticipateApi participateApi = retrofit.create(ParticipateApi.class);
                 if (buttoninscription.getText().equals("Inscription")){
+                    participation = new Participation(selectedEvent.getIdev(),iduser,0,1);
                     buttoninscription.setText("Se Désinscrire");
                     buttoninscription.setBackgroundColor(0xFFFF0000);
-                    Call call = participateApi.UpdateParticipation(participation);
+                    Call call = participateApi.Participer(participation);
                     call.enqueue(new Callback<String>(){
-
                         @Override
                         public void onResponse(Call<String> call, Response<String> response) {
-                            Toast.makeText(getActivity().getApplicationContext(), "Vous suivez cette association", Toast.LENGTH_LONG).show();
-
+                            Toast.makeText(getActivity().getApplicationContext(), "Vous venez de vous inscrire a cet evenement", Toast.LENGTH_LONG).show();
                         }
-
                         @Override
                         public void onFailure(Call<String> call, Throwable t) {
                             Toast.makeText(getActivity().getApplicationContext(), "Echec", Toast.LENGTH_LONG).show();
-
                         }
                     });
                 }else{
+                    participation = new Participation(selectedEvent.getIdev(),iduser,0,0);
                     buttoninscription.setText("Inscription");
                     buttoninscription.setBackgroundColor(R.drawable.round_corner);
                     Call call = participateApi.RefuseParticipation(participation);
                     call.enqueue(new Callback<String>(){
                         @Override
                         public void onResponse(Call<String> call, Response<String> response) {
-                            Toast.makeText(getActivity().getApplicationContext(), "Vous ne suivez plus cette association", Toast.LENGTH_LONG).show();
+                            Log.d("TAG", "onResponse: "+response.code());
+                            Toast.makeText(getActivity().getApplicationContext(), "Vous venez de vous desinscrire a cet evenement", Toast.LENGTH_LONG).show();
                         }
 
                         @Override
@@ -180,7 +186,7 @@ public class EventDetailsFragment extends Fragment {
                             nameAsso = associations.get(0).getName();
                             assoTV = v.findViewById(R.id.asso_event_details);
                             assoTV.setText(nameAsso);
-                            if (selectedEvent.getDateDeb().before(new Date()) && selectedEvent.getDateFin().after(new Date())){
+                            if (selectedEvent.getDateDeb().before(new Date()) && selectedEvent.getDateFin().after(new Date()) && valideParticipation==1){
                                 buttonQRcode.setVisibility(View.VISIBLE);
                             }
                         }

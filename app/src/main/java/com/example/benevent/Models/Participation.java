@@ -3,10 +3,10 @@ package com.example.benevent.Models;
 public class Participation {
     int idev;
     int idu;
-    boolean participate;
-    boolean status;
+    int participate;
+    int status;
 
-    public Participation(int idev, int idu, boolean participate, boolean status) {
+    public Participation(int idev, int idu, int participate, int status) {
         this.idev = idev;
         this.idu = idu;
         this.participate = participate;
@@ -34,19 +34,19 @@ public class Participation {
         this.idu = idu;
     }
 
-    public boolean isParticipate() {
+    public int isParticipate() {
         return participate;
     }
 
-    public void setParticipate(boolean participate) {
+    public void setParticipate(int participate) {
         this.participate = participate;
     }
 
-    public boolean isStatus() {
+    public int isStatus() {
         return status;
     }
 
-    public void setStatus(boolean status) {
+    public void setStatus(int status) {
         this.status = status;
     }
 }
