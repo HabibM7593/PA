@@ -76,7 +76,7 @@
 
         android:layout_width="100dp"
         android:layout_height="30dp"
-        android:background="@drawable/round_corner"
+        android:background="@drawable/round_corner_blue"
 
         android:text="@string/connexion_label"
         android:textSize="12sp"

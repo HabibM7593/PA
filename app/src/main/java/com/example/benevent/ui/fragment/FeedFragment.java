@@ -67,9 +67,9 @@ public class FeedFragment extends Fragment {
         call.enqueue(new Callback<List<Post>>() {
             @Override
             public void onResponse(Call<List<Post>> call, Response<List<Post>> response) {
-                Log.d("TAG", "onResponse: OKAAAAAY");
+                //Log.d("TAG", "onResponse: OKAAAAAY");
                 List<Post> listepost =response.body();
-                Log.d("TAG", "onResponse: "+listepost.get(0).getMessage());
+                //Log.d("TAG", "onResponse: "+listepost.get(0).getMessage());
                 MyPostAdapter adapter = new MyPostAdapter(listepost);
                 recyclerView.setAdapter(adapter);
             }

@@ -2,7 +2,6 @@
 package com.example.benevent.ui.fragment;
 
 import android.content.SharedPreferences;
-import android.media.Image;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -17,7 +16,6 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.benevent.API.CategoryApi;
 import com.example.benevent.API.FollowApi;
 import com.example.benevent.API.NetworkClient;
 import com.example.benevent.Models.Association;
@@ -124,7 +122,7 @@ public class AssociationDetailsFragment extends Fragment {
                     });
                 }else{
                     followAsso.setText("Suivre");
-                    followAsso.setBackgroundColor(R.drawable.round_corner);
+                    followAsso.setBackgroundColor(R.drawable.round_corner_blue);
                     Call call = followApi.unfollowAsso(follow);
                     call.enqueue(new Callback<String>(){
                         @Override

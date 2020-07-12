@@ -208,7 +208,7 @@
 
             android:layout_width="100dp"
             android:layout_height="30dp"
-            android:background="@drawable/round_corner"
+            android:background="@drawable/round_corner_blue"
             android:text="@string/inscrire_label"
             android:textColor="@color/colorWhite"
             android:textSize="12sp"
@@ -224,7 +224,7 @@
 
             android:layout_width="100dp"
             android:layout_height="30dp"
-            android:background="@drawable/round_corner"
+            android:background="@drawable/round_corner_blue"
             android:visibility="invisible"
             android:text="@string/scan_qrcode_label"
             android:textColor="@color/colorWhite"

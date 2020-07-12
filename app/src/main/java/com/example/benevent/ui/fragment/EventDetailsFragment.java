@@ -22,7 +22,6 @@ import com.example.benevent.API.NetworkClient;
 import com.example.benevent.API.ParticipateApi;
 import com.example.benevent.Models.Association;
 import com.example.benevent.Models.Event;
-import com.example.benevent.Models.Follow;
 import com.example.benevent.Models.Participation;
 import com.example.benevent.R;
 import com.google.zxing.integration.android.IntentIntegrator;
@@ -32,7 +31,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-import androidx.lifecycle.Lifecycle;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -90,7 +88,7 @@ public class EventDetailsFragment extends Fragment {
                     List<Participation> participation =response.body();
                     if (participation.size()==1){
                         buttoninscription.setText("Se Désinscrire");
-                        buttoninscription.setBackgroundColor(0xFFFF0000);
+                        buttoninscription.setBackgroundResource(R.drawable.round_corner_red);
                         if (participation.get(0).isStatus()==1){
                             valideParticipation=1;
                         }else{
@@ -126,7 +124,7 @@ public class EventDetailsFragment extends Fragment {
                 if (buttoninscription.getText().equals("Inscription")){
                     participation = new Participation(selectedEvent.getIdev(),iduser,0,1);
                     buttoninscription.setText("Se Désinscrire");
-                    buttoninscription.setBackgroundColor(0xFFFF0000);
+                    buttoninscription.setBackgroundResource(R.drawable.round_corner_red);
                     Call call = participateApi.Participer(participation);
                     call.enqueue(new Callback<String>(){
                         @Override
@@ -141,7 +139,7 @@ public class EventDetailsFragment extends Fragment {
                 }else{
                     participation = new Participation(selectedEvent.getIdev(),iduser,0,0);
                     buttoninscription.setText("Inscription");
-                    buttoninscription.setBackgroundColor(R.drawable.round_corner);
+                    buttoninscription.setBackgroundResource(R.drawable.round_corner_blue);
                     Call call = participateApi.RefuseParticipation(participation);
                     call.enqueue(new Callback<String>(){
                         @Override

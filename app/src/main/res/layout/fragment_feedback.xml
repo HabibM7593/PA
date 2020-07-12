@@ -94,7 +94,7 @@
 
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:background="@drawable/round_corner"
+        android:background="@drawable/round_corner_blue"
 
         android:text="@string/feedback_string"
 
