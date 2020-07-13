@@ -17,10 +17,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.benevent.API.NetworkClient;
-import com.example.benevent.API.UserApi;
-import com.example.benevent.Models.User;
 import com.example.benevent.R;
-import com.example.benevent.ui.fragment.AssociationFragment;
 import com.example.benevent.ui.fragment.CategoryFragment;
 import com.example.benevent.ui.fragment.EventFragment;
 import com.example.benevent.ui.fragment.FeedFragment;
@@ -38,15 +35,9 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLConnection;
-import java.util.List;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import java.net.URL;
+
 import retrofit2.Retrofit;
 
 public class FragmentManagerActivity extends AppCompatActivity
@@ -55,8 +46,6 @@ public class FragmentManagerActivity extends AppCompatActivity
         FeedFragment.OnFragmentInteractionListener,
 
         NavigationView.OnNavigationItemSelectedListener {
-
-    Retrofit retrofit = NetworkClient.getRetrofitClient();
 
     Context context = this;
 
