@@ -10,26 +10,26 @@ public class Post {
     int idas;
     int idev;
     String eventname;
-    String assoname;
+    String assoacro;
 
-    public Post(int idpo, String message, Date date, int idas, int idev, String eventname, String assoname) {
+    public Post(int idpo, String message, Date date, int idas, int idev, String eventname, String assoacro) {
         this.idpo = idpo;
         this.message = message;
         this.date = date;
         this.idas = idas;
         this.idev = idev;
         this.eventname = eventname;
-        this.assoname = assoname;
+        this.assoacro = assoacro;
     }
 
-    public Post(int idpo, int idu, String message, Date date, int idev, String eventname, String assoname) {
+    public Post(int idpo, int idu, String message, Date date, int idev, String eventname, String assoacro) {
         this.idpo = idpo;
         this.message = message;
         this.date = date;
         this.idu = idu;
         this.idev = idev;
         this.eventname = eventname;
-        this.assoname = assoname;
+        this.assoacro = assoacro;
     }
 
     public String getEventname() {
@@ -40,12 +40,12 @@ public class Post {
         this.eventname = eventname;
     }
 
-    public String getAssoname() {
-        return assoname;
+    public String getAssoacro() {
+        return assoacro;
     }
 
-    public void setAssoname(String assoname) {
-        this.assoname = assoname;
+    public void setAssoacro(String assoacro) {
+        this.assoacro = assoacro;
     }
 
     public int getIdpo() {

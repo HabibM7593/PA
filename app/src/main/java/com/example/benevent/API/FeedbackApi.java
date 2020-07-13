@@ -7,6 +7,8 @@ import retrofit2.http.Body;
 import retrofit2.http.POST;
 
 public interface FeedbackApi {
-    @POST("feedback")
-    Call<Void> sendFeedback(@Body Feedback feedback);
+    @POST("feedback/bug")
+    Call<Void> sendFeedbackBug(@Body Feedback feedback);
+    @POST("feedback/evaluation")
+    Call<Void> sendFeedbackEval(@Body Feedback feedback);
 }

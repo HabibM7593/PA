@@ -83,7 +83,9 @@ public class AssociationFragment extends Fragment {
                                                             .collect(Collectors.toList());
                                                     List<Association> associations = responseAsso.body();
                                                     Predicate<Association> byIdcat = association -> association.getIdcat()==result.get(0).getIdcat();
-                                                    List<Association> filteredAsso = associations.stream().filter(byIdcat).collect(Collectors.toList());
+                                                    List<Association> filteredAsso = associations.stream()
+                                                            .filter(byIdcat)
+                                                            .collect(Collectors.toList());
                                                     listAsso.addAll(filteredAsso);
                                                     listCat.addAll(curCat);
                                                     MyAssoAdapter adapter = new MyAssoAdapter(listAsso,result.get(0));

@@ -27,6 +27,13 @@ public class User {
         this.description = description;
     }
 
+    public User(String name, String firstname, String phone, String profilpicture) {
+        this.name = name;
+        this.firstname = firstname;
+        this.phone = phone;
+        this.profilpicture = profilpicture;
+    }
+
     public User() {
 
     }

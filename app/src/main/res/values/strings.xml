@@ -74,4 +74,5 @@
     <string name="menu_category">Categories</string>
     <string name="btn_suivre">Suivre</string>
     <string name="inscrire_label">Inscription</string>
+    <string name="mon_profil">Mon Profil</string>
 </resources>

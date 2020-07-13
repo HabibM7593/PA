@@ -25,6 +25,7 @@ import com.example.benevent.ui.fragment.CategoryFragment;
 import com.example.benevent.ui.fragment.EventFragment;
 import com.example.benevent.ui.fragment.FeedFragment;
 import com.example.benevent.ui.fragment.FeedbackFragment;
+import com.example.benevent.ui.fragment.ProfilFragment;
 import com.example.benevent.ui.fragment.QRcodeFragment;
 import com.google.android.material.navigation.NavigationView;
 
@@ -191,6 +192,10 @@ public class FragmentManagerActivity extends AppCompatActivity
             setTitle("QR Code");
         }
 
+        if (id == R.id.nav_profil) {
+            fragment = new ProfilFragment();
+            setTitle("Mon Profil");
+        }
 
         //NOTE: Fragment changing code
         if (fragment != null) {

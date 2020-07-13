@@ -8,7 +8,9 @@ import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
+import retrofit2.http.PATCH;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 
@@ -21,4 +23,10 @@ public interface UserApi {
 
     @GET("user/{id}")
     Call<List<User>> getUser(@Path("id") int id);
+
+    @PATCH("user/{idu}")
+    Call<Void> updateUser(@Path("idu") int id,@Body User user);
+
+    @DELETE("user/{idu}")
+    Call<Void> deleteUser(@Path("idu") int id);
 }

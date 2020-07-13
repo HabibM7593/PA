@@ -29,6 +29,7 @@
         android:layout_height="48dp"
         android:background="@drawable/back_border"
         android:ems="10"
+        android:visibility="invisible"
 
         android:hint="@string/object_feedback_string"
         android:autofillHints="@string/object_feedback_string"

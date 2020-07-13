@@ -4,6 +4,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.benevent.Models.Post;
@@ -34,13 +35,14 @@ public class MyFeedAdapter extends RecyclerView.Adapter<MyFeedAdapter.MyViewHold
     public static class MyViewHolder extends RecyclerView.ViewHolder {
 
         public View view;
-        public TextView nameAssoPostTV;
+        public TextView namePostTV;
         public TextView contentPostTV;
+        public ImageView imageView;
 
         public MyViewHolder(View v) {
             super(v);
             view = v;
-            nameAssoPostTV = v.findViewById(R.id.name_feed);
+            namePostTV = v.findViewById(R.id.name_feed);
             contentPostTV = v.findViewById(R.id.content_feed);
         }
     }
@@ -62,7 +64,11 @@ public class MyFeedAdapter extends RecyclerView.Adapter<MyFeedAdapter.MyViewHold
         Log.d("TAG", "onBindViewHolder: " + post.getMessage());
 
         holder.contentPostTV.setText(post.getMessage());
-        holder.nameAssoPostTV.setText(post.getAssoname());
+        if (post.getEventname()==null){
+            holder.namePostTV.setText(post.getAssoacro());
+        }else{
+            holder.namePostTV.setText(post.getAssoacro()+" | "+post.getEventname());
+        }
     }
 
     @Override

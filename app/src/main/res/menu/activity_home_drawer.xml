@@ -24,5 +24,9 @@
             android:id="@+id/nav_qrcode"
             android:icon="@drawable/ic_menu_camera"
             android:title="@string/menu_qrcode" />
+        <item
+            android:id="@+id/nav_profil"
+            android:icon="@drawable/ic_info"
+            android:title="@string/mon_profil" />
     </group>
 </menu>

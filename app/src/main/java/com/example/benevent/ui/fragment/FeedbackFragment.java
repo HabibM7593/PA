@@ -57,8 +57,10 @@ public class FeedbackFragment extends Fragment {
             public void onClick(View view) {
                 if (switchbug.isChecked()) {
                     ratingbar.setVisibility(View.INVISIBLE);
+                    titrefeedback.setVisibility(View.VISIBLE);
                 } else {
                     ratingbar.setVisibility(View.VISIBLE);
+                    titrefeedback.setVisibility(View.INVISIBLE);
                 }
             }
         });
@@ -74,14 +76,18 @@ public class FeedbackFragment extends Fragment {
                     if (titrefeedback.getText().toString().equals("") || contentfeedback.getText().toString().equals("")) {
                         Toast.makeText(getActivity().getApplicationContext(),"Faites attention à ne pas envoyer de champs vides",Toast.LENGTH_SHORT).show();
                     }else{
-                        SendFeedback(new Feedback(iduser, titrefeedback.getText().toString(), contentfeedback.getText().toString(), formatter.format(date), "", type, "ANDROID"));
+                        SendFeedbackBug(new Feedback(iduser, titrefeedback.getText().toString(), contentfeedback.getText().toString(), formatter.format(date),  type, "ANDROID"));
+                        titrefeedback.setText("");
+                        contentfeedback.setText("");
                     }
                 } else {
                     type = 2;
-                    if (titrefeedback.getText().toString().equals("") || contentfeedback.getText().toString().equals("")) {
+                    if (contentfeedback.getText().toString().equals("")) {
                         Toast.makeText(getActivity().getApplicationContext(),"Faites attention à ne pas envoyer de champs vides",Toast.LENGTH_SHORT).show();
                     }else{
-                        SendFeedback(new Feedback(iduser, titrefeedback.getText().toString(), contentfeedback.getText().toString(), formatter.format(date), "", (int) ratingbar.getRating(), type, "ANDROID"));
+                        SendFeedbackEval(new Feedback(iduser, contentfeedback.getText().toString(), formatter.format(date), (int) ratingbar.getRating(), type, "ANDROID"));
+                        titrefeedback.setText("");
+                        contentfeedback.setText("");
                     }
                 }
             }
@@ -90,12 +96,38 @@ public class FeedbackFragment extends Fragment {
     }
 
 
-    private void SendFeedback(Feedback feedback) {
+    private void SendFeedbackBug(Feedback feedback) {
         Retrofit retrofit = NetworkClient.getRetrofitClient();
 
         FeedbackApi feedbackApi = retrofit.create(FeedbackApi.class);
 
-        Call call = feedbackApi.sendFeedback(feedback);
+        Call call = feedbackApi.sendFeedbackBug(feedback);
+
+        call.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                Log.d("test", String.valueOf(response.code()));
+                if (response.code() == 200) {
+                    Toast.makeText(getActivity().getApplicationContext(), "Votre retour a bien ete pris en compte", Toast.LENGTH_LONG).show();
+                }
+                if (response.code() == 500) {
+                    Toast.makeText(getActivity().getApplicationContext(), "Veuillez reessayer plus tard", Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+                Log.e("test", "onFailure: " + t);
+                Toast.makeText(getActivity().getApplicationContext(), t.toString(), Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+    private void SendFeedbackEval(Feedback feedback) {
+        Retrofit retrofit = NetworkClient.getRetrofitClient();
+
+        FeedbackApi feedbackApi = retrofit.create(FeedbackApi.class);
+
+        Call call = feedbackApi.sendFeedbackEval(feedback);
 
         call.enqueue(new Callback<String>() {
             @Override
