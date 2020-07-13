@@ -108,7 +108,6 @@ public class MainActivity extends AppCompatActivity {
                     editor.putInt("userid", users.get(0).getId());
                     editor.putString("username", users.get(0).getFirstname() + " " + users.get(0).getName());
                     editor.putString("email", users.get(0).getEmail()); // Saving string
-                    Log.d("TAG", "onResponse: "+users.get(0).getProfilpicture());
                     editor.putString("profilpicture",users.get(0).getProfilpicture());
 
                     editor.apply();

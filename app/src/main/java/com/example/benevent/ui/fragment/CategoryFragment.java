@@ -1,7 +1,6 @@
 package com.example.benevent.ui.fragment;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,13 +11,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.benevent.API.CategoryApi;
-import com.example.benevent.API.EventApi;
 import com.example.benevent.API.NetworkClient;
 import com.example.benevent.Adapter.MyCategoryAdapter;
 import com.example.benevent.Models.Category;
-import com.example.benevent.Models.Event;
 import com.example.benevent.R;
-import com.example.benevent.Adapter.MyEventAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -68,7 +64,6 @@ public class CategoryFragment extends Fragment {
 
                     @Override
                     public void onFailure(Call call, Throwable t) {
-                        Log.d("FailEvent", "onFailure : " + t);
                     }
                 }
         );

@@ -10,20 +10,18 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.NetworkOnMainThreadException;
 import android.os.StrictMode;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.benevent.API.NetworkClient;
+
 import com.example.benevent.R;
 import com.example.benevent.ui.fragment.CategoryFragment;
 import com.example.benevent.ui.fragment.EventFragment;
 import com.example.benevent.ui.fragment.FeedFragment;
 import com.example.benevent.ui.fragment.FeedbackFragment;
 import com.example.benevent.ui.fragment.ProfilFragment;
-import com.example.benevent.ui.fragment.QRcodeFragment;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -38,7 +36,6 @@ import java.io.IOException;
 
 import java.net.URL;
 
-import retrofit2.Retrofit;
 
 public class FragmentManagerActivity extends AppCompatActivity
         implements
@@ -112,7 +109,6 @@ public class FragmentManagerActivity extends AppCompatActivity
         String profilpic = pref.getString("profilpicture", "");
 
         getMenuInflater().inflate(R.menu.home, menu); // Inflate the menu; this adds items to the action bar if it is present.
-        Log.d("TAG", "onResponse: " + profilpic);
         TextView nameV = findViewById(R.id.menu_name);
         TextView emailV = findViewById(R.id.menu_email);
         ImageView pp = findViewById(R.id.menu_pp);
@@ -135,12 +131,9 @@ public class FragmentManagerActivity extends AppCompatActivity
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
+
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
         }
@@ -174,11 +167,6 @@ public class FragmentManagerActivity extends AppCompatActivity
         if (id == R.id.nav_event) {
             fragment = new EventFragment();
             setTitle("Event");
-        }
-
-        if (id == R.id.nav_qrcode) {
-            fragment = new QRcodeFragment();
-            setTitle("QR Code");
         }
 
         if (id == R.id.nav_profil) {

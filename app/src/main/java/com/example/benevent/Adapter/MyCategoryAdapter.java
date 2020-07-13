@@ -1,6 +1,5 @@
 package com.example.benevent.Adapter;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,28 +10,15 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.benevent.Models.Association;
 import com.example.benevent.Models.Category;
-import com.example.benevent.Models.Event;
 import com.example.benevent.R;
 import com.example.benevent.ui.fragment.AssociationFragment;
-import com.example.benevent.ui.fragment.EventDetailsFragment;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 public class MyCategoryAdapter extends RecyclerView.Adapter<MyCategoryAdapter.MyViewHolder> {
 
     private List<Category> listCategory;
-
-    public List<Category> getListCategory() {
-        return listCategory;
-    }
-
-    public void setListCategory(List<Category> listCategory) {
-        this.listCategory = listCategory;
-    }
 
     public MyCategoryAdapter(List<Category> listCategory) {
         this.listCategory = listCategory;
@@ -60,7 +46,6 @@ public class MyCategoryAdapter extends RecyclerView.Adapter<MyCategoryAdapter.My
             @Override
             public void onClick(View v) {
                 Category category = listCategory.get(vh.getAdapterPosition());
-                Log.d("TAG", "onClick: "+category.getName());
                 AssociationFragment aFragment = new AssociationFragment(category.getName());
 
                 ((FragmentActivity) v.getContext()).getSupportFragmentManager().beginTransaction()

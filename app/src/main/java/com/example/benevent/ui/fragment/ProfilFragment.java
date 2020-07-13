@@ -1,6 +1,5 @@
 package com.example.benevent.ui.fragment;
 
-import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
@@ -18,8 +17,6 @@ import retrofit2.Retrofit;
 import android.os.NetworkOnMainThreadException;
 import android.os.StrictMode;
 import android.provider.MediaStore;
-import android.provider.SyncStateContract;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,11 +27,6 @@ import android.widget.Toast;
 
 import com.cloudinary.Cloudinary;
 import com.cloudinary.Uploader;
-import com.cloudinary.android.MediaManager;
-import com.cloudinary.android.payload.FileNotFoundException;
-import com.cloudinary.android.signed.Signature;
-import com.cloudinary.android.signed.SignatureProvider;
-import com.example.benevent.API.AssociationApi;
 import com.example.benevent.API.NetworkClient;
 import com.example.benevent.API.UserApi;
 import com.example.benevent.Activity.MainActivity;
@@ -58,11 +50,9 @@ public class ProfilFragment extends Fragment {
     public ImageView pictureprofilTV;
     public TextView phoneprofilTV;
     Retrofit retrofit = NetworkClient.getRetrofitClient();
-    List<User> profiluser;
     User currentUser = new User();
 
     public ProfilFragment() {
-        // Required empty public constructor
     }
 
 
@@ -75,7 +65,6 @@ public class ProfilFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_profil, container, false);
-        // Inflate the layout for this fragment
         UserApi userApi = retrofit.create(UserApi.class);
         Button modifbtn = v.findViewById(R.id.button_valid_modif);
         Button supprbtn = v.findViewById(R.id.button_supprimer);
@@ -113,7 +102,6 @@ public class ProfilFragment extends Fragment {
                         Bitmap bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
                         pictureprofilTV.setImageBitmap(bmp);
                     } catch (IOException | NetworkOnMainThreadException e) {
-                        e.printStackTrace();
                     }
                 }
             }
@@ -128,7 +116,6 @@ public class ProfilFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
-                Log.d("TAG", "onClick: "+ currentUser.getProfilpicture());
                 Call call = userApi.updateUser( iduser,new User(nameprofilTV.getText().toString(),firstnameprofilTV.getText().toString(),phoneprofilTV.getText().toString(),currentUser.getProfilpicture()));
                 call.enqueue(new Callback<String>() {
                     @Override
@@ -189,7 +176,6 @@ public class ProfilFragment extends Fragment {
                     Uploader uploader = cloudinary.uploader();
                     Map map = uploader.upload(is, new HashMap());
 
-                    Log.d("TAG", "onActivityResult: "+map.containsKey("url")+" "+ map.get("url"));
                     try {
                         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
                                 .permitAll().build();

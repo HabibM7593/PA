@@ -1,8 +1,5 @@
-
-
 package com.example.benevent.Adapter;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,21 +21,6 @@ public class MyAssoAdapter extends RecyclerView.Adapter<MyAssoAdapter.MyViewHold
 
     private List<Association> listAssos;
     private Category category;
-
-    public List<Association> getListAssos() {
-        return listAssos;
-    }
-
-    public Category getListCategory() { return category; }
-
-    public void setListAssos(List<Association> listAssos) {
-        this.listAssos = listAssos;
-        notifyDataSetChanged();
-    }
-
-    public void setListCategory(Category listCategory) {
-        this.category = listCategory;
-    }
 
     public MyAssoAdapter(List<Association> listAssos, Category category) {
         this.listAssos = listAssos;
@@ -82,10 +64,7 @@ public class MyAssoAdapter extends RecyclerView.Adapter<MyAssoAdapter.MyViewHold
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         Association association = listAssos.get(position);
-        Log.d("TAG", "onBindViewHolder: asso idcat "+association.getIdcat());
 
-        Log.d("TAG", "onBindViewHolder: cat name"+category.getName());
-        Log.d("TAG", "onBindViewHolder: cat id"+category.getIdcat());
 
         holder.nameAssoTV.setText(association.getName());
         holder.catAssoTV.setText(category.getName());

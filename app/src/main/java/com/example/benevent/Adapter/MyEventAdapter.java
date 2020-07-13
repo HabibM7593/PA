@@ -22,15 +22,6 @@ public class MyEventAdapter extends RecyclerView.Adapter<MyEventAdapter.MyViewHo
 
     private List<Event> listEvents;
 
-    public List<Event> getListEvents() {
-        return listEvents;
-    }
-
-    public void setListEvents(List<Event> listEvents) {
-        this.listEvents = listEvents;
-        notifyDataSetChanged();
-    }
-
     public MyEventAdapter(List<Event> listEvents) {
         this.listEvents = listEvents;
     }

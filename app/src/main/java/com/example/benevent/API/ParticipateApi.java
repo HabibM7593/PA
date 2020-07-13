@@ -1,9 +1,7 @@
 package com.example.benevent.API;
 
 
-import com.example.benevent.Models.Follow;
 import com.example.benevent.Models.Participation;
-import com.example.benevent.Models.User;
 
 import java.util.List;
 

@@ -2,7 +2,6 @@ package com.example.benevent.ui.fragment;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -74,7 +73,6 @@ public class EventFragment extends Fragment {
 
                     @Override
                     public void onFailure(Call call, Throwable t) {
-                        Log.d("FailEvent", "onFailure : " + t);
                     }
                 }
         );

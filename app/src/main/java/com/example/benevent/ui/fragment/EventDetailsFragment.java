@@ -8,7 +8,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -144,7 +143,6 @@ public class EventDetailsFragment extends Fragment {
                     call.enqueue(new Callback<String>(){
                         @Override
                         public void onResponse(Call<String> call, Response<String> response) {
-                            Log.d("TAG", "onResponse: "+response.code());
                             Toast.makeText(getActivity().getApplicationContext(), "Vous venez de vous desinscrire a cet evenement", Toast.LENGTH_LONG).show();
                         }
 
@@ -192,7 +190,6 @@ public class EventDetailsFragment extends Fragment {
 
                     @Override
                     public void onFailure(Call call, Throwable t) {
-                        Log.d("FailEvent", "onFailure : " + t);
                     }
                 }
         );

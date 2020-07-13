@@ -1,6 +1,5 @@
 package com.example.benevent.Adapter;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,14 +22,6 @@ public class MyFeedAdapter extends RecyclerView.Adapter<MyFeedAdapter.MyViewHold
         this.listpost = listpost;
     }
 
-    public List<Post> getListpost() {
-        return listpost;
-    }
-
-    public void setListpost(List<Post> listpost) {
-        this.listpost = listpost;
-        notifyDataSetChanged();
-    }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
 
@@ -50,7 +41,6 @@ public class MyFeedAdapter extends RecyclerView.Adapter<MyFeedAdapter.MyViewHold
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        Log.d("TAG", "onCreateViewHolder: test");
         View v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.element_cell_feed, parent, false);
         MyFeedAdapter.MyViewHolder vh = new MyFeedAdapter.MyViewHolder(v);
@@ -61,7 +51,6 @@ public class MyFeedAdapter extends RecyclerView.Adapter<MyFeedAdapter.MyViewHold
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         Post post = listpost.get(position);
-        Log.d("TAG", "onBindViewHolder: " + post.getMessage());
 
         holder.contentPostTV.setText(post.getMessage());
         if (post.getEventname()==null){

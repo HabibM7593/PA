@@ -31,7 +31,6 @@ import static android.content.Context.MODE_PRIVATE;
 public class FeedbackFragment extends Fragment {
 
     public FeedbackFragment() {
-        // Required empty public constructor
     }
 
     @Override
@@ -106,7 +105,6 @@ public class FeedbackFragment extends Fragment {
         call.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
-                Log.d("test", String.valueOf(response.code()));
                 if (response.code() == 200) {
                     Toast.makeText(getActivity().getApplicationContext(), "Votre retour a bien ete pris en compte", Toast.LENGTH_LONG).show();
                 }
@@ -132,7 +130,6 @@ public class FeedbackFragment extends Fragment {
         call.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
-                Log.d("test", String.valueOf(response.code()));
                 if (response.code() == 200) {
                     Toast.makeText(getActivity().getApplicationContext(), "Votre retour a bien ete pris en compte", Toast.LENGTH_LONG).show();
                 }

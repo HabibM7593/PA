@@ -3,11 +3,15 @@ package com.example.benevent.Activity;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+
 import android.os.Bundle;
+
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.benevent.API.NetworkClient;
@@ -27,6 +31,7 @@ import retrofit2.Retrofit;
 public class SignupActivity extends AppCompatActivity {
 
     public ImageButton backButton;
+    public ImageView imageUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +39,10 @@ public class SignupActivity extends AppCompatActivity {
         setContentView(R.layout.activity_signup);
 
         backButton = findViewById(R.id.back_button_signup);
+        String uri = "@drawable/logo_image.png";  // where myresource (without the extension) is the file
+
+        imageUser= (ImageView)findViewById(R.id.profil_picture);
+
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

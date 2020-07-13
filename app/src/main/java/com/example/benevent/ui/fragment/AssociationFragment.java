@@ -7,7 +7,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +17,7 @@ import com.example.benevent.API.CategoryApi;
 import com.example.benevent.API.NetworkClient;
 import com.example.benevent.Adapter.MyAssoAdapter;
 import com.example.benevent.Models.Association;
-import com.example.benevent.Adapter.MyEventAdapter;
+
 import com.example.benevent.Models.Category;
 import com.example.benevent.R;
 
@@ -94,7 +94,6 @@ public class AssociationFragment extends Fragment {
                                         }
                                         @Override
                                         public void onFailure(Call call, Throwable t) {
-                                            Log.d("FailCategory", "onFailure : " + t);
                                         }
                                     }
                             );
@@ -103,7 +102,6 @@ public class AssociationFragment extends Fragment {
 
                     @Override
                     public void onFailure(Call call, Throwable t) {
-                        Log.d("FailAsso", "onFailure : " + t);
                     }
                 }
         );

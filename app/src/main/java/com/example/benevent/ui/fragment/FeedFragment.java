@@ -2,7 +2,6 @@ package com.example.benevent.ui.fragment;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -36,7 +35,6 @@ public class FeedFragment extends Fragment {
     private LinearLayoutManager LLM;
 
     public FeedFragment() {
-        // Required empty public constructor
     }
 
     @Override
@@ -96,6 +94,5 @@ public class FeedFragment extends Fragment {
     }
 
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
         void onFragmentInteraction(String title);    }
 }
