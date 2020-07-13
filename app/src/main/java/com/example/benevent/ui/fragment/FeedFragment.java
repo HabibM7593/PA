@@ -13,13 +13,16 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.example.benevent.API.NetworkClient;
 import com.example.benevent.API.PostApi;
 import com.example.benevent.Adapter.MyFeedAdapter;
+import com.example.benevent.Models.Association;
 import com.example.benevent.Models.Post;
 import com.example.benevent.R;
 
@@ -48,7 +51,16 @@ public class FeedFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_feed, container, false);
         // Inflate the layout for this fragment
         SharedPreferences pref = this.getActivity().getSharedPreferences("login", MODE_PRIVATE);
-
+        Button addpost = view.findViewById(R.id.button_create_post);
+        addpost.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                CreatePostFragment createPostFragment = new CreatePostFragment();
+                ((FragmentActivity) view.getContext()).getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.frame_feed, createPostFragment)
+                        .commit();
+            }
+        });
         recyclerView = view.findViewById(R.id.recycler_feed);
         int iduser = pref.getInt("userid", 0);
 
@@ -73,7 +85,7 @@ public class FeedFragment extends Fragment {
         });
 
 
-        return view ;
+        return view;
     }
 
     @Override
@@ -94,5 +106,6 @@ public class FeedFragment extends Fragment {
     }
 
     public interface OnFragmentInteractionListener {
-        void onFragmentInteraction(String title);    }
+        void onFragmentInteraction(String title);
+    }
 }

@@ -8,7 +8,6 @@ import android.os.Bundle;
 
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -59,17 +58,25 @@ public class SignupActivity extends AppCompatActivity {
         EditText ageET = (EditText) findViewById(R.id.age_signup);
         EditText emailET = (EditText) findViewById(R.id.email_signup);
         EditText passwordET = (EditText) findViewById(R.id.password_signup);
+        EditText phoneET = (EditText) findViewById(R.id.phone_signup);
 
         SimpleDateFormat formatter1 = new SimpleDateFormat("dd/MM/yyyy");
         SimpleDateFormat formatter2 = new SimpleDateFormat("yyyy-MM-dd");
 
-        Date ageDate = formatter1.parse(ageET.getText().toString());
-        String age = formatter2.format(ageDate);
 
 
-        if(nameET.getText().toString().equals("")||firstnameET.getText().toString().equals("")||age.equals("")||emailET.getText().toString().equals("")||passwordET.getText().toString().equals("")){
+
+        if(nameET.getText().toString().equals("")||firstnameET.getText().toString().equals("")||ageET.getText().toString().equals("")||emailET.getText().toString().equals("")||passwordET.getText().toString().equals("")){
             Toast.makeText(getApplicationContext(), "Faites attention à ne pas envoyer de champs vides", Toast.LENGTH_LONG).show();
         }else{
+            if(!emailET.getText().toString().contains("@")){
+                Toast.makeText(getApplicationContext(), "Verifiez votre adresse mail !", Toast.LENGTH_LONG).show();
+            }
+            if(phoneET.getText().toString().length()<10 || (phoneET.getText().toString().length()>10 && !phoneET.getText().toString().contains("+"))||phoneET.getText().toString().length()>12){
+                Toast.makeText(getApplicationContext(), "Verifiez votre numero de telephone !", Toast.LENGTH_LONG).show();
+            }
+            Date ageDate = formatter1.parse(ageET.getText().toString());
+            String age = formatter2.format(ageDate);
             signUser(new Signup(nameET.getText().toString(),firstnameET.getText().toString(),age,emailET.getText().toString(),passwordET.getText().toString()));
         }
 

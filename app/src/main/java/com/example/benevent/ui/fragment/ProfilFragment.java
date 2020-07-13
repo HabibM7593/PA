@@ -156,7 +156,6 @@ public class ProfilFragment extends Fragment {
             }
         });
 
-
         return v;
     }
 
@@ -169,8 +168,7 @@ public class ProfilFragment extends Fragment {
             if (requestCode == 200 && resultCode == RESULT_OK && null != data)
             {
                 Uri selectedImage = data.getData();
-                String[] filePathColumn = { MediaStore.Images.Media.DATA };
-                Cloudinary cloudinary = new Cloudinary("cloudinary://723223212294846:zAg46rcMqXbUG4oaoNNB3KlBLco@benevent");
+                Cloudinary cloudinary = new Cloudinary("cloudinary://996546549428271:zTYYc7JGVOE4lpiWuyt5zSt_Ftc@beneventesgi");
                 try {
                     FileInputStream is = new FileInputStream(new File(getPath(selectedImage)));
                     Uploader uploader = cloudinary.uploader();

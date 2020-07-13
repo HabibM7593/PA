@@ -2,41 +2,42 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frame_feed"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/frame_asso"
-    tools:context=".ui.fragment.AssociationFragment"
-    android:background="@color/colorWhite" >
+    android:background="@color/colorWhite"
+    tools:context=".ui.fragment.AssociationFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <Button
-            android:id="@+id/button_send_post"
+            android:id="@+id/button_create_post"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/round_corner_blue"
+            android:text="Poster Un Message"
+            android:textColor="@color/colorWhite"
+            android:textSize="12sp"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:text="Poster Un Message"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_feed"
-
             android:layout_width="match_parent"
             android:layout_height="0dp"
-
+            android:layout_marginTop="10dp"
             android:scrollbars="vertical"
-
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/button_send_post" />
+            app:layout_constraintTop_toBottomOf="@+id/button_create_post" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 
 
 </FrameLayout>

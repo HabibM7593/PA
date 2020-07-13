@@ -95,7 +95,7 @@
         android:inputType="textEmailAddress"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/age_signup" />
+        app:layout_constraintTop_toBottomOf="@+id/phone_signup" />
 
     <EditText
         android:id="@+id/password_signup"
@@ -114,6 +114,22 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/email_signup" />
+    <EditText
+        android:id="@+id/phone_signup"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:autofillHints="@string/hint_phone"
+        android:inputType="phone"
+        android:background="@drawable/background_border"
+        android:ems="15"
+        android:gravity="center"
+        android:hint="@string/hint_phone"
+
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/age_signup" />
 
     <ImageButton
         android:id="@+id/back_button_signup"

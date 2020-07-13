@@ -1,18 +1,16 @@
 package com.example.benevent.Models;
 
-import java.util.Date;
-
 public class Post {
     int idpo;
     String message;
-    Date date;
+    String date;
     int idu;
     int idas;
     int idev;
     String eventname;
     String assoacro;
 
-    public Post(int idpo, String message, Date date, int idas, int idev, String eventname, String assoacro) {
+    public Post(int idpo, String message, String date, int idas, int idev, String eventname, String assoacro) {
         this.idpo = idpo;
         this.message = message;
         this.date = date;
@@ -22,7 +20,7 @@ public class Post {
         this.assoacro = assoacro;
     }
 
-    public Post(int idpo, int idu, String message, Date date, int idev, String eventname, String assoacro) {
+    public Post(int idpo, int idu, String message, String date, int idev, String eventname, String assoacro) {
         this.idpo = idpo;
         this.message = message;
         this.date = date;
@@ -30,6 +28,17 @@ public class Post {
         this.idev = idev;
         this.eventname = eventname;
         this.assoacro = assoacro;
+    }
+
+    public Post() {
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 
     public String getEventname() {
@@ -62,14 +71,6 @@ public class Post {
 
     public void setMessage(String message) {
         this.message = message;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
     }
 
     public int getIdu() {

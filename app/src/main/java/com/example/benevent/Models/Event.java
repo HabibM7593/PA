@@ -139,4 +139,9 @@ public class Event {
         this.idas = idas;
     }
 
+    @Override
+    public String toString() {
+        return name;
+    }
+
 }
