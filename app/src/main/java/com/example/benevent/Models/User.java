@@ -11,10 +11,8 @@ public class User {
     String password;
     String phone;
     String profilpicture;
-    String address;
-    String description;
 
-    public User(int idu, String name, String firstname, Date age, String email, String password, String phone, String profilpicture, String address, String description) {
+    public User(int idu, String name, String firstname, Date age, String email, String password, String phone, String profilpicture) {
         this.idu = idu;
         this.name = name;
         this.firstname = firstname;
@@ -23,8 +21,6 @@ public class User {
         this.password = password;
         this.phone = phone;
         this.profilpicture = profilpicture;
-        this.address = address;
-        this.description = description;
     }
 
     public User(String name, String firstname, String phone, String profilpicture) {
@@ -97,20 +93,5 @@ public class User {
     public String getProfilpicture() { return profilpicture; }
 
     public void setProfilpicture(String profilpicture) { this.profilpicture = profilpicture; }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
+    
 }
