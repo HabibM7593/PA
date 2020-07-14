@@ -75,4 +75,7 @@
     <string name="btn_suivre">Suivre</string>
     <string name="inscrire_label">Inscription</string>
     <string name="mon_profil">Mon Profil</string>
+    <string name="event_title">Titre de l\'évènement</string>
+    <string name="post_message_title">Publier un message</string>
+    <string name="post_title">Publier</string>
 </resources>

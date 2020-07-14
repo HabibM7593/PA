@@ -12,65 +12,86 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <Button
-            android:id="@+id/button_publier"
+        <ImageButton
+            android:id="@+id/back_button_details_feed"
+            android:contentDescription="@string/back_arrow"
+
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:background="@color/colorWhite"
+            android:src="@drawable/left_chevron"
+
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="20dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent" />
+
+        <ImageView
+            android:id="@+id/app_logo"
+            android:contentDescription="@string/app_logo"
+
+            android:layout_width="200dp"
+            android:layout_height="160dp"
+            android:background="@drawable/logo_image"
+
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@id/back_button_details_feed"/>
+
+        <TextView
+            android:id="@+id/title_post"
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            android:text="Publier"
-            app:layout_constraintBottom_toBottomOf="parent"
+
+            android:text="@string/post_message_title"
+            android:textColor="@color/colorBlack"
+            android:textSize="25sp"
+
+            android:layout_marginTop="20dp"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/app_logo" />
+
+        <Spinner
+            android:id="@+id/evenement_spinner"
+            android:layout_width="370dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/background_border"
+            android:popupBackground="@drawable/background_border"
+            android:spinnerMode="dropdown"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/title_post"/>
 
         <EditText
-            android:id="@+id/editText_content_post"
-            android:layout_width="377dp"
-            android:layout_height="252dp"
+            android:id="@+id/content_post_edit_text"
+            android:layout_width="370dp"
+            android:layout_height="250dp"
             android:ems="10"
             android:gravity="start|top"
             android:inputType="textMultiLine"
-            app:layout_constraintBottom_toTopOf="@+id/button_publier"
+            android:background="@drawable/background_border"
+            android:layout_marginTop="30dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView3" />
+            app:layout_constraintTop_toBottomOf="@+id/evenement_spinner"
+            android:autofillHints="Contenue du message" />
 
-        <ImageButton
-            android:id="@+id/back_button_details_feed"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="20dp"
-            android:background="@color/colorWhite"
-            android:contentDescription="@string/back_arrow"
-            android:src="@drawable/left_chevron"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <Spinner
-            android:id="@+id/spinner"
-            android:layout_width="230dp"
-            android:layout_height="33dp"
-            app:layout_constraintBottom_toTopOf="@id/textView3"
+        <Button
+            android:id="@+id/button_post"
+            android:layout_width="100dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="50dp"
+            android:text="@string/post_title"
+            android:textColor="@color/colorWhite"
+            android:textSize="12sp"
+            android:background="@drawable/round_corner_blue"
+            app:layout_constraintTop_toBottomOf="@+id/content_post_edit_text"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Evenement"
-            app:layout_constraintBottom_toTopOf="@id/textView3"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Contenue du Post"
-            app:layout_constraintBottom_toTopOf="@id/editText_content_post"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView" />
+            app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

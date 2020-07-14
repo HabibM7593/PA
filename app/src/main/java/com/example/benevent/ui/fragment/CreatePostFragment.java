@@ -56,15 +56,15 @@ public class CreatePostFragment extends Fragment {
         Post post = new Post();
 
         ImageButton backbutton = view.findViewById(R.id.back_button_details_feed);
-        Button submitbutton = view.findViewById(R.id.button_publier);
-        EditText content = view.findViewById(R.id.editText_content_post);
+        Button submitbutton = view.findViewById(R.id.button_post);
+        EditText content = view.findViewById(R.id.content_post_edit_text);
         SharedPreferences pref = this.getActivity().getSharedPreferences("login", MODE_PRIVATE);
         int iduser = pref.getInt("userid", 0);
         List<Event> listevent = new ArrayList<>();
         EventApi eventApi = retrofit.create(EventApi.class);
         PostApi postApi = retrofit.create(PostApi.class);
 
-        Spinner eventlist = view.findViewById(R.id.spinner);
+        Spinner eventlist = view.findViewById(R.id.evenement_spinner);
         backbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
