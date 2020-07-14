@@ -7,6 +7,8 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 
+import android.text.Html;
+import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -139,6 +141,15 @@ public class AssociationDetailsFragment extends Fragment {
         phoneTV.setText(selectedAssociation.getPhone());
         websiteTV.setText(selectedAssociation.getWebsite());
         supportTV.setText(selectedAssociation.getSupport());
+
+        websiteTV.setClickable(true);
+        websiteTV.setMovementMethod(LinkMovementMethod.getInstance());
+        String textwebsite = "<a href='"+selectedAssociation.getWebsite()+"'> Site Internet</a>";
+        websiteTV.setText(Html.fromHtml(textwebsite));
+        supportTV.setClickable(true);
+        supportTV.setMovementMethod(LinkMovementMethod.getInstance());
+        String textsupport = "<a href='"+selectedAssociation.getSupport()+"'> Soutenir</a>";
+        supportTV.setText(Html.fromHtml(textsupport));
 
         return v;
     }

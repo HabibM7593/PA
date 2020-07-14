@@ -60,5 +60,5 @@
     <string name="hint_content">Contenue du message</string>
     <string name="hint_object_feedback">Object Feedback</string>
     <string name="hint_content_feedback">Maximum 255 caractères</string>
-    
+
 </resources>
