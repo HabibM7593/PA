@@ -8,17 +8,37 @@
     tools:context=".ui.fragment.AssociationFragment"
     android:background="@color/colorWhite" >
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_asso"
-
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="match_parent" >
 
-        android:scrollbars="vertical"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_asso"
 
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            android:scrollbars="vertical"
+
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
+            android:id="@+id/no_asso_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pas encore d'associations"
+            android:textColor="@color/colorBlack"
+            android:textSize="25sp"
+            android:textStyle="italic"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="@+id/recycler_asso"
+            app:layout_constraintEnd_toEndOf="@+id/recycler_asso"
+            app:layout_constraintStart_toStartOf="@+id/recycler_asso"
+            app:layout_constraintTop_toTopOf="@+id/recycler_asso" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>

@@ -18,6 +18,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.example.benevent.API.NetworkClient;
 import com.example.benevent.API.PostApi;
@@ -72,10 +73,12 @@ public class FeedFragment extends Fragment {
 
         PostApi postApi = retrofit.create(PostApi.class);
         Call call = postApi.getPosts(iduser);
+        TextView labelEmpty = view.findViewById(R.id.no_post_label);
 
         final FragmentActivity Post = getActivity();
         LLM = new LinearLayoutManager(Post);
         recyclerView.setLayoutManager(LLM);
+
         call.enqueue(new Callback<List<Post>>() {
             @Override
             public void onResponse(Call<List<Post>> call, Response<List<Post>> response) {
@@ -95,6 +98,12 @@ public class FeedFragment extends Fragment {
                                     listepost.get(i).setNomprenom(listeuser.get(j).getName()+" "+listeuser.get(j).getFirstname());
                                 }
                             }
+                        }
+
+                        if(listepost.size() == 0) {
+                            labelEmpty.setVisibility(View.VISIBLE);
+                        } else {
+                            labelEmpty.setVisibility(View.INVISIBLE);
                         }
 
                         MyFeedAdapter adapter = new MyFeedAdapter(listepost);

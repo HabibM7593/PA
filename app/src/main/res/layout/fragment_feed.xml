@@ -37,6 +37,20 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/button_create_post" />
 
+        <TextView
+            android:id="@+id/no_post_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pas encore de post"
+            android:textColor="@color/colorBlack"
+            android:textSize="25sp"
+            android:textStyle="italic"
+            android:visibility="invisible"
+            app:layout_constraintStart_toStartOf="@+id/recycler_feed"
+            app:layout_constraintEnd_toEndOf="@+id/recycler_feed"
+            app:layout_constraintTop_toTopOf="@+id/recycler_feed"
+            app:layout_constraintBottom_toBottomOf="@+id/recycler_feed"/>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

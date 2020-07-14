@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
@@ -51,9 +52,12 @@ public class EventFragment extends Fragment {
         EventApi event = retrofit.create(EventApi.class);
         Call callEvent = event.getEvents(iduser);
 
+        TextView labelEmpty = root.findViewById(R.id.no_event_label);
+
         final FragmentActivity Event = getActivity();
         LLM = new LinearLayoutManager(Event);
         recyclerView.setLayoutManager(LLM);
+
         callEvent.enqueue(
                 new Callback<List<Event>>() {
 
@@ -66,6 +70,13 @@ public class EventFragment extends Fragment {
                                     listevent.add(events.get(i));
                                 }
                             }
+
+                            if(events.size() == 0) {
+                                labelEmpty.setVisibility(View.VISIBLE);
+                            } else {
+                                labelEmpty.setVisibility(View.INVISIBLE);
+                            }
+
                             MyEventAdapter adapter = new MyEventAdapter(listevent);
                             recyclerView.setAdapter(adapter);
                         }
