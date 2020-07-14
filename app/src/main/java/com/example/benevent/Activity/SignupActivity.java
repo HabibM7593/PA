@@ -55,7 +55,7 @@ public class SignupActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
 
-        loadpicture = findViewById(R.id.button_upload_signup);
+        loadpicture = findViewById(R.id.upload_button_signup);
 
         imageUser= (ImageView)findViewById(R.id.profil_picture_signup);
 
@@ -70,12 +70,12 @@ public class SignupActivity extends AppCompatActivity {
     }
 
     public void Signup(View view) throws ParseException {
-        EditText nameET = (EditText) findViewById(R.id.name_signup);
-        EditText firstnameET = (EditText) findViewById(R.id.firstname_signup);
-        EditText ageET = (EditText) findViewById(R.id.age_signup);
-        EditText emailET = (EditText) findViewById(R.id.email_signup);
-        EditText passwordET = (EditText) findViewById(R.id.password_signup);
-        EditText phoneET = (EditText) findViewById(R.id.phone_signup);
+        EditText nameET = (EditText) findViewById(R.id.ed_name_signup);
+        EditText firstnameET = (EditText) findViewById(R.id.ed_firstname_signup);
+        EditText ageET = (EditText) findViewById(R.id.ed_born_signup);
+        EditText emailET = (EditText) findViewById(R.id.ed_email_signup);
+        EditText passwordET = (EditText) findViewById(R.id.ed_password_signup);
+        EditText phoneET = (EditText) findViewById(R.id.ed_phone_signup);
 
         SimpleDateFormat formatter1 = new SimpleDateFormat("dd/MM/yyyy");
         SimpleDateFormat formatter2 = new SimpleDateFormat("yyyy-MM-dd");
