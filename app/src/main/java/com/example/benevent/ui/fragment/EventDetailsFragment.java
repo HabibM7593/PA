@@ -68,7 +68,6 @@ public class EventDetailsFragment extends Fragment {
 
         View v = inflater.inflate(R.layout.fragment_event_details, container, false);
 
-        ImageButton buttonDetailBack = v.findViewById(R.id.back_button_details_event);
         Button buttonQRcode = v.findViewById(R.id.button_scan_qrcode);
         Button buttoninscription = v.findViewById(R.id.button_inscription_event);
         SharedPreferences pref = this.getActivity().getSharedPreferences("login", MODE_PRIVATE);
@@ -102,16 +101,6 @@ public class EventDetailsFragment extends Fragment {
             @Override
             public void onFailure(Call<List<Participation>> call, Throwable t) {
                 Toast.makeText(getActivity().getApplicationContext(), "Echec de recuperation du status de participation "+t, Toast.LENGTH_LONG).show();
-            }
-        });
-        buttonDetailBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                EventFragment eFragment = new EventFragment();
-                ((FragmentActivity) v.getContext()).getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.frame_event_detail, eFragment)
-                        .commit();
             }
         });
 

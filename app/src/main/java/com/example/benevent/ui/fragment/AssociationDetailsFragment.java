@@ -65,7 +65,6 @@ public class AssociationDetailsFragment extends Fragment {
         SharedPreferences pref = this.getActivity().getSharedPreferences("login", MODE_PRIVATE);
         int iduser = pref.getInt("userid", 0);
         Follow follow = new Follow(selectedAssociation.getIdas(),iduser);
-        ImageButton buttonDetailBack = v.findViewById(R.id.back_button_details_asso);
         Call call = followApi.checkFollow(follow.getIdas(),follow.getIdu());
         call.enqueue(new Callback<List<Follow>>(){
 
@@ -85,15 +84,7 @@ public class AssociationDetailsFragment extends Fragment {
                 Toast.makeText(getActivity().getApplicationContext(), "Echec", Toast.LENGTH_LONG).show();
             }
         });
-        buttonDetailBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AssociationFragment aFragment = new AssociationFragment(categoryAssociation.getName());
-                ((FragmentActivity) v.getContext()).getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.frame_asso_details, aFragment)
-                        .commit();
-            }
-        });
+
         followAsso.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {

@@ -17,7 +17,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -45,7 +44,6 @@ import retrofit2.Retrofit;
 
 public class SignupActivity extends AppCompatActivity {
 
-    public ImageButton backButton;
     public Button loadpicture;
     public ImageView imageUser;
     public Signup signup;
@@ -55,19 +53,9 @@ public class SignupActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
 
-        backButton = findViewById(R.id.back_button_signup);
         loadpicture = findViewById(R.id.button_upload_signup);
 
         imageUser= (ImageView)findViewById(R.id.profil_picture_signup);
-
-        backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(SignupActivity.this, MainActivity.class);
-                startActivity(intent);
-                //overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
-            }
-        });
 
         loadpicture.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -119,6 +107,12 @@ public class SignupActivity extends AppCompatActivity {
 
         }
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(SignupActivity.this, MainActivity.class);
+        startActivity(intent);
     }
 
     private void signUser(Signup signup) {

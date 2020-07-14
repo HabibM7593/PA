@@ -55,7 +55,6 @@ public class CreatePostFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_create_post, container, false);
         Post post = new Post();
 
-        ImageButton backbutton = view.findViewById(R.id.back_button_details_feed);
         Button submitbutton = view.findViewById(R.id.button_post);
         EditText content = view.findViewById(R.id.content_post_edit_text);
         SharedPreferences pref = this.getActivity().getSharedPreferences("login", MODE_PRIVATE);
@@ -65,15 +64,6 @@ public class CreatePostFragment extends Fragment {
         PostApi postApi = retrofit.create(PostApi.class);
 
         Spinner eventlist = view.findViewById(R.id.evenement_spinner);
-        backbutton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                FeedFragment feedFragment = new FeedFragment();
-                ((FragmentActivity) view.getContext()).getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.frame_create_post, feedFragment)
-                        .commit();
-            }
-        });
 
         submitbutton.setOnClickListener(new View.OnClickListener() {
             @Override
