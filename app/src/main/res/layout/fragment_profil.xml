@@ -13,10 +13,10 @@
 
         <Button
             android:id="@+id/button_supprimer"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="100dp"
+            android:layout_height="30dp"
             android:text="Supprimer mon compte"
-            android:background="@drawable/round_corner_blue"
+            android:background="@drawable/round_corner_red"
             android:textSize="12sp"
             android:textColor="@color/colorWhite"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -26,8 +26,8 @@
 
         <Button
             android:id="@+id/button_valid_modif"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="100dp"
+            android:layout_height="30dp"
             android:text="Valider Modification"
             android:textSize="12sp"
             android:textColor="@color/colorWhite"
@@ -39,10 +39,10 @@
 
         <Button
             android:id="@+id/button_upload"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="30dp"
-            android:text="Changer d'image"
+            android:layout_width="100dp"
+            android:layout_height="30dp"
+            android:layout_marginEnd="50dp"
+            android:text="Changer ma photo"
             android:background="@drawable/round_corner_blue"
             android:textSize="12sp"
             android:textColor="@color/colorWhite"

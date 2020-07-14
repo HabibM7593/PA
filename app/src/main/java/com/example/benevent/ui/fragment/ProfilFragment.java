@@ -1,5 +1,7 @@
 package com.example.benevent.ui.fragment;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
@@ -139,20 +141,42 @@ public class ProfilFragment extends Fragment {
         supprbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Call call = userApi.deleteUser(iduser);
-                call.enqueue(new Callback<String>() {
-                    @Override
-                    public void onResponse(Call<String> call, Response<String> response) {
-                        Toast.makeText(getActivity().getApplicationContext(), "Votre compte vient d'etre supprimé ", Toast.LENGTH_LONG).show();
-                        Intent intent = new Intent(getActivity().getApplicationContext(), MainActivity.class);
-                        startActivity(intent);
-                    }
 
-                    @Override
-                    public void onFailure(Call<String> call, Throwable t) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
+                builder.setTitle("Attention");
+                builder.setMessage("Voulez-vous vraiment supprimer votre compte ?");
+
+                builder.setPositiveButton("OUI", new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface dialog, int which) {
+                        Call call = userApi.deleteUser(iduser);
+                        call.enqueue(new Callback<String>() {
+                            @Override
+                            public void onResponse(Call<String> call, Response<String> response) {
+                                Toast.makeText(getActivity().getApplicationContext(), "Votre compte vient d'etre supprimé ", Toast.LENGTH_LONG).show();
+                                Intent intent = new Intent(getActivity().getApplicationContext(), MainActivity.class);
+                                startActivity(intent);
+                            }
+
+                            @Override
+                            public void onFailure(Call<String> call, Throwable t) {
+
+                            }
+                        });
                     }
                 });
+
+                builder.setNegativeButton("NON", new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+                AlertDialog alert = builder.create();
+                alert.show();
             }
         });
 
