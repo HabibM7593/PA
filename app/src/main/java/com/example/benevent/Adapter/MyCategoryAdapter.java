@@ -50,6 +50,7 @@ public class MyCategoryAdapter extends RecyclerView.Adapter<MyCategoryAdapter.My
 
                 ((FragmentActivity) v.getContext()).getSupportFragmentManager().beginTransaction()
                         .replace(R.id.frame_category, aFragment)
+                        .addToBackStack(null)
                         .commit();
             }
         });

@@ -54,6 +54,7 @@ public class MyEventAdapter extends RecyclerView.Adapter<MyEventAdapter.MyViewHo
                 EventDetailsFragment edFragment = new EventDetailsFragment(newEvent);
                 ((FragmentActivity) v.getContext()).getSupportFragmentManager().beginTransaction()
                         .replace(R.id.frame_event, edFragment)
+                        .addToBackStack(null)
                         .commit();
             }
         });

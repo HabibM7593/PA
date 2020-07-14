@@ -55,6 +55,7 @@ public class MyAssoAdapter extends RecyclerView.Adapter<MyAssoAdapter.MyViewHold
                 AssociationDetailsFragment adFragment = new AssociationDetailsFragment(newAssociation, category);
                 ((FragmentActivity) v.getContext()).getSupportFragmentManager().beginTransaction()
                         .replace(R.id.frame_asso, adFragment)
+                        .addToBackStack(null)
                         .commit();
             }
         });

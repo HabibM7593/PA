@@ -68,35 +68,41 @@ public class FragmentManagerActivity extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
+        int count = getSupportFragmentManager().getBackStackEntryCount();
+
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            if (count != 0) {
+                getSupportFragmentManager().popBackStack();
+            } else {
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
-            builder.setTitle("Attention");
-            builder.setMessage("Voulez-vous quitter l'application ?");
+                builder.setTitle("Attention");
+                builder.setMessage("Voulez-vous quitter l'application ?");
 
-            builder.setPositiveButton("OUI", new DialogInterface.OnClickListener() {
+                builder.setPositiveButton("OUI", new DialogInterface.OnClickListener() {
 
-                public void onClick(DialogInterface dialog, int which) {
-                    Intent a = new Intent(Intent.ACTION_MAIN);
-                    a.addCategory(Intent.CATEGORY_HOME);
-                    a.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    startActivity(a);
-                }
-            });
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent a = new Intent(Intent.ACTION_MAIN);
+                        a.addCategory(Intent.CATEGORY_HOME);
+                        a.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(a);
+                    }
+                });
 
-            builder.setNegativeButton("NON", new DialogInterface.OnClickListener() {
+                builder.setNegativeButton("NON", new DialogInterface.OnClickListener() {
 
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    dialog.dismiss();
-                }
-            });
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
 
-            AlertDialog alert = builder.create();
-            alert.show();
+                AlertDialog alert = builder.create();
+                alert.show();
+            }
         }
     }
 

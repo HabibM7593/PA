@@ -58,6 +58,7 @@ public class FeedFragment extends Fragment {
                 CreatePostFragment createPostFragment = new CreatePostFragment();
                 ((FragmentActivity) view.getContext()).getSupportFragmentManager().beginTransaction()
                         .replace(R.id.frame_feed, createPostFragment)
+                        .addToBackStack(null)
                         .commit();
             }
         });
