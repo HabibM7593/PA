@@ -1,5 +1,9 @@
 package com.example.benevent.Adapter;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.NetworkOnMainThreadException;
+import android.os.StrictMode;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +13,8 @@ import android.widget.TextView;
 import com.example.benevent.Models.Post;
 import com.example.benevent.R;
 
+import java.io.IOException;
+import java.net.URL;
 import java.util.List;
 
 import androidx.annotation.NonNull;
@@ -35,6 +41,7 @@ public class MyFeedAdapter extends RecyclerView.Adapter<MyFeedAdapter.MyViewHold
             view = v;
             namePostTV = v.findViewById(R.id.name_feed);
             contentPostTV = v.findViewById(R.id.content_feed);
+            imageView = v.findViewById(R.id.image_feed);
         }
     }
 
@@ -53,10 +60,33 @@ public class MyFeedAdapter extends RecyclerView.Adapter<MyFeedAdapter.MyViewHold
         Post post = listpost.get(position);
 
         holder.contentPostTV.setText(post.getMessage());
-        if (post.getEventname()==null){
-            holder.namePostTV.setText(post.getAssoacro());
-        }else{
-            holder.namePostTV.setText(post.getAssoacro()+" | "+post.getEventname());
+
+        if (post.getPictureprofiluser() != null) {
+            holder.namePostTV.setText(post.getNomprenom() + " | " + post.getEventname());
+            try {
+                StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
+                        .permitAll().build();
+                StrictMode.setThreadPolicy(policy);
+                URL url = new URL(post.getPictureprofiluser());
+                Bitmap bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+                holder.imageView.setImageBitmap(bmp);
+            } catch (IOException | NetworkOnMainThreadException e) {
+            }
+        } else {
+            if (post.getEventname() == null) {
+                holder.namePostTV.setText(post.getAssoacro());
+            } else {
+                holder.namePostTV.setText(post.getAssoacro() + " | " + post.getEventname());
+            }
+            try {
+                StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
+                        .permitAll().build();
+                StrictMode.setThreadPolicy(policy);
+                URL url = new URL(post.getPictureprofilasso());
+                Bitmap bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+                holder.imageView.setImageBitmap(bmp);
+            } catch (IOException | NetworkOnMainThreadException e) {
+            }
         }
     }
 

@@ -9,6 +9,10 @@ public class Post {
     int idev;
     String eventname;
     String assoacro;
+    String nameuser;
+    String pictureprofilasso;
+    String pictureprofiluser;
+    String nomprenom;
 
     public Post(int idpo, String message, String date, int idas, int idev, String eventname, String assoacro) {
         this.idpo = idpo;
@@ -31,6 +35,38 @@ public class Post {
     }
 
     public Post() {
+    }
+
+    public String getNomprenom() {
+        return nomprenom;
+    }
+
+    public void setNomprenom(String nomprenom) {
+        this.nomprenom = nomprenom;
+    }
+
+    public String getPictureprofiluser() {
+        return pictureprofiluser;
+    }
+
+    public void setPictureprofiluser(String pictureprofiluser) {
+        this.pictureprofiluser = pictureprofiluser;
+    }
+
+    public String getNameuser() {
+        return nameuser;
+    }
+
+    public void setNameuser(String nameuser) {
+        this.nameuser = nameuser;
+    }
+
+    public String getPictureprofilasso() {
+        return pictureprofilasso;
+    }
+
+    public void setPictureprofilasso(String pictureprofilasso) {
+        this.pictureprofilasso = pictureprofilasso;
     }
 
     public String getDate() {

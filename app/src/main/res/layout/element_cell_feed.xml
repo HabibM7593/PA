@@ -36,13 +36,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        tools:text="Test contenue"
-        android:textSize="15sp"
-        android:textStyle="italic"
+        android:layout_below="@+id/name_feed"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="-2dp"
         android:textColor="@color/colorBlack"
 
-        android:layout_marginTop="30dp"
-        android:layout_marginStart="70dp" />
+        android:textSize="15sp"
+        android:textStyle="italic"
+        tools:text="Test contenue" />
 
 </RelativeLayout>
 

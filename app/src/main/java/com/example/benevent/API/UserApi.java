@@ -24,6 +24,9 @@ public interface UserApi {
     @GET("user/{id}")
     Call<List<User>> getUser(@Path("id") int id);
 
+    @GET("users")
+    Call<List<User>> getUsers();
+
     @PATCH("user/{idu}")
     Call<Void> updateUser(@Path("idu") int id,@Body User user);
 

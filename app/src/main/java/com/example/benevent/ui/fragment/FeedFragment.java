@@ -21,12 +21,17 @@ import android.widget.Button;
 
 import com.example.benevent.API.NetworkClient;
 import com.example.benevent.API.PostApi;
+import com.example.benevent.API.UserApi;
 import com.example.benevent.Adapter.MyFeedAdapter;
 import com.example.benevent.Models.Association;
+import com.example.benevent.Models.Category;
 import com.example.benevent.Models.Post;
+import com.example.benevent.Models.User;
 import com.example.benevent.R;
 
 import java.util.List;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -65,8 +70,8 @@ public class FeedFragment extends Fragment {
         recyclerView = view.findViewById(R.id.recycler_feed);
         int iduser = pref.getInt("userid", 0);
 
-        PostApi event = retrofit.create(PostApi.class);
-        Call call = event.getPosts(iduser);
+        PostApi postApi = retrofit.create(PostApi.class);
+        Call call = postApi.getPosts(iduser);
 
         final FragmentActivity Post = getActivity();
         LLM = new LinearLayoutManager(Post);
@@ -74,9 +79,36 @@ public class FeedFragment extends Fragment {
         call.enqueue(new Callback<List<Post>>() {
             @Override
             public void onResponse(Call<List<Post>> call, Response<List<Post>> response) {
-                List<Post> listepost = response.body();
-                MyFeedAdapter adapter = new MyFeedAdapter(listepost);
-                recyclerView.setAdapter(adapter);
+
+                UserApi users = retrofit.create(UserApi.class);
+                Call calluser = users.getUsers();
+                calluser.enqueue(new Callback<List<User>>() {
+                    @Override
+                    public void onResponse(Call<List<User>> call, Response<List<User>> responseuser) {
+                        List<User> listeuser = responseuser.body();
+                        List<Post> listepost = response.body();
+
+                        for (int i = 0; i <listepost.size() ; i++) {
+                            for (int j = 0; j <listeuser.size() ; j++) {
+                                if(listepost.get(i).getIdu()==listeuser.get(j).getId()){
+                                    listepost.get(i).setPictureprofiluser(listeuser.get(j).getProfilpicture());
+                                    listepost.get(i).setNomprenom(listeuser.get(j).getName()+" "+listeuser.get(j).getFirstname());
+                                }
+                            }
+                        }
+
+                        MyFeedAdapter adapter = new MyFeedAdapter(listepost);
+                        recyclerView.setAdapter(adapter);
+                    }
+
+                    @Override
+                    public void onFailure(Call<List<User>> call, Throwable t) {
+
+                    }
+                });
+
+
+
             }
 
             @Override
