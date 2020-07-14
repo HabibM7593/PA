@@ -31,7 +31,7 @@ import com.cloudinary.Cloudinary;
 import com.cloudinary.Uploader;
 import com.example.benevent.API.NetworkClient;
 import com.example.benevent.API.UserApi;
-import com.example.benevent.Activity.MainActivity;
+import com.example.benevent.Activity.SigninActivity;
 import com.example.benevent.Models.User;
 import com.example.benevent.R;
 
@@ -155,7 +155,7 @@ public class ProfilFragment extends Fragment {
                             @Override
                             public void onResponse(Call<String> call, Response<String> response) {
                                 Toast.makeText(getActivity().getApplicationContext(), "Votre compte vient d'etre supprimé ", Toast.LENGTH_LONG).show();
-                                Intent intent = new Intent(getActivity().getApplicationContext(), MainActivity.class);
+                                Intent intent = new Intent(getActivity().getApplicationContext(), SigninActivity.class);
                                 startActivity(intent);
                             }
 

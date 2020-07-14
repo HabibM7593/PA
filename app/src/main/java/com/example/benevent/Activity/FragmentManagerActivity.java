@@ -202,7 +202,7 @@ public class FragmentManagerActivity extends AppCompatActivity
         builder.setPositiveButton("Déconnexion", new DialogInterface.OnClickListener() {
 
             public void onClick(DialogInterface dialog, int which) {
-                Intent intent = new Intent(context, MainActivity.class);
+                Intent intent = new Intent(context, SigninActivity.class);
                 startActivity(intent);
             }
         });

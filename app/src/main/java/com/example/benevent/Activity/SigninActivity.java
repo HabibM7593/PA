@@ -28,7 +28,7 @@ import com.example.benevent.R;
 
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class SigninActivity extends AppCompatActivity {
 
     Context context = this ;
     public TextView signupTV;
@@ -36,13 +36,13 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_signin);
 
         signupTV = findViewById(R.id.no_account_button);
         signupTV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, SignupActivity.class);
+                Intent intent = new Intent(SigninActivity.this, SignupActivity.class);
                 startActivity(intent);
                 //overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
             }

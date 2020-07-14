@@ -22,7 +22,7 @@
             android:name=".Activity.FragmentManagerActivity"
             android:label="HomeActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Activity.MainActivity">
+        <activity android:name=".Activity.SigninActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

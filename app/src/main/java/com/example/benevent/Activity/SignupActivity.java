@@ -111,7 +111,7 @@ public class SignupActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(SignupActivity.this, MainActivity.class);
+        Intent intent = new Intent(SignupActivity.this, SigninActivity.class);
         startActivity(intent);
     }
 
@@ -128,7 +128,7 @@ public class SignupActivity extends AppCompatActivity {
 
                 if (response.code() == 201) {
                     Toast.makeText(getApplicationContext(), "L'utilisateur a bien été enregistré !", Toast.LENGTH_LONG).show();
-                    Intent intent = new Intent(SignupActivity.this, MainActivity.class);
+                    Intent intent = new Intent(SignupActivity.this, SigninActivity.class);
                     startActivity(intent);
                 } else {
                     Toast.makeText(getApplicationContext(), "L'adresse mail est déjà utilisé !", Toast.LENGTH_LONG).show();
