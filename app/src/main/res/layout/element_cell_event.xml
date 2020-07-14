@@ -14,7 +14,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
 
-            tools:text="test"
+            tools:text="Label Event"
             android:textSize="25sp"
             android:textColor="@color/colorBlack"
 
@@ -22,11 +22,11 @@
 
         <ImageButton
             android:id="@+id/button_event_view"
-            android:contentDescription="@string/view_arrow"
+            android:contentDescription="@string/desc_arrow"
 
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:background="@android:color/white"
+            android:background="@color/colorWhite"
             android:src="@drawable/right_chevron"
 
             android:layout_alignParentEnd="true"
@@ -39,7 +39,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
 
-            tools:text="test date"
+            tools:text="Label Date"
             android:textSize="15sp"
             android:textColor="@color/colorBlack"
 

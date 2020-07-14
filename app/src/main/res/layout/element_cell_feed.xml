@@ -23,7 +23,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        tools:text="test"
+        tools:text="Label Name"
         android:textSize="20sp"
 
         android:layout_marginTop="5dp"
@@ -43,7 +43,7 @@
 
         android:textSize="15sp"
         android:textStyle="italic"
-        tools:text="Test contenue" />
+        tools:text="Label Contenue" />
 
 </RelativeLayout>
 

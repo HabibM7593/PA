@@ -28,7 +28,7 @@
             android:id="@+id/no_event_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Pas encore d'évènements"
+            android:text="@string/label_no_event"
             android:textColor="@color/colorBlack"
             android:textSize="25sp"
             android:textStyle="italic"

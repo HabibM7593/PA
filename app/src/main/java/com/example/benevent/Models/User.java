@@ -93,5 +93,5 @@ public class User {
     public String getProfilpicture() { return profilpicture; }
 
     public void setProfilpicture(String profilpicture) { this.profilpicture = profilpicture; }
-    
+
 }

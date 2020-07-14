@@ -19,7 +19,7 @@
         android:layout_height="80dp"
         app:srcCompat="@mipmap/ic_launcher_round"
         android:scaleType="fitXY"
-        android:contentDescription="@string/nav_header_desc"
+        android:contentDescription="@string/desc_pp"
 
         android:paddingTop="@dimen/nav_header_vertical_spacing" />
 
@@ -29,7 +29,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        android:text="@string/nav_header_title"
+        android:text="@string/label_name_user"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:paddingTop="@dimen/nav_header_vertical_spacing" />
 
@@ -39,6 +39,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        android:text="@string/nav_header_subtitle" />
+        android:text="@string/label_email_user" />
 
 </LinearLayout>

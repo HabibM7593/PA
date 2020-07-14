@@ -14,7 +14,7 @@
         android:layout_height="30dp"
         android:background="@drawable/round_corner_blue"
         android:onClick="Signup"
-        android:text="@string/signup_label"
+        android:text="@string/label_signup"
         android:textColor="@color/colorWhite"
 
         android:textSize="12sp"
@@ -30,7 +30,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:autofillHints="@string/hint_name"
+        android:autofillHints="Nom"
 
         android:background="@drawable/background_border"
         android:ems="15"
@@ -48,7 +48,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:autofillHints="@string/hint_firstname"
+        android:autofillHints="Prénom"
 
         android:background="@drawable/background_border"
         android:ems="15"
@@ -66,12 +66,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:autofillHints="@string/hint_age"
+        android:autofillHints="Date de naissance"
 
         android:background="@drawable/background_border"
         android:ems="15"
         android:gravity="center"
-        android:hint="@string/hint_age"
+        android:hint="@string/hint_born"
         android:inputType="date"
 
         android:maxLength="10"
@@ -85,7 +85,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:autofillHints="@string/hint_email"
+        android:autofillHints="Adresse mail"
 
         android:background="@drawable/background_border"
         android:ems="15"
@@ -103,7 +103,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:autofillHints="@string/hint_password"
+        android:autofillHints="Mot de passe"
 
         android:background="@drawable/background_border"
         android:ems="15"
@@ -120,7 +120,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:autofillHints="@string/hint_phone"
+        android:autofillHints="N° de telephone"
         android:inputType="phone"
         android:background="@drawable/background_border"
         android:ems="15"
@@ -138,7 +138,7 @@
         android:layout_height="wrap_content"
 
         android:layout_marginTop="70dp"
-        android:text="@string/signup_label"
+        android:text="@string/label_signup"
         android:textColor="@color/colorBlack"
         android:textSize="30sp"
 
@@ -163,7 +163,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/round_corner_blue"
-        android:text="Changer d'image"
+        android:text="@string/label_change_pp"
         android:textColor="@color/colorWhite"
         android:textSize="12sp"
         app:layout_constraintBottom_toTopOf="@+id/button_signup_send"

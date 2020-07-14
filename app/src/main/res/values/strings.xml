@@ -1,81 +1,64 @@
 <resources>
     <string name="app_name">Benevent</string>
 
-    <!--Nav view name-->
+    <!--Nav view String-->
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
-    <string name="nav_header_desc">Navigation header</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 
-    <!--Menu Name-->
-    <string name="menu_event">Evènements</string>
-    <string name="menu_feedback">Feedback</string>
-    <string name="menu_qrcode">Scan Event</string>
+    <!--Menu String-->
     <string name="menu_feed">Feed</string>
     <string name="menu_association">Associations</string>
+    <string name="menu_event">Evènements</string>
+    <string name="menu_feedback">Feedback</string>
+    <string name="menu_profil">Mon Profil</string>
 
-    <!--Settings Strings-->
-    <string name="action_settings">Settings</string>
-    <string name="action_logout">Déconnexion</string>
+    <!--Desc String-->
+    <string name="desc_logo">Appli logo</string>
+    <string name="desc_arrow">Details Arrow</string>
+    <string name="desc_info_logo">Logo Info</string>
+    <string name="desc_pp">Profile picture</string>
 
-    <!--Hint Strings-->
+    <!--Label String-->
+    <string name="label_welcome">Bienvenue sur Benevent</string>
+    <string name="label_connexion">Connexion</string>
+    <string name="label_no_account">Pas encore de compte ?</string>
+    <string name="label_signup">S\'inscrire</string>
+    <string name="label_change_pp">Changer de photo</string>
+    <string name="label_no_asso">Pas encore d\'associations</string>
+    <string name="label_name_asso">Name Asso</string>
+    <string name="label_name_category">Name Category</string>
+    <string name="label_info">Informations :</string>
+    <string name="label_email">Adresse @ :</string>
+    <string name="label_phone">Téléphone :</string>
+    <string name="label_website">Site Internet :</string>
+    <string name="label_support">Soutenir :</string>
+    <string name="label_follow">Suivre</string>
+    <string name="label_post_message">Publier un message</string>
+    <string name="label_post">Publier</string>
+    <string name="label_no_event">Pas encore d\'évènements</string>
+    <string name="label_scan">Scan QrCode</string>
+    <string name="label_no_post">Pas encore de post</string>
+    <string name="label_feedback">Envoyer un feedback</string>
+    <string name="Label_bug">Déclarer un bug ?</string>
+    <string name="label_send">Envoyer</string>
+    <string name="label_delete_account">Supprimer mon compte</string>
+    <string name="label_change">Valider Modification</string>
+    <string name="label_change_pic">Changer ma photo</string>
+    <string name="label_name_user">Name user</string>
+    <string name="label_email_user">Email user</string>
+    <string name="label_signout">Déconnexion</string>
+
+    <!--Hint String-->
+    <string name="hint_email">Adresse mail</string>
+    <string name="hint_password">Mot de passe</string>
     <string name="hint_name">Nom</string>
     <string name="hint_firstname">Prénom</string>
-    <string name="hint_age">Date de naissance</string>
-    <string name="hint_email">Adresse Mail</string>
-    <string name="hint_password">Mot de passe</string>
-    <string name="hint_asso">asso</string>
-    <string name="hint_event_name">nom de l\'évent</string>
-    <string name="hint_event_dateD">dateDeb de l\'évent</string>
-    <string name="hint_event_dateF">dateFin de l\'évent</string>
-    <string name="hint_localisation">localisation de l\'évent</string>
-    <string name="hint_event_maxB">maxBenevole de l\'évent</string>
-    <string name="hint_event_desc">description de l\'évent</string>
-    <string name="hint_website">Site internet</string>
-    <string name="hint_support">support de l\'asso</string>
-    <string name="hint_category_name">category</string>
-    <string name="hint_phone">N° de telephone</string>
-
-    <!--Logo Strings-->
-    <string name="asso_logo">asso logo</string>
-    <string name="calendar_logo">calendar logo</string>
-    <string name="place_logo">place logo</string>
-    <string name="group_logo">group logo</string>
-    <string name="info_logo">logo d\'informations</string>
-
-    <!--Label Strings-->
-    <string name="connexion_label">Connexion</string>
-    <string name="signup_label">S\'inscrire</string>
-    <string name="email_label">Adresse @ :</string>
-    <string name="phone_label">téléphone :</string>
-    <string name="website_label">Site internet :</string>
-    <string name="support_label">Soutenir :</string>
-    <string name="info_label">Informations :</string>
-    <string name="scan_qrcode_label">Scan QRcode</string>
-
-    <!--Other-->
-    <string name="bienvenue">Bienvenue sur Benevent</string>
-    <string name="bug_text">Déclarer un bug ?</string>
-    <string name="feedback_string">Envoyer le feedback</string>
-    <string name="feedback_content_string">Maximum 255 caractères</string>
-    <string name="object_feedback_string">objet</string>
-    <string name="title_feedback">Envoyer un Feedback</string>
-    <string name="app_logo">Logo</string>
-    <string name="back_arrow">Back Arrow</string>
-    <string name="no_account">Pas encore de compte ?</string>
-    <string name="view_arrow">view arrow</string>
-    <string name="qr_edit_text">Enter Text Here</string>
-    <string name="qr_button_generate">Click Here TO generate qr code</string>
-    <string name="qr_button_scan">Scan Your QR Code</string>
-    <string name="text_here">TextHere</string>
-    <string name="qrcode">QrCode</string>
-    <string name="menu_category">Categories</string>
-    <string name="btn_suivre">Suivre</string>
-    <string name="inscrire_label">Inscription</string>
-    <string name="mon_profil">Mon Profil</string>
-    <string name="event_title">Titre de l\'évènement</string>
-    <string name="post_message_title">Publier un message</string>
-    <string name="post_title">Publier</string>
+    <string name="hint_born">Date de naissance</string>
+    <string name="hint_phone">N° de téléphone</string>
+    <string name="hint_website">www.website.com</string>
+    <string name="hint_support">www.support.com</string>
+    <string name="hint_content">Contenue du message</string>
+    <string name="hint_object_feedback">Object Feedback</string>
+    <string name="hint_content_feedback">Maximum 255 caractères</string>
+    
 </resources>

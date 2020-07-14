@@ -29,7 +29,7 @@
             android:id="@+id/no_asso_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Pas encore d'associations"
+            android:text="@string/label_no_asso"
             android:textColor="@color/colorBlack"
             android:textSize="25sp"
             android:textStyle="italic"

@@ -9,7 +9,7 @@
 
     <ImageView
         android:id="@+id/app_logo"
-        android:contentDescription="@string/app_logo"
+        android:contentDescription="@string/desc_logo"
 
         android:layout_width="200dp"
         android:layout_height="160dp"
@@ -25,7 +25,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        android:text="@string/bienvenue"
+        android:text="@string/label_welcome"
         android:textColor="@color/colorBlack"
         android:textSize="25sp"
 
@@ -43,7 +43,7 @@
         android:ems="15"
 
         android:hint="@string/hint_email"
-        android:autofillHints="@string/hint_email"
+        android:autofillHints="Adresse Mail"
         android:inputType="textEmailAddress"
         android:gravity="center"
 
@@ -62,7 +62,7 @@
         android:ems="15"
 
         android:hint="@string/hint_password"
-        android:autofillHints="@string/hint_password"
+        android:autofillHints="Mot de passe"
         android:inputType="textPassword"
         android:gravity="center"
 
@@ -78,7 +78,7 @@
         android:layout_height="30dp"
         android:background="@drawable/round_corner_blue"
 
-        android:text="@string/connexion_label"
+        android:text="@string/label_connexion"
         android:textSize="12sp"
         android:textColor="@color/colorWhite"
 
@@ -97,7 +97,7 @@
         android:paddingStart="100dp"
         android:paddingEnd="0dp"
 
-        android:text="@string/no_account"
+        android:text="@string/label_no_account"
         android:textColor="@color/colorBlack"
 
         android:layout_marginBottom="10dp"
@@ -112,7 +112,7 @@
         android:paddingStart="5dp"
         android:paddingEnd="100dp"
 
-        android:text="@string/signup_label"
+        android:text="@string/label_signup"
         android:textColor="@color/colorBlue"
 
         android:layout_marginBottom="10dp"

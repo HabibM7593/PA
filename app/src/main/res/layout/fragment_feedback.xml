@@ -13,7 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        android:text="@string/title_feedback"
+        android:text="@string/label_feedback"
         android:textSize="25sp"
         android:textColor="@color/colorBlack"
 
@@ -27,15 +27,17 @@
 
         android:layout_width="350dp"
         android:layout_height="48dp"
-        android:background="@drawable/back_border"
+        android:background="@drawable/background_border"
         android:ems="10"
         android:visibility="invisible"
 
-        android:hint="@string/object_feedback_string"
-        android:autofillHints="@string/object_feedback_string"
+        android:hint="@string/hint_object_feedback"
+        android:autofillHints="Object Feedback"
         android:inputType="textPersonName"
         android:maxLength="50"
         android:gravity="center_vertical"
+        android:paddingStart="5dp"
+        android:paddingEnd="5dp"
 
         android:layout_marginBottom="10dp"
         app:layout_constraintBottom_toTopOf="@+id/content_feedback"
@@ -46,15 +48,20 @@
 
         android:layout_width="350dp"
         android:layout_height="135dp"
-        android:background="@drawable/back_border"
+        android:background="@drawable/background_border"
         android:ems="10"
         android:singleLine="false"
 
-        android:hint="@string/feedback_content_string"
-        android:autofillHints="@string/feedback_content_string"
+        android:hint="@string/hint_content_feedback"
+        android:autofillHints="Maximum 255 caractères"
         android:inputType="text|textMultiLine"
         android:maxLength="255"
         android:gravity="center_vertical"
+        android:paddingStart="5dp"
+        android:paddingEnd="5dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+
 
         android:layout_marginBottom="10dp"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -67,7 +74,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        android:text="@string/bug_text"
+        android:text="@string/Label_bug"
 
         android:layout_marginTop="10dp"
         app:layout_constraintTop_toBottomOf="parent"
@@ -97,7 +104,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/round_corner_blue"
 
-        android:text="@string/feedback_string"
+        android:text="@string/label_send"
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
