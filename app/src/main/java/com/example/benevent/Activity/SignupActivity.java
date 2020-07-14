@@ -4,23 +4,39 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 
+import android.os.NetworkOnMainThreadException;
+import android.os.StrictMode;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.cloudinary.Cloudinary;
+import com.cloudinary.Uploader;
 import com.example.benevent.API.NetworkClient;
 import com.example.benevent.API.UserApi;
 import com.example.benevent.Models.Signup;
 import com.example.benevent.R;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -30,7 +46,9 @@ import retrofit2.Retrofit;
 public class SignupActivity extends AppCompatActivity {
 
     public ImageButton backButton;
+    public Button loadpicture;
     public ImageView imageUser;
+    public Signup signup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,9 +56,9 @@ public class SignupActivity extends AppCompatActivity {
         setContentView(R.layout.activity_signup);
 
         backButton = findViewById(R.id.back_button_signup);
-        String uri = "@drawable/logo_image.png";  // where myresource (without the extension) is the file
+        loadpicture = findViewById(R.id.button_upload_signup);
 
-        imageUser= (ImageView)findViewById(R.id.profil_picture);
+        imageUser= (ImageView)findViewById(R.id.profil_picture_signup);
 
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,6 +68,15 @@ public class SignupActivity extends AppCompatActivity {
                 //overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
             }
         });
+
+        loadpicture.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent galleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
+                startActivityForResult(galleryIntent,200);
+            }
+        });
+
     }
 
     public void Signup(View view) throws ParseException {
@@ -63,21 +90,33 @@ public class SignupActivity extends AppCompatActivity {
         SimpleDateFormat formatter1 = new SimpleDateFormat("dd/MM/yyyy");
         SimpleDateFormat formatter2 = new SimpleDateFormat("yyyy-MM-dd");
 
-
-
-
         if(nameET.getText().toString().equals("")||firstnameET.getText().toString().equals("")||ageET.getText().toString().equals("")||emailET.getText().toString().equals("")||passwordET.getText().toString().equals("")){
             Toast.makeText(getApplicationContext(), "Faites attention à ne pas envoyer de champs vides", Toast.LENGTH_LONG).show();
         }else{
             if(!emailET.getText().toString().contains("@")){
                 Toast.makeText(getApplicationContext(), "Verifiez votre adresse mail !", Toast.LENGTH_LONG).show();
             }
-            if(phoneET.getText().toString().length()<10 || (phoneET.getText().toString().length()>10 && !phoneET.getText().toString().contains("+"))||phoneET.getText().toString().length()>12){
+            else if(phoneET.getText().toString().length()<10 || (phoneET.getText().toString().length()>10 && !phoneET.getText().toString().contains("+"))||(phoneET.getText().toString().length()<12 && phoneET.getText().toString().contains("+"))){
                 Toast.makeText(getApplicationContext(), "Verifiez votre numero de telephone !", Toast.LENGTH_LONG).show();
             }
-            Date ageDate = formatter1.parse(ageET.getText().toString());
-            String age = formatter2.format(ageDate);
-            signUser(new Signup(nameET.getText().toString(),firstnameET.getText().toString(),age,emailET.getText().toString(),passwordET.getText().toString()));
+            else{
+                try {
+                    Date ageDate = formatter1.parse(ageET.getText().toString());
+                    String age = formatter2.format(ageDate);
+                    signup.setName(nameET.getText().toString());
+                    signup.setFirstname(firstnameET.getText().toString());
+                    signup.setAge(age);
+                    signup.setPhone(phoneET.getText().toString());
+                    signup.setEmail(emailET.getText().toString());
+                    signup.setPassword(passwordET.getText().toString());
+                    Log.d("TAG", "Signup: "+signup.getProfilpicture());
+                    signUser(signup);
+                }catch (IllegalStateException | ParseException e){
+                    Toast.makeText(getApplicationContext(), "la date de naissance doit etre sous le format JJ/MM/AAAA", Toast.LENGTH_LONG).show();
+                }
+
+            }
+
         }
 
     }
@@ -109,4 +148,59 @@ public class SignupActivity extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        super.onActivityResult(requestCode, resultCode, data);
+        try
+        {
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
+                    .permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+            if (requestCode == 200 && resultCode == RESULT_OK && null != data)
+            {
+                Uri selectedImage = data.getData();
+                Cloudinary cloudinary = new Cloudinary("cloudinary://996546549428271:zTYYc7JGVOE4lpiWuyt5zSt_Ftc@beneventesgi");
+                try {
+                    FileInputStream is = new FileInputStream(new File(getPath(selectedImage)));
+                    Uploader uploader = cloudinary.uploader();
+                    Map map = uploader.upload(is, new HashMap());
+
+                    try {
+
+                        URL url = new URL((String) map.get("url"));
+                        Bitmap bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+                        imageUser.setImageBitmap(bmp);
+                    } catch (IOException | NetworkOnMainThreadException e) {
+                        e.printStackTrace();
+                    }
+                    Log.d("TAG", "onActivityResult: "+(String) map.get("url"));
+                    signup.setProfilpicture((String) map.get("url"));
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+            } else {
+                Toast.makeText(this, "You haven't picked Image",Toast.LENGTH_LONG).show();
+            }
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+            Toast.makeText(this, "Something went wrong"+e, Toast.LENGTH_LONG) .show();
+        }
+    }
+
+    public String getPath(Uri uri) {
+        String[] projection = { MediaStore.Images.Media.BUCKET_DISPLAY_NAME,
+                MediaStore.Images.Media.DATA };
+        Cursor cursor = this.getContentResolver().query(uri,
+                projection, null, null, null);
+        int column_index = cursor
+                .getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+        cursor.moveToFirst();
+        return cursor.getString(column_index);
+    }
+
 }

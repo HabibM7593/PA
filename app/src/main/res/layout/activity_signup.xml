@@ -126,7 +126,7 @@
         android:ems="15"
         android:gravity="center"
         android:hint="@string/hint_phone"
-
+        android:maxLength="12"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/age_signup" />
@@ -160,5 +160,29 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/profil_picture_signup"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toTopOf="@+id/button_signup_send"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/password_signup"
+        app:layout_constraintEnd_toStartOf="@id/button_upload_signup"
+        android:src="@drawable/logo_image" />
+
+    <Button
+        android:id="@+id/button_upload_signup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/round_corner_blue"
+        android:text="Changer d'image"
+        android:textColor="@color/colorWhite"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toTopOf="@+id/button_signup_send"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/profil_picture_signup"
+        app:layout_constraintTop_toBottomOf="@+id/password_signup" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

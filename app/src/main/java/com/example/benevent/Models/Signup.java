@@ -1,20 +1,38 @@
 package com.example.benevent.Models;
 
-import java.util.Date;
-
 public class Signup {
     String name;
     String firstname;
     String age;
     String email;
     String password;
+    String phone;
+    String profilpicture;
 
-    public Signup(String name, String firstname, String age, String email, String password) {
+    public Signup(String name, String firstname, String age, String email, String password, String phone, String profilpicture) {
         this.name = name;
         this.firstname = firstname;
         this.age = age;
         this.email = email;
         this.password = password;
+        this.phone = phone;
+        this.profilpicture = profilpicture;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getProfilpicture() {
+        return profilpicture;
+    }
+
+    public void setProfilpicture(String profilpicture) {
+        this.profilpicture = profilpicture;
     }
 
     public String getName() {
