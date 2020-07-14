@@ -10,12 +10,16 @@
 
     <ImageView
         android:id="@+id/image_feed"
+        android:contentDescription="@string/desc_pp"
+
         android:layout_width="50dp"
         android:layout_height="50dp"
+
+        android:src="@mipmap/ic_launcher"
+
         android:layout_marginTop="15dp"
         android:layout_marginStart="10dp"
-        android:src="@mipmap/ic_launcher"
-        android:layout_marginBottom="15dp"/>
+        android:layout_marginBottom="15dp" />
 
     <TextView
         android:id="@+id/name_feed"
@@ -36,14 +40,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        android:layout_below="@+id/name_feed"
-        android:layout_marginStart="70dp"
-        android:layout_marginTop="-2dp"
-        android:textColor="@color/colorBlack"
-
+        tools:text="Label Contenue"
         android:textSize="15sp"
+        android:textColor="@color/colorBlack"
         android:textStyle="italic"
-        tools:text="Label Contenue" />
+
+        android:layout_below="@+id/name_feed"
+        android:layout_marginTop="-2dp"
+        android:layout_marginStart="70dp" />
 
 </RelativeLayout>
 

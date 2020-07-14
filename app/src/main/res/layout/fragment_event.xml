@@ -26,17 +26,20 @@
 
         <TextView
             android:id="@+id/no_event_label"
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+
             android:text="@string/label_no_event"
-            android:textColor="@color/colorBlack"
             android:textSize="25sp"
+            android:textColor="@color/colorBlack"
             android:textStyle="italic"
             android:visibility="invisible"
+
+            app:layout_constraintTop_toTopOf="@+id/recycler_event"
             app:layout_constraintBottom_toBottomOf="@+id/recycler_event"
-            app:layout_constraintEnd_toEndOf="@+id/recycler_event"
             app:layout_constraintStart_toStartOf="@+id/recycler_event"
-            app:layout_constraintTop_toTopOf="@+id/recycler_event" />
+            app:layout_constraintEnd_toEndOf="@+id/recycler_event" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

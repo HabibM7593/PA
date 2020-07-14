@@ -29,8 +29,8 @@
             android:background="@color/colorWhite"
             android:src="@drawable/right_chevron"
 
-            android:layout_alignParentEnd="true"
             android:layout_marginEnd="10dp"
+            android:layout_alignParentEnd="true"
             android:layout_alignBaseline="@+id/name_event" />
 
         <TextView
