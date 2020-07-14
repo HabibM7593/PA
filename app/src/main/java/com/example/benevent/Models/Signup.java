@@ -19,6 +19,10 @@ public class Signup {
         this.profilpicture = profilpicture;
     }
 
+    public Signup() {
+
+    }
+
     public String getPhone() {
         return phone;
     }

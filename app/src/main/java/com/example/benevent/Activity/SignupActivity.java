@@ -31,6 +31,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URL;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -46,7 +48,7 @@ public class SignupActivity extends AppCompatActivity {
 
     public Button loadpicture;
     public ImageView imageUser;
-    public Signup signup;
+    public Signup signup = new Signup();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,7 +98,7 @@ public class SignupActivity extends AppCompatActivity {
                     signup.setAge(age);
                     signup.setPhone(phoneET.getText().toString());
                     signup.setEmail(emailET.getText().toString());
-                    signup.setPassword(passwordET.getText().toString());
+                    signup.setPassword(md5(passwordET.getText().toString()));
                     Log.d("TAG", "Signup: "+signup.getProfilpicture());
                     signUser(signup);
                 }catch (IllegalStateException | ParseException e){
@@ -196,5 +198,25 @@ public class SignupActivity extends AppCompatActivity {
         cursor.moveToFirst();
         return cursor.getString(column_index);
     }
+
+    public String md5(String s) {
+        try {
+            // Create MD5 Hash
+            MessageDigest digest = java.security.MessageDigest.getInstance("MD5");
+            digest.update(s.getBytes());
+            byte messageDigest[] = digest.digest();
+
+            // Create Hex String
+            StringBuffer hexString = new StringBuffer();
+            for (int i=0; i<messageDigest.length; i++)
+                hexString.append(Integer.toHexString(0xFF & messageDigest[i]));
+
+            return hexString.toString();
+        }catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        return "";
+    }
+
 
 }

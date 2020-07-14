@@ -26,6 +26,8 @@ import com.example.benevent.Models.User;
 import com.example.benevent.R;
 
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 public class SigninActivity extends AppCompatActivity {
@@ -47,6 +49,13 @@ public class SigninActivity extends AppCompatActivity {
                 //overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
             }
         });
+        SharedPreferences pref = this.getSharedPreferences("login", MODE_PRIVATE);
+        String password = pref.getString("password", "");
+        String email = pref.getString("email", "");
+        if(!password.equals("")||!email.equals("")){
+            Login autologin = new Login(email,password);
+            loginUser(autologin);
+        }
     }
     @Override
     public void onBackPressed() {
@@ -82,7 +91,7 @@ public class SigninActivity extends AppCompatActivity {
         EditText log = (EditText) findViewById(R.id.log_ed);
         EditText password = (EditText) findViewById(R.id.pass_ed);
 
-        loginUser(new Login(log.getText().toString(),password.getText().toString()));
+        loginUser(new Login(log.getText().toString(),md5(password.getText().toString())));
 
     }
 
@@ -109,6 +118,7 @@ public class SigninActivity extends AppCompatActivity {
                     editor.putString("username", users.get(0).getFirstname() + " " + users.get(0).getName());
                     editor.putString("email", users.get(0).getEmail()); // Saving string
                     editor.putString("profilpicture",users.get(0).getProfilpicture());
+                    editor.putString("password",login.getPassword());
 
                     editor.apply();
                     Intent intent = new Intent(context, FragmentManagerActivity.class);
@@ -124,5 +134,23 @@ public class SigninActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), t.toString(), Toast.LENGTH_LONG).show();
             }
         });
+    }
+    public String md5(String s) {
+        try {
+            // Create MD5 Hash
+            MessageDigest digest = java.security.MessageDigest.getInstance("MD5");
+            digest.update(s.getBytes());
+            byte messageDigest[] = digest.digest();
+
+            // Create Hex String
+            StringBuffer hexString = new StringBuffer();
+            for (int i=0; i<messageDigest.length; i++)
+                hexString.append(Integer.toHexString(0xFF & messageDigest[i]));
+
+            return hexString.toString();
+        }catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        return "";
     }
 }

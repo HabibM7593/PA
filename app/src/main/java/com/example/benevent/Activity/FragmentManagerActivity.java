@@ -202,6 +202,16 @@ public class FragmentManagerActivity extends AppCompatActivity
         builder.setPositiveButton("Déconnexion", new DialogInterface.OnClickListener() {
 
             public void onClick(DialogInterface dialog, int which) {
+                SharedPreferences pref = getApplicationContext().getSharedPreferences("login", MODE_PRIVATE);
+                SharedPreferences.Editor editor = pref.edit();
+
+                editor.putInt("userid", 0);
+                editor.putString("username", "");
+                editor.putString("email", ""); // Saving string
+                editor.putString("profilpicture","");
+                editor.putString("password","");
+
+                editor.apply();
                 Intent intent = new Intent(context, SigninActivity.class);
                 startActivity(intent);
             }
