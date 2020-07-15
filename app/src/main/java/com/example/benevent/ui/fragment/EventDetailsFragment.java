@@ -6,13 +6,12 @@ import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,6 +29,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import androidx.fragment.app.FragmentActivity;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -41,6 +41,7 @@ public class EventDetailsFragment extends Fragment {
 
     Event selectedEvent;
     String nameAsso;
+    int iduser;
 
     public TextView nameEventTV;
     public TextView dateDebEventTV;
@@ -71,12 +72,12 @@ public class EventDetailsFragment extends Fragment {
         Button buttonQRcode = v.findViewById(R.id.button_scan_qrcode);
         Button buttoninscription = v.findViewById(R.id.button_inscription_event);
         SharedPreferences pref = this.getActivity().getSharedPreferences("login", MODE_PRIVATE);
-        int iduserser = pref.getInt("userid", 0);
+        iduser = pref.getInt("userid", 0);
 
         if (selectedEvent.getDateDeb().after(new Date())){
             buttoninscription.setVisibility(View.VISIBLE);
         }
-        Participation participation = new Participation(selectedEvent.getIdev(),iduserser);
+        Participation participation = new Participation(selectedEvent.getIdev(),iduser);
         ParticipateApi participateApi = retrofit.create(ParticipateApi.class);
         Call call = participateApi.checkParticipation(participation.getIdev(),participation.getIdu());
         call.enqueue(new Callback<List<Participation>>(){
@@ -87,7 +88,7 @@ public class EventDetailsFragment extends Fragment {
                     if (participation.size()==1){
                         buttoninscription.setText("Se Désinscrire");
                         buttoninscription.setBackgroundResource(R.drawable.round_corner_red);
-                        if (participation.get(0).isStatus()==1){
+                        if (participation.get(0).isStatus()==1 && participation.get(0).getEnddate()==null){
                             valideParticipation=1;
                         }else{
                             valideParticipation=0;
@@ -110,7 +111,7 @@ public class EventDetailsFragment extends Fragment {
                 Participation participation;
                 ParticipateApi participateApi = retrofit.create(ParticipateApi.class);
                 if (buttoninscription.getText().equals("Inscription")){
-                    participation = new Participation(selectedEvent.getIdev(),iduserser,0,1);
+                    participation = new Participation(selectedEvent.getIdev(),iduser,0,1);
                     buttoninscription.setText("Se Désinscrire");
                     buttoninscription.setBackgroundResource(R.drawable.round_corner_red);
                     Call call = participateApi.Participer(participation);
@@ -125,7 +126,7 @@ public class EventDetailsFragment extends Fragment {
                         }
                     });
                 }else{
-                    participation = new Participation(selectedEvent.getIdev(),iduserser,0,0);
+                    participation = new Participation(selectedEvent.getIdev(),iduser,0,0);
                     buttoninscription.setText("Inscription");
                     buttoninscription.setBackgroundResource(R.drawable.round_corner_blue);
                     Call call = participateApi.RefuseParticipation(participation);
@@ -150,7 +151,6 @@ public class EventDetailsFragment extends Fragment {
                 IntentIntegrator integrator = IntentIntegrator.forSupportFragment(EventDetailsFragment.this);
                 integrator.setPrompt("Scan");
                 integrator.setBeepEnabled(true);
-                //The following line if you want QR code
                 integrator.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE_TYPES);
                 integrator.setOrientationLocked(true);
                 integrator.setBarcodeImageEnabled(true);
@@ -209,7 +209,37 @@ public class EventDetailsFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         IntentResult intentResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
         if (intentResult != null){
-            if (intentResult.getContents() == null){
+            if (intentResult.getContents() != null){
+
+                Log.d("TAG", "onActivityResult: "+intentResult.getContents());
+                Participation participation ;
+
+
+                participation = new Participation(Integer.parseInt(intentResult.getContents()),iduser,1,1);
+                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                Date date = new Date();
+                participation.setStartdate(formatter.format(date));
+                participation.setEnddate(formatter.format(date));
+                ParticipateApi participateApi = retrofit.create(ParticipateApi.class);
+
+                Call callAsso = participateApi.UpdateParticipation(participation);
+
+                callAsso.enqueue(
+                        new Callback<List<Association>>() {
+
+                            @Override
+                            public void onResponse(Call<List<Association>> call, Response<List<Association>> response) {
+                                if(response.code()==200) {
+                                    Toast.makeText(getActivity().getApplicationContext(), "Votre scan a bien été pris en compte ", Toast.LENGTH_LONG).show();
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(Call call, Throwable t) {
+
+                            }
+                        }
+                );
             }else {
             }
         }

@@ -1,7 +1,5 @@
 package com.example.benevent.Models;
 
-import android.util.Log;
-
 import java.util.Date;
 
 public class Event {

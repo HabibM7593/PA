@@ -72,7 +72,7 @@ public class ProfilFragment extends Fragment {
         Button supprbtn = v.findViewById(R.id.button_delete);
         Button uploadimg = v.findViewById(R.id.button_upload);
         SharedPreferences pref = this.getActivity().getSharedPreferences("login", MODE_PRIVATE);
-        int iduserser = pref.getInt("userid", 0);
+        int iduser = pref.getInt("userid", 0);
 
         uploadimg.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,7 +82,7 @@ public class ProfilFragment extends Fragment {
             }
         });
 
-        Call call = userApi.getUser(iduserser);
+        Call call = userApi.getUser(iduser);
         call.enqueue(new Callback<List<User>>() {
             @Override
             public void onResponse(Call<List<User>> call, Response<List<User>> response) {
@@ -118,7 +118,7 @@ public class ProfilFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
-                Call call = userApi.updateUser( iduserser,new User(nameprofilTV.getText().toString(),firstnameprofilTV.getText().toString(),phoneprofilTV.getText().toString(),currentUser.getProfilpicture()));
+                Call call = userApi.updateUser( iduser,new User(nameprofilTV.getText().toString(),firstnameprofilTV.getText().toString(),phoneprofilTV.getText().toString(),currentUser.getProfilpicture()));
                 call.enqueue(new Callback<String>() {
                     @Override
                     public void onResponse(Call<String> call, Response<String> response) {
@@ -150,7 +150,7 @@ public class ProfilFragment extends Fragment {
                 builder.setPositiveButton("OUI", new DialogInterface.OnClickListener() {
 
                     public void onClick(DialogInterface dialog, int which) {
-                        Call call = userApi.deleteUser(iduserser);
+                        Call call = userApi.deleteUser(iduser);
                         call.enqueue(new Callback<String>() {
                             @Override
                             public void onResponse(Call<String> call, Response<String> response) {

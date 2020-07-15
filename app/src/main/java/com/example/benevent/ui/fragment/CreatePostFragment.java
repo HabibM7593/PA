@@ -58,7 +58,7 @@ public class CreatePostFragment extends Fragment {
         Button submitbutton = view.findViewById(R.id.button_post);
         EditText content = view.findViewById(R.id.content_post_edit_text);
         SharedPreferences pref = this.getActivity().getSharedPreferences("login", MODE_PRIVATE);
-        int iduserser = pref.getInt("userid", 0);
+        int iduser = pref.getInt("userid", 0);
         List<Event> listevent = new ArrayList<>();
         EventApi eventApi = retrofit.create(EventApi.class);
         PostApi postApi = retrofit.create(PostApi.class);
@@ -69,7 +69,7 @@ public class CreatePostFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 post.setMessage(content.getText().toString());
-                post.setIdu(iduserser);
+                post.setIdu(iduser);
                 post.setIdev(selectedevent.getIdev());
                 SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 Date date = new Date();
@@ -106,7 +106,7 @@ public class CreatePostFragment extends Fragment {
         });
 
 
-        Call call =  eventApi.getEvents(iduserser);
+        Call call =  eventApi.getEvents(iduser);
         call.enqueue(new Callback<List<Event>>() {
             @Override
             public void onResponse(Call<List<Event>> call, Response<List<Event>> response) {

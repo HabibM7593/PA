@@ -69,10 +69,10 @@ public class FeedFragment extends Fragment {
             }
         });
         recyclerView = view.findViewById(R.id.recycler_feed);
-        int iduserser = pref.getInt("userid", 0);
+        int iduser = pref.getInt("userid", 0);
 
         PostApi postApi = retrofit.create(PostApi.class);
-        Call call = postApi.getPosts(iduserser);
+        Call call = postApi.getPosts(iduser);
         TextView labelEmpty = view.findViewById(R.id.no_post_label);
 
         final FragmentActivity Post = getActivity();

@@ -43,7 +43,7 @@ public class FeedbackFragment extends Fragment {
                              Bundle savedInstanceState) {
         SharedPreferences pref = this.getActivity().getSharedPreferences("login", MODE_PRIVATE);
 
-        int iduserser = pref.getInt("userid", 0);
+        int iduser = pref.getInt("userid", 0);
         View view = inflater.inflate(R.layout.fragment_feedback, container, false);
         final EditText titrefeedback = (EditText) view.findViewById(R.id.object_feedback);
         final EditText contentfeedback = (EditText) view.findViewById(R.id.content_feedback);
@@ -75,7 +75,7 @@ public class FeedbackFragment extends Fragment {
                     if (titrefeedback.getText().toString().equals("") || contentfeedback.getText().toString().equals("")) {
                         Toast.makeText(getActivity().getApplicationContext(),"Faites attention à ne pas envoyer de champs vides",Toast.LENGTH_SHORT).show();
                     }else{
-                        SendFeedbackBug(new Feedback(iduserser, titrefeedback.getText().toString(), contentfeedback.getText().toString(), formatter.format(date),  type, "ANDROID"));
+                        SendFeedbackBug(new Feedback(iduser, titrefeedback.getText().toString(), contentfeedback.getText().toString(), formatter.format(date),  type, "ANDROID"));
                         titrefeedback.setText("");
                         contentfeedback.setText("");
                     }
@@ -84,7 +84,7 @@ public class FeedbackFragment extends Fragment {
                     if (contentfeedback.getText().toString().equals("")) {
                         Toast.makeText(getActivity().getApplicationContext(),"Faites attention à ne pas envoyer de champs vides",Toast.LENGTH_SHORT).show();
                     }else{
-                        SendFeedbackEval(new Feedback(iduserser, contentfeedback.getText().toString(), formatter.format(date), (int) ratingbar.getRating(), type, "ANDROID"));
+                        SendFeedbackEval(new Feedback(iduser, contentfeedback.getText().toString(), formatter.format(date), (int) ratingbar.getRating(), type, "ANDROID"));
                         titrefeedback.setText("");
                         contentfeedback.setText("");
                     }
