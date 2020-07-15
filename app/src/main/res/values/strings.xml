@@ -15,7 +15,11 @@
     <!--Desc String-->
     <string name="desc_logo">Appli logo</string>
     <string name="desc_arrow">Details Arrow</string>
-    <string name="desc_info_logo">Logo Info</string>
+    <string name="desc_info_logo">Info logo</string>
+    <string name="desc_website_logo">Website logo</string>
+    <string name="desc_email_logo">Email logo</string>
+    <string name="desc_phone_logo">Phone logo</string>
+    <string name="desc_support_logo">Support logo</string>
     <string name="desc_pp">Profile picture</string>
 
     <!--Label String-->
@@ -28,10 +32,6 @@
     <string name="label_name_asso">Name Asso</string>
     <string name="label_name_category">Name Category</string>
     <string name="label_info">Informations :</string>
-    <string name="label_email">Adresse @ :</string>
-    <string name="label_phone">Téléphone :</string>
-    <string name="label_website">Site Internet :</string>
-    <string name="label_support">Soutenir :</string>
     <string name="label_follow">Suivre</string>
     <string name="label_post_message">Publier un message</string>
     <string name="label_post">Publier</string>
@@ -60,5 +60,6 @@
     <string name="hint_content">Contenue du message</string>
     <string name="hint_object_feedback">Object Feedback</string>
     <string name="hint_content_feedback">Maximum 255 caractères</string>
+
 
 </resources>
