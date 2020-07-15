@@ -78,25 +78,30 @@ public class CreatePostFragment extends Fragment {
                 Log.d("TAG", "onClick: idu "+post.getIdu());
                 Log.d("TAG", "onClick: idev "+post.getIdev());
                 Log.d("TAG", "onClick: date "+post.getDate());
-                Call call =  postApi.sendPost(post);
-                call.enqueue(new Callback<String>() {
-                    @Override
-                    public void onResponse(Call<String>call, Response<String> response) {
-                        if (response.code()==200){
-                            Toast.makeText(getActivity().getApplicationContext(),"Votre post a bien ete pris en compte !",Toast.LENGTH_LONG).show();
+
+                if(post.getIdev()==0){
+                    Toast.makeText(getActivity().getApplicationContext(),"Vous ne pouvez pas publier sans selectionner un evenement !",Toast.LENGTH_LONG).show();
+                }else{
+                    Call call =  postApi.sendPost(post);
+                    call.enqueue(new Callback<String>() {
+                        @Override
+                        public void onResponse(Call<String>call, Response<String> response) {
+                            if (response.code()==200){
+                                Toast.makeText(getActivity().getApplicationContext(),"Votre post a bien ete pris en compte !",Toast.LENGTH_LONG).show();
+                            }
                         }
-                    }
-                    @Override
-                    public void onFailure(Call<String> call, Throwable t) {
-                        Toast.makeText(getActivity().getApplicationContext(),"Impossible d'envoyer ce post",Toast.LENGTH_LONG).show();
-                    }
-                });
+                        @Override
+                        public void onFailure(Call<String> call, Throwable t) {
+                            Toast.makeText(getActivity().getApplicationContext(),"Impossible d'envoyer ce post",Toast.LENGTH_LONG).show();
+                        }
+                    });
 
 
-                FeedFragment feedFragment = new FeedFragment();
-                ((FragmentActivity) view.getContext()).getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.frame_create_post, feedFragment)
-                        .commit();
+                    FeedFragment feedFragment = new FeedFragment();
+                    ((FragmentActivity) view.getContext()).getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.frame_create_post, feedFragment)
+                            .commit();
+                }
             }
         });
 
