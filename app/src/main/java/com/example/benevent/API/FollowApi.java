@@ -17,6 +17,6 @@ public interface FollowApi {
     Call<Void> followAsso(@Body Follow follow);
     @HTTP(method = "DELETE", path = "unfollow", hasBody = true)
     Call<Void> unfollowAsso(@Body Follow unfollow);
-    @GET("follow/{idas}/{idu}")
-    Call<List<User>> checkFollow(@Path("idas") int idas,@Path("idu") int idu);
+    @GET("follow/{idassociation}/{iduser}")
+    Call<List<User>> checkFollow(@Path("idassociation") int idassociation,@Path("iduser") int iduser);
 }

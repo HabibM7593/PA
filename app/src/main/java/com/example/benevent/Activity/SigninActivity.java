@@ -101,6 +101,7 @@ public class SigninActivity extends AppCompatActivity {
         UserApi userApi = retrofit.create(UserApi.class);
 
         Call call = userApi.logUser(login);
+        Log.d("TAG", "loginUser: "+login.getPassword());
         /*
         This is the line which actually sends a network request. Calling enqueue() executes a call asynchronously. It has two callback listeners which will invoked on the main thread
         */

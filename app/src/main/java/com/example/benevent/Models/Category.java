@@ -1,20 +1,20 @@
 package com.example.benevent.Models;
 
 public class Category {
-    int idcat;
+    int idcategory;
     String name;
 
-    public Category(int idcat, String name) {
-        this.idcat = idcat;
+    public Category(int idcategory, String name) {
+        this.idcategory = idcategory;
         this.name = name;
     }
 
     public int getIdcat() {
-        return idcat;
+        return idcategory;
     }
 
-    public void setIdcat(int idcat) {
-        this.idcat = idcat;
+    public void setIdcat(int idcategory) {
+        this.idcategory = idcategory;
     }
 
     public String getName() {

@@ -22,7 +22,7 @@ public interface ParticipateApi {
     @PATCH("participate/refuse")
     Call<Void> RefuseParticipation(@Body Participation participation);
 
-    @GET("participate/{idev}/{idu}")
-    Call<List<Participation>> checkParticipation(@Path("idev") int idev, @Path("idu") int idu);
+    @GET("participate/{idevent}/{iduser}")
+    Call<List<Participation>> checkParticipation(@Path("idevent") int idevent, @Path("iduser") int iduser);
 
 }

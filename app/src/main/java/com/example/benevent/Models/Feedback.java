@@ -1,30 +1,30 @@
 package com.example.benevent.Models;
 
 public class Feedback {
-    int idu;
+    int iduser;
     String title;
     String content;
     String date;
     String status;
     int note;
-    int idty;
+    int idtype;
     String plateform;
 
-    public Feedback(int idu, String title, String content, String date, int idty, String plateform) {
-        this.idu = idu;
+    public Feedback(int iduser, String title, String content, String date, int idtype, String plateform) {
+        this.iduser = iduser;
         this.title = title;
         this.content = content;
         this.date = date;
-        this.idty = idty;
+        this.idtype = idtype;
         this.plateform = plateform;
     }
 
-    public Feedback(int idu, String content, String date, int note, int idty, String plateform) {
-        this.idu = idu;
+    public Feedback(int iduser, String content, String date, int note, int idtype, String plateform) {
+        this.iduser = iduser;
         this.content = content;
         this.date = date;
         this.note = note;
-        this.idty = idty;
+        this.idtype = idtype;
         this.plateform = plateform;
     }
 
@@ -53,11 +53,11 @@ public class Feedback {
     }
 
     public int getIdu() {
-        return idu;
+        return iduser;
     }
 
-    public void setIdu(int idu) {
-        this.idu = idu;
+    public void setIdu(int iduser) {
+        this.iduser = iduser;
     }
 
     public String getPlateform() {
@@ -85,10 +85,10 @@ public class Feedback {
     }
 
     public int getIdty() {
-        return idty;
+        return idtype;
     }
 
-    public void setIdty(int idty) {
-        this.idty = idty;
+    public void setIdty(int idtype) {
+        this.idtype = idtype;
     }
 }

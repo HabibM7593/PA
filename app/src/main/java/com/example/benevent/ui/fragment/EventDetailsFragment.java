@@ -71,12 +71,12 @@ public class EventDetailsFragment extends Fragment {
         Button buttonQRcode = v.findViewById(R.id.button_scan_qrcode);
         Button buttoninscription = v.findViewById(R.id.button_inscription_event);
         SharedPreferences pref = this.getActivity().getSharedPreferences("login", MODE_PRIVATE);
-        int iduser = pref.getInt("userid", 0);
+        int iduserser = pref.getInt("userid", 0);
 
         if (selectedEvent.getDateDeb().after(new Date())){
             buttoninscription.setVisibility(View.VISIBLE);
         }
-        Participation participation = new Participation(selectedEvent.getIdev(),iduser);
+        Participation participation = new Participation(selectedEvent.getIdev(),iduserser);
         ParticipateApi participateApi = retrofit.create(ParticipateApi.class);
         Call call = participateApi.checkParticipation(participation.getIdev(),participation.getIdu());
         call.enqueue(new Callback<List<Participation>>(){
@@ -110,7 +110,7 @@ public class EventDetailsFragment extends Fragment {
                 Participation participation;
                 ParticipateApi participateApi = retrofit.create(ParticipateApi.class);
                 if (buttoninscription.getText().equals("Inscription")){
-                    participation = new Participation(selectedEvent.getIdev(),iduser,0,1);
+                    participation = new Participation(selectedEvent.getIdev(),iduserser,0,1);
                     buttoninscription.setText("Se Désinscrire");
                     buttoninscription.setBackgroundResource(R.drawable.round_corner_red);
                     Call call = participateApi.Participer(participation);
@@ -125,7 +125,7 @@ public class EventDetailsFragment extends Fragment {
                         }
                     });
                 }else{
-                    participation = new Participation(selectedEvent.getIdev(),iduser,0,0);
+                    participation = new Participation(selectedEvent.getIdev(),iduserser,0,0);
                     buttoninscription.setText("Inscription");
                     buttoninscription.setBackgroundResource(R.drawable.round_corner_blue);
                     Call call = participateApi.RefuseParticipation(participation);

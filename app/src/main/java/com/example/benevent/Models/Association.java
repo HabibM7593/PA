@@ -1,7 +1,7 @@
 package com.example.benevent.Models;
 
 public class Association {
-    int idas;
+    int idassociation;
     String name;
     String logo;
     String acronym;
@@ -10,10 +10,10 @@ public class Association {
     String website;
     String support;
     String password;
-    int idcat;
+    int idcategory;
 
-    public Association(int idas, String name, String logo, String acronym, String email, String phone, String website, String support, String password, int idcat) {
-        this.idas = idas;
+    public Association(int idassociation, String name, String logo, String acronym, String email, String phone, String website, String support, String password, int idcategory) {
+        this.idassociation = idassociation;
         this.name = name;
         this.logo = logo;
         this.acronym = acronym;
@@ -22,15 +22,15 @@ public class Association {
         this.website = website;
         this.support = support;
         this.password = password;
-        this.idcat = idcat;
+        this.idcategory = idcategory;
     }
 
     public int getIdas() {
-        return idas;
+        return idassociation;
     }
 
-    public void setIdas(int idas) {
-        this.idas = idas;
+    public void setIdas(int idassociation) {
+        this.idassociation = idassociation;
     }
 
     public String getName() {
@@ -98,10 +98,10 @@ public class Association {
     }
 
     public int getIdcat() {
-        return idcat;
+        return idcategory;
     }
 
-    public void setIdcat(int idcat) {
-        this.idcat = idcat;
+    public void setIdcat(int idcategory) {
+        this.idcategory = idcategory;
     }
 }

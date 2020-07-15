@@ -58,7 +58,7 @@ public class CreatePostFragment extends Fragment {
         Button submitbutton = view.findViewById(R.id.button_post);
         EditText content = view.findViewById(R.id.content_post_edit_text);
         SharedPreferences pref = this.getActivity().getSharedPreferences("login", MODE_PRIVATE);
-        int iduser = pref.getInt("userid", 0);
+        int iduserser = pref.getInt("userid", 0);
         List<Event> listevent = new ArrayList<>();
         EventApi eventApi = retrofit.create(EventApi.class);
         PostApi postApi = retrofit.create(PostApi.class);
@@ -69,14 +69,14 @@ public class CreatePostFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 post.setMessage(content.getText().toString());
-                post.setIdu(iduser);
+                post.setIdu(iduserser);
                 post.setIdev(selectedevent.getIdev());
                 SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 Date date = new Date();
                 post.setDate(formatter.format(date));
                 Log.d("TAG", "onClick: message "+post.getMessage());
-                Log.d("TAG", "onClick: idu "+post.getIdu());
-                Log.d("TAG", "onClick: idev "+post.getIdev());
+                Log.d("TAG", "onClick: iduser "+post.getIdu());
+                Log.d("TAG", "onClick: idevent "+post.getIdev());
                 Log.d("TAG", "onClick: date "+post.getDate());
 
                 if(post.getIdev()==0){
@@ -106,7 +106,7 @@ public class CreatePostFragment extends Fragment {
         });
 
 
-        Call call =  eventApi.getEvents(iduser);
+        Call call =  eventApi.getEvents(iduserser);
         call.enqueue(new Callback<List<Event>>() {
             @Override
             public void onResponse(Call<List<Event>> call, Response<List<Event>> response) {

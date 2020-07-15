@@ -5,7 +5,7 @@ import android.util.Log;
 import java.util.Date;
 
 public class Event {
-    int idev;
+    int idevent;
     String name;
     String description;
     Date dateDeb;
@@ -13,16 +13,16 @@ public class Event {
     String location;
     int maxBenevole;
     String info;
-    int idcat;
-    int idas;
+    int idcategory;
+    int idassociation;
     int fakeevent;
 
     public Event(String name) {
         this.name = name;
     }
 
-    public Event(int idev, String name, String description, Date dateDeb, Date dateFin, String location, int maxBenevole, String info, int idcat, int idas, int fakeevent) {
-        this.idev = idev;
+    public Event(int idevent, String name, String description, Date dateDeb, Date dateFin, String location, int maxBenevole, String info, int idcategory, int idassociation, int fakeevent) {
+        this.idevent = idevent;
         this.name = name;
         this.description = description;
         this.dateDeb = dateDeb;
@@ -30,8 +30,8 @@ public class Event {
         this.location = location;
         this.maxBenevole = maxBenevole;
         this.info = info;
-        this.idcat = idcat;
-        this.idas = idas;
+        this.idcategory = idcategory;
+        this.idassociation = idassociation;
         this.fakeevent = fakeevent;
     }
 
@@ -62,11 +62,11 @@ public class Event {
 
 
     public int getIdev() {
-        return idev;
+        return idevent;
     }
 
-    public void setIdev(int idev) {
-        this.idev = idev;
+    public void setIdev(int idevent) {
+        this.idevent = idevent;
     }
 
     public String getName() {
@@ -124,19 +124,19 @@ public class Event {
     }
 
     public int getIdcat() {
-        return idcat;
+        return idcategory;
     }
 
-    public void setIdcat(int idcat) {
-        this.idcat = idcat;
+    public void setIdcat(int idcategory) {
+        this.idcategory = idcategory;
     }
 
     public int getIdas() {
-        return idas;
+        return idassociation;
     }
 
-    public void setIdas(int idas) {
-        this.idas = idas;
+    public void setIdas(int idassociation) {
+        this.idassociation = idassociation;
     }
 
     @Override

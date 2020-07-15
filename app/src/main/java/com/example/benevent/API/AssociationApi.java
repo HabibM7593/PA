@@ -9,12 +9,12 @@ import retrofit2.http.GET;
 import retrofit2.http.Path;
 
 public interface AssociationApi {
-    @GET("association/{idas}")
-    Call<List<Association>> getAsso(@Path("idas") int id);
+    @GET("association/{idassociation}")
+    Call<List<Association>> getAsso(@Path("idassociation") int id);
 
     @GET("associations")
     Call<List<Association>> getAllAssos();
 
-    @GET("associations/category/{idcat}")
-    Call<List<Association>> getAllAssosCat(@Path("idcat") int id);
+    @GET("associations/category/{idcategory}")
+    Call<List<Association>> getAllAssosCat(@Path("idcategory") int id);
 }

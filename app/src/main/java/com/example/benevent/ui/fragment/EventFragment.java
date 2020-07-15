@@ -47,10 +47,10 @@ public class EventFragment extends Fragment {
 
         recyclerView = root.findViewById(R.id.recycler_event);
         SharedPreferences pref = this.getActivity().getSharedPreferences("login", MODE_PRIVATE);
-        int iduser = pref.getInt("userid", 0);
+        int iduserser = pref.getInt("userid", 0);
 
         EventApi event = retrofit.create(EventApi.class);
-        Call callEvent = event.getEvents(iduser);
+        Call callEvent = event.getEvents(iduserser);
 
         TextView labelEmpty = root.findViewById(R.id.no_event_label);
 

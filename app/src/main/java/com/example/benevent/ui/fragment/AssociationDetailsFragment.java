@@ -65,8 +65,8 @@ public class AssociationDetailsFragment extends Fragment {
         Button followAsso = v.findViewById(R.id.button_follow);
         FollowApi followApi = retrofit.create(FollowApi.class);
         SharedPreferences pref = this.getActivity().getSharedPreferences("login", MODE_PRIVATE);
-        int iduser = pref.getInt("userid", 0);
-        Follow follow = new Follow(selectedAssociation.getIdas(),iduser);
+        int iduserser = pref.getInt("userid", 0);
+        Follow follow = new Follow(selectedAssociation.getIdas(),iduserser);
         Call call = followApi.checkFollow(follow.getIdas(),follow.getIdu());
         call.enqueue(new Callback<List<Follow>>(){
 

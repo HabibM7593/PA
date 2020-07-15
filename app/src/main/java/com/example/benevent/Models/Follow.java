@@ -1,27 +1,27 @@
 package com.example.benevent.Models;
 
 public class Follow {
-    int idas;
-    int idu;
+    int idassociation;
+    int iduser;
 
-    public Follow(int idas, int idu) {
-        this.idas = idas;
-        this.idu = idu;
+    public Follow(int idassociation, int iduser) {
+        this.idassociation = idassociation;
+        this.iduser = iduser;
     }
 
     public int getIdas() {
-        return idas;
+        return idassociation;
     }
 
-    public void setIdas(int idas) {
-        this.idas = idas;
+    public void setIdas(int idassociation) {
+        this.idassociation = idassociation;
     }
 
     public int getIdu() {
-        return idu;
+        return iduser;
     }
 
-    public void setIdu(int idu) {
-        this.idu = idu;
+    public void setIdu(int iduser) {
+        this.iduser = iduser;
     }
 }

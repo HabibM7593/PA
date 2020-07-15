@@ -1,12 +1,12 @@
 package com.example.benevent.Models;
 
 public class Post {
-    int idpo;
+    int idpost;
     String message;
     String date;
-    int idu;
-    int idas;
-    int idev;
+    int iduser;
+    int idassociation;
+    int idevent;
     String eventname;
     String assoacro;
     String nameuser;
@@ -14,22 +14,22 @@ public class Post {
     String pictureprofiluser;
     String nomprenom;
 
-    public Post(int idpo, String message, String date, int idas, int idev, String eventname, String assoacro) {
-        this.idpo = idpo;
+    public Post(int idpost, String message, String date, int idassociation, int idevent, String eventname, String assoacro) {
+        this.idpost = idpost;
         this.message = message;
         this.date = date;
-        this.idas = idas;
-        this.idev = idev;
+        this.idassociation = idassociation;
+        this.idevent = idevent;
         this.eventname = eventname;
         this.assoacro = assoacro;
     }
 
-    public Post(int idpo, int idu, String message, String date, int idev, String eventname, String assoacro) {
-        this.idpo = idpo;
+    public Post(int idpost, int iduser, String message, String date, int idevent, String eventname, String assoacro) {
+        this.idpost = idpost;
         this.message = message;
         this.date = date;
-        this.idu = idu;
-        this.idev = idev;
+        this.iduser = iduser;
+        this.idevent = idevent;
         this.eventname = eventname;
         this.assoacro = assoacro;
     }
@@ -94,11 +94,11 @@ public class Post {
     }
 
     public int getIdpo() {
-        return idpo;
+        return idpost;
     }
 
-    public void setIdpo(int idpo) {
-        this.idpo = idpo;
+    public void setIdpo(int idpost) {
+        this.idpost = idpost;
     }
 
     public String getMessage() {
@@ -110,26 +110,26 @@ public class Post {
     }
 
     public int getIdu() {
-        return idu;
+        return iduser;
     }
 
-    public void setIdu(int idu) {
-        this.idu = idu;
+    public void setIdu(int iduser) {
+        this.iduser = iduser;
     }
 
     public int getIdas() {
-        return idas;
+        return idassociation;
     }
 
-    public void setIdas(int idas) {
-        this.idas = idas;
+    public void setIdas(int idassociation) {
+        this.idassociation = idassociation;
     }
 
     public int getIdev() {
-        return idev;
+        return idevent;
     }
 
-    public void setIdev(int idev) {
-        this.idev = idev;
+    public void setIdev(int idevent) {
+        this.idevent = idevent;
     }
 }

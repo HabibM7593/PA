@@ -1,37 +1,37 @@
 package com.example.benevent.Models;
 
 public class Participation {
-    int idev;
-    int idu;
+    int idevent;
+    int iduser;
     int participate;
     int status;
 
-    public Participation(int idev, int idu, int participate, int status) {
-        this.idev = idev;
-        this.idu = idu;
+    public Participation(int idevent, int iduser, int participate, int status) {
+        this.idevent = idevent;
+        this.iduser = iduser;
         this.participate = participate;
         this.status = status;
     }
 
-    public Participation(int idev, int idu) {
-        this.idev = idev;
-        this.idu = idu;
+    public Participation(int idevent, int iduser) {
+        this.idevent = idevent;
+        this.iduser = iduser;
     }
 
     public int getIdev() {
-        return idev;
+        return idevent;
     }
 
-    public void setIdev(int idev) {
-        this.idev = idev;
+    public void setIdev(int idevent) {
+        this.idevent = idevent;
     }
 
     public int getIdu() {
-        return idu;
+        return iduser;
     }
 
-    public void setIdu(int idu) {
-        this.idu = idu;
+    public void setIdu(int iduser) {
+        this.iduser = iduser;
     }
 
     public int isParticipate() {

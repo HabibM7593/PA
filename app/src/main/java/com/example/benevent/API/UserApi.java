@@ -21,15 +21,15 @@ public interface UserApi {
     @POST("signup/user")
     Call<Void> signUser(@Body Signup sign);
 
-    @GET("user/{id}")
-    Call<List<User>> getUser(@Path("id") int id);
+    @GET("user/{iduser}")
+    Call<List<User>> getUser(@Path("iduser") int id);
 
     @GET("users")
     Call<List<User>> getUsers();
 
-    @PATCH("user/{idu}")
-    Call<Void> updateUser(@Path("idu") int id,@Body User user);
+    @PATCH("user/{iduser}")
+    Call<Void> updateUser(@Path("iduser") int id,@Body User user);
 
-    @DELETE("user/{idu}")
-    Call<Void> deleteUser(@Path("idu") int id);
+    @DELETE("user/{iduser}")
+    Call<Void> deleteUser(@Path("iduser") int id);
 }
