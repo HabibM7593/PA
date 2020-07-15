@@ -68,8 +68,8 @@ public class ProfilFragment extends Fragment {
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_profil, container, false);
         UserApi userApi = retrofit.create(UserApi.class);
-        Button modifbtn = v.findViewById(R.id.button_valid_modif);
-        Button supprbtn = v.findViewById(R.id.button_supprimer);
+        Button modifbtn = v.findViewById(R.id.button_submit);
+        Button supprbtn = v.findViewById(R.id.button_delete);
         Button uploadimg = v.findViewById(R.id.button_upload);
         SharedPreferences pref = this.getActivity().getSharedPreferences("login", MODE_PRIVATE);
         int iduser = pref.getInt("userid", 0);
