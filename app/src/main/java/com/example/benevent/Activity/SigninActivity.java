@@ -131,7 +131,7 @@ public class SigninActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call call, Throwable t) {
                 Log.e("FailSignin", "onFailure : " + t );
-                Toast.makeText(getApplicationContext(), "Verifiez votre connection internet", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Verifiez votre connexion internet", Toast.LENGTH_LONG).show();
             }
         });
     }
