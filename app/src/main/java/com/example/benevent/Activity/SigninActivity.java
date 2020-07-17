@@ -26,6 +26,7 @@ import com.example.benevent.Models.User;
 import com.example.benevent.R;
 
 
+import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
@@ -136,22 +137,21 @@ public class SigninActivity extends AppCompatActivity {
             }
         });
     }
+
     public String md5(String s) {
+        String password = null;
+        MessageDigest mdEnc;
         try {
-            // Create MD5 Hash
-            MessageDigest digest = java.security.MessageDigest.getInstance("MD5");
-            digest.update(s.getBytes());
-            byte messageDigest[] = digest.digest();
-
-            // Create Hex String
-            StringBuffer hexString = new StringBuffer();
-            for (int i=0; i<messageDigest.length; i++)
-                hexString.append(Integer.toHexString(0xFF & messageDigest[i]));
-
-            return hexString.toString();
-        }catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
+            mdEnc = MessageDigest.getInstance("MD5");
+            mdEnc.update(s.getBytes(), 0, s.length());
+            s = new BigInteger(1, mdEnc.digest()).toString(16);
+            while (s.length() < 32) {
+                s = "0" + s;
+            }
+            password = s;
+        } catch (NoSuchAlgorithmException e1) {
+            e1.printStackTrace();
         }
-        return "";
+        return password;
     }
 }
