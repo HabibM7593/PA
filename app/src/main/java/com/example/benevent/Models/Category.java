@@ -13,10 +13,6 @@ public class Category {
         return idcategory;
     }
 
-    public void setIdcat(int idcategory) {
-        this.idcategory = idcategory;
-    }
-
     public String getName() {
         return name;
     }

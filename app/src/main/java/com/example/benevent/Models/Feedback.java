@@ -28,14 +28,6 @@ public class Feedback {
         this.plateform = plateform;
     }
 
-    public int getNote() {
-        return note;
-    }
-
-    public void setNote(int note) {
-        this.note = note;
-    }
-
     public String getDate() {
         return date;
     }
@@ -44,51 +36,11 @@ public class Feedback {
         this.date = date;
     }
 
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public int getIdu() {
-        return iduser;
-    }
-
-    public void setIdu(int iduser) {
-        this.iduser = iduser;
-    }
-
-    public String getPlateform() {
-        return plateform;
-    }
-
-    public void setPlateform(String plateform) {
-        this.plateform = plateform;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
     public String getContent() {
         return content;
     }
 
     public void setContent(String content) {
         this.content = content;
-    }
-
-    public int getIdty() {
-        return idtype;
-    }
-
-    public void setIdty(int idtype) {
-        this.idtype = idtype;
     }
 }
