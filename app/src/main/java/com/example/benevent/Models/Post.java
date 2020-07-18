@@ -13,6 +13,7 @@ public class Post {
     String pictureprofilasso;
     String pictureprofiluser;
     String nomprenom;
+    String assoname;
 
     public Post() {
     }
@@ -31,6 +32,14 @@ public class Post {
 
     public void setPictureprofiluser(String pictureprofiluser) {
         this.pictureprofiluser = pictureprofiluser;
+    }
+
+    public String getAssoname() {
+        return assoname;
+    }
+
+    public void setAssoname(String assoname) {
+        this.assoname = assoname;
     }
 
     public String getPictureprofilasso() {

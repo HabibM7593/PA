@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.NetworkOnMainThreadException;
 import android.os.StrictMode;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -73,10 +74,18 @@ public class MyFeedAdapter extends RecyclerView.Adapter<MyFeedAdapter.MyViewHold
             } catch (IOException | NetworkOnMainThreadException e) {
             }
         } else {
-            if (post.getEventname() == null) {
-                holder.namePostTV.setText(post.getAssoacro());
+            if (post.getEventname().equals("")) {
+                if(post.getAssoacro()==null){
+                    holder.namePostTV.setText(post.getAssoname());
+                }else{
+                    holder.namePostTV.setText(post.getAssoacro());
+                }
             } else {
-                holder.namePostTV.setText(post.getAssoacro() + " | " + post.getEventname());
+                if(post.getAssoacro()==null){
+                    holder.namePostTV.setText(post.getAssoname() + " | " + post.getEventname());
+                }else {
+                    holder.namePostTV.setText(post.getAssoacro() + " | " + post.getEventname());
+                }
             }
             try {
                 StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
