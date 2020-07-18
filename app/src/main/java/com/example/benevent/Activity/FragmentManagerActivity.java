@@ -15,7 +15,6 @@ import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-
 import com.example.benevent.R;
 import com.example.benevent.ui.fragment.CategoryFragment;
 import com.example.benevent.ui.fragment.EventFragment;
@@ -36,14 +35,7 @@ import java.io.IOException;
 
 import java.net.URL;
 
-
-public class FragmentManagerActivity extends AppCompatActivity
-        implements
-
-        FeedFragment.OnFragmentInteractionListener,
-
-        NavigationView.OnNavigationItemSelectedListener {
-
+public class FragmentManagerActivity extends AppCompatActivity implements FeedFragment.OnFragmentInteractionListener, NavigationView.OnNavigationItemSelectedListener {
     Context context = this;
 
     @Override
@@ -51,12 +43,11 @@ public class FragmentManagerActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
         Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        setTitle("Feed");
-
         DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
 
+        setSupportActionBar(toolbar);
+        setTitle("Feed");
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawerLayout.addDrawerListener(toggle);
@@ -65,44 +56,33 @@ public class FragmentManagerActivity extends AppCompatActivity
         navigationView.setCheckedItem(R.id.nav_feed);
         Fragment feedFragment = new FeedFragment();
         displaySelectedFragment(feedFragment);
-
     }
 
     @Override
     public void onBackPressed() {
         int countFragment = getSupportFragmentManager().getBackStackEntryCount();
-
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
+
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
             if (countFragment != 0) {
                 getSupportFragmentManager().popBackStack();
             } else {
-                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
 
-                builder.setTitle("Attention");
-                builder.setMessage("Voulez-vous quitter l'application ?");
+                alertDialog.setTitle("Attention");
+                alertDialog.setMessage("Voulez-vous quitter l'application ?");
 
-                builder.setPositiveButton("OUI", new DialogInterface.OnClickListener() {
-
-                    public void onClick(DialogInterface dialog, int which) {
-                        Intent intent = new Intent(Intent.ACTION_MAIN);
-                        intent.addCategory(Intent.CATEGORY_HOME);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        startActivity(intent);
-                    }
+                alertDialog.setPositiveButton("OUI", (dialog, which) -> {
+                    Intent intent = new Intent(Intent.ACTION_MAIN);
+                    intent.addCategory(Intent.CATEGORY_HOME);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
                 });
 
-                builder.setNegativeButton("NON", new DialogInterface.OnClickListener() {
-
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
-
-                AlertDialog alert = builder.create();
+                alertDialog.setNegativeButton("NON", (dialog, which) -> dialog.dismiss());
+                AlertDialog alert = alertDialog.create();
                 alert.show();
             }
         }
@@ -110,118 +90,93 @@ public class FragmentManagerActivity extends AppCompatActivity
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        SharedPreferences pref = getApplicationContext().getSharedPreferences("login", MODE_PRIVATE);
-        String name = pref.getString("username", "");
-        String email = pref.getString("email", "");
-        String profilpic = pref.getString("profilpicture", "");
+        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("login", MODE_PRIVATE);
+        String name = sharedPreferences.getString("username", "");
+        String email = sharedPreferences.getString("email", "");
+        String profilePicture = sharedPreferences.getString("profilpicture", "");
 
-        getMenuInflater().inflate(R.menu.home, menu); // Inflate the menu; this adds items to the action bar if it is present.
-        TextView nameV = findViewById(R.id.menu_name);
-        TextView emailV = findViewById(R.id.menu_email);
-        ImageView pp = findViewById(R.id.menu_pp);
-        nameV.setText(name);
-        emailV.setText(email);
-
+        getMenuInflater().inflate(R.menu.home, menu);
+        TextView nameTV = findViewById(R.id.menu_name);
+        TextView emailTV = findViewById(R.id.menu_email);
+        ImageView profilePictureIV = findViewById(R.id.menu_pp);
+        nameTV.setText(name);
+        emailTV.setText(email);
         try {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
                     .permitAll().build();
             StrictMode.setThreadPolicy(policy);
-            URL url = new URL(profilpic);
-            Bitmap bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
-            pp.setImageBitmap(bmp);
+            URL url = new URL(profilePicture);
+            Bitmap bitmap = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+            profilePictureIV.setImageBitmap(bitmap);
         } catch (IOException | NetworkOnMainThreadException e) {
             e.printStackTrace();
         }
-
         return true;
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
-
-        //NOTE: creating fragment object
         Fragment fragment = null;
 
-        if (id == R.id.nav_feed) {
-            fragment = new FeedFragment();
-            setTitle("Feed");
+        switch (id) {
+            case R.id.nav_feed :
+                fragment = new FeedFragment();
+                setTitle("Feed");
+                break;
+            case R.id.nav_asso :
+                fragment = new CategoryFragment();
+                setTitle("Associations");
+                break;
+            case R.id.nav_feedback :
+                fragment = new FeedbackFragment();
+                setTitle("Feedback");
+                break;
+            case R.id.nav_event :
+                fragment = new EventFragment();
+                setTitle("Event");
+                break;
+            case R.id.nav_profil :
+                fragment = new ProfilFragment();
+                setTitle("Mon Profil");
+                break;
         }
 
-        if (id == R.id.nav_asso) {
-            fragment = new CategoryFragment();
-            setTitle("Associations");
-        }
-
-        if (id == R.id.nav_feedback) {
-            fragment = new FeedbackFragment();
-            setTitle("Feedback");
-        }
-
-        if (id == R.id.nav_event) {
-            fragment = new EventFragment();
-            setTitle("Event");
-        }
-
-        if (id == R.id.nav_profil) {
-            fragment = new ProfilFragment();
-            setTitle("Mon Profil");
-        }
-
-        //NOTE: Fragment changing code
         if (fragment != null) {
-            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-            ft.replace(R.id.frame, fragment);
-            ft.commit();
+            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.frame, fragment);
+            fragmentTransaction.commit();
         }
-
-        //NOTE:  Closing the drawer after selecting
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout); //Ya you can also globalize this variable :P
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
 
     public void LogOut(MenuItem item) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-
         builder.setTitle("Déconnexion");
         builder.setMessage("Voulez-vous vraiment vous déconnecter ?");
+        builder.setPositiveButton("Déconnexion", (dialog, which) -> {
+            SharedPreferences pref = getApplicationContext().getSharedPreferences("login", MODE_PRIVATE);
+            SharedPreferences.Editor editor = pref.edit();
 
-        builder.setPositiveButton("Déconnexion", new DialogInterface.OnClickListener() {
+            editor.putInt("userid", 0);
+            editor.putString("username", "");
+            editor.putString("email", "");
+            editor.putString("profilpicture", "");
+            editor.putString("password", "");
 
-            public void onClick(DialogInterface dialog, int which) {
-                SharedPreferences pref = getApplicationContext().getSharedPreferences("login", MODE_PRIVATE);
-                SharedPreferences.Editor editor = pref.edit();
-
-                editor.putInt("userid", 0);
-                editor.putString("username", "");
-                editor.putString("email", ""); // Saving string
-                editor.putString("profilpicture","");
-                editor.putString("password","");
-
-                editor.apply();
-                Intent intent = new Intent(context, SigninActivity.class);
-                startActivity(intent);
-            }
+            editor.apply();
+            Intent intent = new Intent(context, SigninActivity.class);
+            startActivity(intent);
         });
-
-        builder.setNegativeButton("Non", new DialogInterface.OnClickListener() {
-
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-            }
-        });
-
+        builder.setNegativeButton("Non", (dialog, which) -> dialog.dismiss());
         AlertDialog alert = builder.create();
         alert.show();
     }
 
     @Override
     public void onFragmentInteraction(String title) {
-
         getSupportActionBar().setTitle(title);
     }
 

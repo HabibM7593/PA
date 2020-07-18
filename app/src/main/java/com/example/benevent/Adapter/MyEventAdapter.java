@@ -66,8 +66,8 @@ public class MyEventAdapter extends RecyclerView.Adapter<MyEventAdapter.MyViewHo
         Event event = listEvents.get(position);
 
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-        Date dateDebutEvent = event.getDateDeb();
-        Date dateFinEvent = event.getDateFin();
+        Date dateDebutEvent = event.getStartdate();
+        Date dateFinEvent = event.getEnddate();
         Date dateToday = new Date();
 
         holder.nameEventTV.setText(event.getName());

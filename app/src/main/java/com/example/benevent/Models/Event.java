@@ -6,8 +6,8 @@ public class Event {
     int idevent;
     String name;
     String description;
-    Date dateDeb;
-    Date dateFin;
+    Date startdate;
+    Date enddate;
     String location;
     int maxBenevole;
     int idassociation;
@@ -37,12 +37,12 @@ public class Event {
         return description;
     }
 
-    public Date getDateDeb() {
-        return dateDeb;
+    public Date getStartdate() {
+        return startdate;
     }
 
-    public Date getDateFin() {
-        return dateFin;
+    public Date getEnddate() {
+        return enddate;
     }
 
     public String getLocation() {

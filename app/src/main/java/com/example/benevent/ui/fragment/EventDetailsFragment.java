@@ -29,7 +29,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-import androidx.fragment.app.FragmentActivity;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -74,7 +73,7 @@ public class EventDetailsFragment extends Fragment {
         SharedPreferences pref = this.getActivity().getSharedPreferences("login", MODE_PRIVATE);
         iduser = pref.getInt("userid", 0);
 
-        if (selectedEvent.getDateDeb().after(new Date())){
+        if (selectedEvent.getStartdate().after(new Date())){
             buttoninscription.setVisibility(View.VISIBLE);
         }
         Participation participation = new Participation(selectedEvent.getIdev(),iduser);
@@ -171,7 +170,7 @@ public class EventDetailsFragment extends Fragment {
                             nameAsso = associations.get(0).getName();
                             assoTV = v.findViewById(R.id.asso_event_details);
                             assoTV.setText(nameAsso);
-                            if (selectedEvent.getDateDeb().before(new Date()) && selectedEvent.getDateFin().after(new Date()) && valideParticipation==1){
+                            if (selectedEvent.getStartdate().before(new Date()) && selectedEvent.getEnddate().after(new Date()) && valideParticipation==1){
                                 buttonQRcode.setVisibility(View.VISIBLE);
                             }
                         }
@@ -184,8 +183,8 @@ public class EventDetailsFragment extends Fragment {
         );
 
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-        Date dateDebEvent = selectedEvent.getDateDeb();
-        Date dateFinEvent = selectedEvent.getDateFin();
+        Date dateDebEvent = selectedEvent.getStartdate();
+        Date dateFinEvent = selectedEvent.getEnddate();
 
         nameEventTV = v.findViewById(R.id.name_event_details);
         dateDebEventTV = v.findViewById(R.id.dateD_event_details);

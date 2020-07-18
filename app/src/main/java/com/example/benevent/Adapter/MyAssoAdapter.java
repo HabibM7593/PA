@@ -28,38 +28,33 @@ public class MyAssoAdapter extends RecyclerView.Adapter<MyAssoAdapter.MyViewHold
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
-
         public View view;
         public TextView nameAssoTV;
         public TextView catAssoTV;
-
-        public MyViewHolder(View v) {
-            super(v);
-            view = v;
-            nameAssoTV = v.findViewById(R.id.name_asso);
-            catAssoTV = v.findViewById(R.id.category_asso);
+        public MyViewHolder(View view) {
+            super(view);
+            this.view = view;
+            nameAssoTV = view.findViewById(R.id.name_asso);
+            catAssoTV = view.findViewById(R.id.category_asso);
         }
     }
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext())
+        View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.element_cell_asso, parent, false);
-        MyViewHolder vh = new MyViewHolder(v);
-        ImageButton buttonDetailShow = v.findViewById(R.id.button_asso_view);
-        buttonDetailShow.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Association newAssociation = listAssos.get(vh.getAdapterPosition());
+        MyViewHolder viewHolder = new MyViewHolder(view);
+        ImageButton buttonDetailShow = view.findViewById(R.id.button_asso_view);
+        buttonDetailShow.setOnClickListener(loadingView -> {
+            Association newAssociation = listAssos.get(viewHolder.getAdapterPosition());
 
-                AssociationDetailsFragment adFragment = new AssociationDetailsFragment(newAssociation, category);
-                ((FragmentActivity) v.getContext()).getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.frame_asso, adFragment)
-                        .addToBackStack(null)
-                        .commit();
-            }
+            AssociationDetailsFragment adFragment = new AssociationDetailsFragment(newAssociation, category);
+            ((FragmentActivity) loadingView.getContext()).getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.frame_asso, adFragment)
+                    .addToBackStack(null)
+                    .commit();
         });
-        return vh;
+        return viewHolder;
     }
 
     @Override
