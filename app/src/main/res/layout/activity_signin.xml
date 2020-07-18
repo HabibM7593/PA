@@ -81,7 +81,7 @@
         android:textSize="12sp"
         android:textColor="@color/colorWhite"
 
-        android:onClick="Signin"
+        android:onClick="signIn"
 
         app:layout_constraintTop_toBottomOf="@+id/pass_ed"
         app:layout_constraintBottom_toBottomOf="parent"

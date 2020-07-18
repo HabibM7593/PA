@@ -13,15 +13,7 @@ public class Follow {
         return idassociation;
     }
 
-    public void setIdas(int idassociation) {
-        this.idassociation = idassociation;
-    }
-
     public int getIdu() {
         return iduser;
-    }
-
-    public void setIdu(int iduser) {
-        this.iduser = iduser;
     }
 }
