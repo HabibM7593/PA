@@ -15,8 +15,10 @@ import retrofit2.http.Path;
 public interface FollowApi {
     @POST("follow")
     Call<Void> followAsso(@Body Follow follow);
+
     @HTTP(method = "DELETE", path = "unfollow", hasBody = true)
     Call<Void> unfollowAsso(@Body Follow unfollow);
+
     @GET("follow/{idassociation}/{iduser}")
     Call<List<User>> checkFollow(@Path("idassociation") int idassociation,@Path("iduser") int iduser);
 }

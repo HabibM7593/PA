@@ -19,7 +19,7 @@ public interface UserApi {
     Call<List<User>> logUser(@Body Login log);
 
     @POST("signup/user")
-    Call<Void> signUser(@Body Signup sign);
+    Call<Void> signupUser(@Body Signup sign);
 
     @GET("user/{iduser}")
     Call<List<User>> getUser(@Path("iduser") int id);

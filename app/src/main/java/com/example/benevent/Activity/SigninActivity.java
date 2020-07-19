@@ -38,9 +38,7 @@ public class SigninActivity extends AppCompatActivity {
         setContentView(R.layout.activity_signin);
         signupButton = findViewById(R.id.no_account_button);
 
-        signupButton.setOnClickListener(view -> {
-            startActivity(new Intent(SigninActivity.this, SignupActivity.class));
-        });
+        signupButton.setOnClickListener(view -> startActivity(new Intent(SigninActivity.this, SignupActivity.class)));
 
         SharedPreferences sharedPreferences = this.getSharedPreferences("login", MODE_PRIVATE);
         String password = sharedPreferences.getString("password", "");
@@ -66,9 +64,9 @@ public class SigninActivity extends AppCompatActivity {
     }
 
     public void signIn(View view) {
-        EditText LoginEditText = findViewById(R.id.log_ed);
-        EditText passwordEditText = findViewById(R.id.pass_ed);
-        loginUser(new Login(LoginEditText.getText().toString(), md5(passwordEditText.getText().toString())));
+        EditText loginET = findViewById(R.id.log_ed);
+        EditText passwordET = findViewById(R.id.pass_ed);
+        loginUser(new Login(loginET.getText().toString(), md5(passwordET.getText().toString())));
     }
 
     private void loginUser(Login login) {
@@ -80,8 +78,8 @@ public class SigninActivity extends AppCompatActivity {
             public void onResponse(Call<List<User>> call, Response<List<User>> response) {
                 if (response.code() == 200) {
                     List<User> users = response.body();
-                    SharedPreferences pref = getApplicationContext().getSharedPreferences("login", MODE_PRIVATE);
-                    SharedPreferences.Editor sharedPrefEditor = pref.edit();
+                    SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("login", MODE_PRIVATE);
+                    SharedPreferences.Editor sharedPrefEditor = sharedPreferences.edit();
                     sharedPrefEditor.putInt("userid", users.get(0).getId());
                     sharedPrefEditor.putString("username", users.get(0).getFirstname() + " " + users.get(0).getName());
                     sharedPrefEditor.putString("email", users.get(0).getEmail());

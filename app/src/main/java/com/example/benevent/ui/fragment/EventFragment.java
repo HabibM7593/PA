@@ -20,6 +20,7 @@ import com.example.benevent.Adapter.MyEventAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -31,7 +32,6 @@ import static android.content.Context.MODE_PRIVATE;
 public class EventFragment extends Fragment {
 
     private RecyclerView recyclerView;
-    private LinearLayoutManager LLM;
     List<Event> listevent = new ArrayList<>();
     Retrofit retrofit = NetworkClient.getRetrofitClient();
 
@@ -43,21 +43,20 @@ public class EventFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_event, container, false);
+        View view = inflater.inflate(R.layout.fragment_event, container, false);
 
-        recyclerView = root.findViewById(R.id.recycler_event);
-        SharedPreferences pref = this.getActivity().getSharedPreferences("login", MODE_PRIVATE);
-        int iduser = pref.getInt("userid", 0);
+        recyclerView = view.findViewById(R.id.recycler_event);
+        SharedPreferences sharedPreferences = Objects.requireNonNull(this.getActivity()).getSharedPreferences("login", MODE_PRIVATE);
+        int iduser = sharedPreferences.getInt("userid", 0);
 
-        EventApi event = retrofit.create(EventApi.class);
-        Call callEvent = event.getEvents(iduser);
-
-        TextView labelEmpty = root.findViewById(R.id.no_event_label);
+        TextView labelEmpty = view.findViewById(R.id.no_event_label);
 
         final FragmentActivity Event = getActivity();
-        LLM = new LinearLayoutManager(Event);
-        recyclerView.setLayoutManager(LLM);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(Event);
+        recyclerView.setLayoutManager(linearLayoutManager);
 
+        EventApi eventApi = retrofit.create(EventApi.class);
+        Call callEvent = eventApi.getEvents(iduser);
         callEvent.enqueue(
                 new Callback<List<Event>>() {
 
@@ -87,7 +86,7 @@ public class EventFragment extends Fragment {
                     }
                 }
         );
-        return root;
+        return view;
 
     }
 }

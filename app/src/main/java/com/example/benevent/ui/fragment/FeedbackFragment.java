@@ -19,6 +19,7 @@ import com.example.benevent.R;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Objects;
 
 import androidx.fragment.app.Fragment;
 import retrofit2.Call;
@@ -41,52 +42,52 @@ public class FeedbackFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        SharedPreferences pref = this.getActivity().getSharedPreferences("login", MODE_PRIVATE);
+        SharedPreferences sharedPreferences = Objects.requireNonNull(this.getActivity()).getSharedPreferences("login", MODE_PRIVATE);
 
-        int iduser = pref.getInt("userid", 0);
+        int iduser = sharedPreferences.getInt("userid", 0);
         View view = inflater.inflate(R.layout.fragment_feedback, container, false);
-        final EditText titrefeedback = (EditText) view.findViewById(R.id.object_feedback);
-        final EditText contentfeedback = (EditText) view.findViewById(R.id.content_feedback);
-        final Switch switchbug = (Switch) view.findViewById(R.id.switch_bug);
-        final Button sendfeedback = (Button) view.findViewById(R.id.button_feedback);
+        final EditText titrefeedbackET = (EditText) view.findViewById(R.id.object_feedback);
+        final EditText contentfeedbackET = (EditText) view.findViewById(R.id.content_feedback);
         RatingBar ratingbar = (RatingBar) view.findViewById(R.id.rating);
         ratingbar.setStepSize(1);
-        switchbug.setOnClickListener(new View.OnClickListener() {
+        final Switch bugSwitch = (Switch) view.findViewById(R.id.switch_bug);
+        bugSwitch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (switchbug.isChecked()) {
+                if (bugSwitch.isChecked()) {
                     ratingbar.setVisibility(View.INVISIBLE);
-                    titrefeedback.setVisibility(View.VISIBLE);
+                    titrefeedbackET.setVisibility(View.VISIBLE);
                 } else {
                     ratingbar.setVisibility(View.VISIBLE);
-                    titrefeedback.setVisibility(View.INVISIBLE);
+                    titrefeedbackET.setVisibility(View.INVISIBLE);
                 }
             }
         });
 
-        sendfeedback.setOnClickListener(new View.OnClickListener() {
+        final Button sendfeedbackButton = (Button) view.findViewById(R.id.button_feedback);
+        sendfeedbackButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 Date date = new Date();
                 int type;
-                if (switchbug.isChecked()) {
+                if (bugSwitch.isChecked()) {
                     type = 1;
-                    if (titrefeedback.getText().toString().equals("") || contentfeedback.getText().toString().equals("")) {
-                        Toast.makeText(getActivity().getApplicationContext(),"Faites attention à ne pas envoyer de champs vides",Toast.LENGTH_SHORT).show();
+                    if (titrefeedbackET.getText().toString().equals("") || contentfeedbackET.getText().toString().equals("")) {
+                        Toast.makeText(Objects.requireNonNull(getActivity()).getApplicationContext(),"Faites attention à ne pas envoyer de champs vides",Toast.LENGTH_SHORT).show();
                     }else{
-                        SendFeedbackBug(new Feedback(iduser, titrefeedback.getText().toString(), contentfeedback.getText().toString(), formatter.format(date),  type, "ANDROID"));
-                        titrefeedback.setText("");
-                        contentfeedback.setText("");
+                        SendFeedbackBug(new Feedback(iduser, titrefeedbackET.getText().toString(), contentfeedbackET.getText().toString(), formatter.format(date),  type, "ANDROID"));
+                        titrefeedbackET.setText("");
+                        contentfeedbackET.setText("");
                     }
                 } else {
                     type = 2;
-                    if (contentfeedback.getText().toString().equals("")) {
-                        Toast.makeText(getActivity().getApplicationContext(),"Faites attention à ne pas envoyer de champs vides",Toast.LENGTH_SHORT).show();
+                    if (contentfeedbackET.getText().toString().equals("")) {
+                        Toast.makeText(Objects.requireNonNull(getActivity()).getApplicationContext(),"Faites attention à ne pas envoyer de champs vides",Toast.LENGTH_SHORT).show();
                     }else{
-                        SendFeedbackEval(new Feedback(iduser, contentfeedback.getText().toString(), formatter.format(date), (int) ratingbar.getRating(), type, "ANDROID"));
-                        titrefeedback.setText("");
-                        contentfeedback.setText("");
+                        SendFeedbackEval(new Feedback(iduser, contentfeedbackET.getText().toString(), formatter.format(date), (int) ratingbar.getRating(), type, "ANDROID"));
+                        titrefeedbackET.setText("");
+                        contentfeedbackET.setText("");
                     }
                 }
             }
@@ -106,17 +107,17 @@ public class FeedbackFragment extends Fragment {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
                 if (response.code() == 200) {
-                    Toast.makeText(getActivity().getApplicationContext(), "Votre retour a bien ete pris en compte", Toast.LENGTH_LONG).show();
+                    Toast.makeText(Objects.requireNonNull(getActivity()).getApplicationContext(), "Votre retour a bien ete pris en compte", Toast.LENGTH_LONG).show();
                 }
                 if (response.code() == 500) {
-                    Toast.makeText(getActivity().getApplicationContext(), "Veuillez reessayer plus tard", Toast.LENGTH_LONG).show();
+                    Toast.makeText(Objects.requireNonNull(getActivity()).getApplicationContext(), "Veuillez reessayer plus tard", Toast.LENGTH_LONG).show();
                 }
             }
 
             @Override
             public void onFailure(Call<String> call, Throwable t) {
                 Log.e("test", "onFailure: " + t);
-                Toast.makeText(getActivity().getApplicationContext(), t.toString(), Toast.LENGTH_LONG).show();
+                Toast.makeText(Objects.requireNonNull(getActivity()).getApplicationContext(), t.toString(), Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -131,17 +132,17 @@ public class FeedbackFragment extends Fragment {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
                 if (response.code() == 200) {
-                    Toast.makeText(getActivity().getApplicationContext(), "Votre retour a bien ete pris en compte", Toast.LENGTH_LONG).show();
+                    Toast.makeText(Objects.requireNonNull(getActivity()).getApplicationContext(), "Votre retour a bien ete pris en compte", Toast.LENGTH_LONG).show();
                 }
                 if (response.code() == 500) {
-                    Toast.makeText(getActivity().getApplicationContext(), "Veuillez reessayer plus tard", Toast.LENGTH_LONG).show();
+                    Toast.makeText(Objects.requireNonNull(getActivity()).getApplicationContext(), "Veuillez reessayer plus tard", Toast.LENGTH_LONG).show();
                 }
             }
 
             @Override
             public void onFailure(Call<String> call, Throwable t) {
                 Log.e("test", "onFailure: " + t);
-                Toast.makeText(getActivity().getApplicationContext(), t.toString(), Toast.LENGTH_LONG).show();
+                Toast.makeText(Objects.requireNonNull(getActivity()).getApplicationContext(), t.toString(), Toast.LENGTH_LONG).show();
             }
         });
     }

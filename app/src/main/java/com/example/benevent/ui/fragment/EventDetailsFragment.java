@@ -28,6 +28,7 @@ import com.google.zxing.integration.android.IntentResult;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -39,7 +40,7 @@ import static android.content.Context.MODE_PRIVATE;
 public class EventDetailsFragment extends Fragment {
 
     Event selectedEvent;
-    String nameAsso;
+    String nameAssociation;
     int iduser;
 
     public TextView nameEventTV;
@@ -48,7 +49,7 @@ public class EventDetailsFragment extends Fragment {
     public TextView locationEventTV;
     public TextView descEventTV;
     public TextView maxBEventTV;
-    public TextView assoTV;
+    public TextView assoNameTV;
     int valideParticipation = 0;
     int numberParticipation =0 ;
 
@@ -67,15 +68,15 @@ public class EventDetailsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View v = inflater.inflate(R.layout.fragment_event_details, container, false);
+        View view = inflater.inflate(R.layout.fragment_event_details, container, false);
 
-        Button buttonQRcode = v.findViewById(R.id.button_scan_qrcode);
-        Button buttoninscription = v.findViewById(R.id.button_inscription_event);
-        SharedPreferences pref = this.getActivity().getSharedPreferences("login", MODE_PRIVATE);
-        iduser = pref.getInt("userid", 0);
+        Button QRcodeButton = view.findViewById(R.id.button_scan_qrcode);
+        Button inscriptionButton = view.findViewById(R.id.button_inscription_event);
+        SharedPreferences sharedPreferences = Objects.requireNonNull(this.getActivity()).getSharedPreferences("login", MODE_PRIVATE);
+        iduser = sharedPreferences.getInt("userid", 0);
 
         if (selectedEvent.getStartdate().after(new Date())){
-            buttoninscription.setVisibility(View.VISIBLE);
+            inscriptionButton.setVisibility(View.VISIBLE);
         }
         Participation participation = new Participation(selectedEvent.getIdev(),iduser);
         ParticipateApi participateApi = retrofit.create(ParticipateApi.class);
@@ -86,8 +87,8 @@ public class EventDetailsFragment extends Fragment {
                 if(response.code()==200){
                     List<Participation> participation =response.body();
                     if (participation.size()==1){
-                        buttoninscription.setText("Se Désinscrire");
-                        buttoninscription.setBackgroundResource(R.drawable.round_corner_red);
+                        inscriptionButton.setText("Se Désinscrire");
+                        inscriptionButton.setBackgroundResource(R.drawable.round_corner_red);
                         if (participation.get(0).isStatus()==1 && participation.get(0).getEnddate()==null){
                             valideParticipation=1;
                         }else{
@@ -101,7 +102,7 @@ public class EventDetailsFragment extends Fragment {
 
             @Override
             public void onFailure(Call<List<Participation>> call, Throwable t) {
-                Toast.makeText(getActivity().getApplicationContext(), "Echec de recuperation du status de participation "+t, Toast.LENGTH_LONG).show();
+                Toast.makeText(Objects.requireNonNull(getActivity()).getApplicationContext(), "Echec de recuperation du status de participation "+t, Toast.LENGTH_LONG).show();
             }
         });
 
@@ -112,11 +113,11 @@ public class EventDetailsFragment extends Fragment {
                 if (response.code()==200){
                     numberParticipation =  response.body().size();
                     if(selectedEvent.getMaxbenevole()-numberParticipation <1 && valideParticipation==0){
-                        buttoninscription.setVisibility(View.INVISIBLE);
-                        Toast.makeText(getActivity().getApplicationContext(), "Cet événement a deja atteint le nombre de participant limite", Toast.LENGTH_LONG).show();
+                        inscriptionButton.setVisibility(View.INVISIBLE);
+                        Toast.makeText(Objects.requireNonNull(getActivity()).getApplicationContext(), "Cet événement a deja atteint le nombre de participant limite", Toast.LENGTH_LONG).show();
                     }
                 }else{
-                    Toast.makeText(getActivity().getApplicationContext(), "Impossible de récuperer le nombre de participant", Toast.LENGTH_LONG).show();
+                    Toast.makeText(Objects.requireNonNull(getActivity()).getApplicationContext(), "Impossible de récuperer le nombre de participant", Toast.LENGTH_LONG).show();
                 }
             }
             @Override
@@ -124,47 +125,47 @@ public class EventDetailsFragment extends Fragment {
             }
         });
 
-        buttoninscription.setOnClickListener(new View.OnClickListener() {
+        inscriptionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Participation participation;
                 ParticipateApi participateApi = retrofit.create(ParticipateApi.class);
-                if (buttoninscription.getText().equals("S'inscrire")){
+                if (inscriptionButton.getText().equals("S'inscrire")){
                     participation = new Participation(selectedEvent.getIdev(),iduser,0,1);
-                    buttoninscription.setText("Se Désinscrire");
-                    buttoninscription.setBackgroundResource(R.drawable.round_corner_red);
+                    inscriptionButton.setText("Se Désinscrire");
+                    inscriptionButton.setBackgroundResource(R.drawable.round_corner_red);
                     Call call = participateApi.Participer(participation);
                     call.enqueue(new Callback<String>(){
                         @Override
                         public void onResponse(Call<String> call, Response<String> response) {
-                            Toast.makeText(getActivity().getApplicationContext(), "Vous venez de vous inscrire a cet evenement", Toast.LENGTH_LONG).show();
+                            Toast.makeText(Objects.requireNonNull(getActivity()).getApplicationContext(), "Vous venez de vous inscrire a cet evenement", Toast.LENGTH_LONG).show();
                         }
                         @Override
                         public void onFailure(Call<String> call, Throwable t) {
-                            Toast.makeText(getActivity().getApplicationContext(), "Echec", Toast.LENGTH_LONG).show();
+                            Toast.makeText(Objects.requireNonNull(getActivity()).getApplicationContext(), "Echec", Toast.LENGTH_LONG).show();
                         }
                     });
                 }else{
                     participation = new Participation(selectedEvent.getIdev(),iduser);
-                    buttoninscription.setText("S'inscrire");
-                    buttoninscription.setBackgroundResource(R.drawable.round_corner_blue);
+                    inscriptionButton.setText("S'inscrire");
+                    inscriptionButton.setBackgroundResource(R.drawable.round_corner_blue);
                     Call call = participateApi.RefuseParticipation(participation.getIdev(),participation.getIdu());
                     call.enqueue(new Callback<String>(){
                         @Override
                         public void onResponse(Call<String> call, Response<String> response) {
-                            Toast.makeText(getActivity().getApplicationContext(), "Vous venez de vous desinscrire a cet evenement", Toast.LENGTH_LONG).show();
+                            Toast.makeText(Objects.requireNonNull(getActivity()).getApplicationContext(), "Vous venez de vous desinscrire a cet evenement", Toast.LENGTH_LONG).show();
                         }
 
                         @Override
                         public void onFailure(Call<String> call, Throwable t) {
-                            Toast.makeText(getActivity().getApplicationContext(), "Echec", Toast.LENGTH_LONG).show();
+                            Toast.makeText(Objects.requireNonNull(getActivity()).getApplicationContext(), "Echec", Toast.LENGTH_LONG).show();
                         }
                     });
                 }
             }
         });
 
-        buttonQRcode.setOnClickListener(new View.OnClickListener() {
+        QRcodeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 IntentIntegrator integrator = IntentIntegrator.forSupportFragment(EventDetailsFragment.this);
@@ -179,7 +180,6 @@ public class EventDetailsFragment extends Fragment {
 
         AssociationApi association = retrofit.create(AssociationApi.class);
         Call callAsso = association.getAsso(selectedEvent.getIdas());
-
         callAsso.enqueue(
                 new Callback<List<Association>>() {
 
@@ -187,11 +187,11 @@ public class EventDetailsFragment extends Fragment {
                     public void onResponse(Call<List<Association>> call, Response<List<Association>> response) {
                         if(response.code()==200) {
                             List<Association> associations = response.body();
-                            nameAsso = associations.get(0).getName();
-                            assoTV = v.findViewById(R.id.asso_event_details);
-                            assoTV.setText(nameAsso);
+                            nameAssociation = associations.get(0).getName();
+                            assoNameTV = view.findViewById(R.id.asso_event_details);
+                            assoNameTV.setText(nameAssociation);
                             if (selectedEvent.getStartdate().before(new Date()) && selectedEvent.getEnddate().after(new Date()) && valideParticipation==1){
-                                buttonQRcode.setVisibility(View.VISIBLE);
+                                QRcodeButton.setVisibility(View.VISIBLE);
                             }
                         }
                     }
@@ -206,12 +206,12 @@ public class EventDetailsFragment extends Fragment {
         Date dateDebEvent = selectedEvent.getStartdate();
         Date dateFinEvent = selectedEvent.getEnddate();
 
-        nameEventTV = v.findViewById(R.id.name_event_details);
-        dateDebEventTV = v.findViewById(R.id.dateD_event_details);
-        dateFinEventTV = v.findViewById(R.id.dateF_event_details);
-        locationEventTV = v.findViewById(R.id.location_event_details);
-        descEventTV = v.findViewById(R.id.desc_event_details);
-        maxBEventTV = v.findViewById(R.id.maxB_event_details);
+        nameEventTV = view.findViewById(R.id.name_event_details);
+        dateDebEventTV = view.findViewById(R.id.dateD_event_details);
+        dateFinEventTV = view.findViewById(R.id.dateF_event_details);
+        locationEventTV = view.findViewById(R.id.location_event_details);
+        descEventTV = view.findViewById(R.id.desc_event_details);
+        maxBEventTV = view.findViewById(R.id.maxB_event_details);
 
         nameEventTV.setText(selectedEvent.getName());
         dateDebEventTV.setText("du : " + formatter.format(dateDebEvent));
@@ -220,7 +220,7 @@ public class EventDetailsFragment extends Fragment {
         descEventTV.setText(selectedEvent.getDescription());
         maxBEventTV.setText(String.valueOf(selectedEvent.getMaxbenevole()));
 
-        return v;
+        return view;
     }
 
     @Override
@@ -241,14 +241,13 @@ public class EventDetailsFragment extends Fragment {
                 ParticipateApi participateApi = retrofit.create(ParticipateApi.class);
 
                 Call callAsso = participateApi.UpdateParticipation(participation);
-
                 callAsso.enqueue(
                         new Callback<List<Association>>() {
 
                             @Override
                             public void onResponse(Call<List<Association>> call, Response<List<Association>> response) {
                                 if(response.code()==200) {
-                                    Toast.makeText(getActivity().getApplicationContext(), "Votre scan a bien été pris en compte ", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(Objects.requireNonNull(getActivity()).getApplicationContext(), "Votre scan a bien été pris en compte ", Toast.LENGTH_LONG).show();
                                 }
                             }
 

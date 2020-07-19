@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -13,7 +14,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,15 +24,12 @@ import com.example.benevent.API.NetworkClient;
 import com.example.benevent.API.PostApi;
 import com.example.benevent.API.UserApi;
 import com.example.benevent.Adapter.MyFeedAdapter;
-import com.example.benevent.Models.Association;
-import com.example.benevent.Models.Category;
 import com.example.benevent.Models.Post;
 import com.example.benevent.Models.User;
 import com.example.benevent.R;
 
 import java.util.List;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
+import java.util.Objects;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -41,7 +38,6 @@ public class FeedFragment extends Fragment {
     private FeedFragment.OnFragmentInteractionListener mListener;
     Retrofit retrofit = NetworkClient.getRetrofitClient();
     private RecyclerView recyclerView;
-    private LinearLayoutManager LLM;
 
     public FeedFragment() {
     }
@@ -55,10 +51,10 @@ public class FeedFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_feed, container, false);
-        // Inflate the layout for this fragment
-        SharedPreferences pref = this.getActivity().getSharedPreferences("login", MODE_PRIVATE);
-        Button addpost = view.findViewById(R.id.button_create_post);
-        addpost.setOnClickListener(new View.OnClickListener() {
+        SharedPreferences sharedPreferences = Objects.requireNonNull(this.getActivity()).getSharedPreferences("login", MODE_PRIVATE);
+        int iduser = sharedPreferences.getInt("userid", 0);
+        Button addpostButton = view.findViewById(R.id.button_create_post);
+        addpostButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 CreatePostFragment createPostFragment = new CreatePostFragment();
@@ -69,16 +65,15 @@ public class FeedFragment extends Fragment {
             }
         });
         recyclerView = view.findViewById(R.id.recycler_feed);
-        int iduser = pref.getInt("userid", 0);
 
-        PostApi postApi = retrofit.create(PostApi.class);
-        Call call = postApi.getPosts(iduser);
         TextView labelEmpty = view.findViewById(R.id.no_post_label);
 
         final FragmentActivity Post = getActivity();
-        LLM = new LinearLayoutManager(Post);
-        recyclerView.setLayoutManager(LLM);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(Post);
+        recyclerView.setLayoutManager(linearLayoutManager);
 
+        PostApi postApi = retrofit.create(PostApi.class);
+        Call call = postApi.getPosts(iduser);
         call.enqueue(new Callback<List<Post>>() {
             @Override
             public void onResponse(Call<List<Post>> call, Response<List<Post>> response) {
@@ -116,8 +111,6 @@ public class FeedFragment extends Fragment {
                     }
                 });
 
-
-
             }
 
             @Override
@@ -126,12 +119,11 @@ public class FeedFragment extends Fragment {
             }
         });
 
-
         return view;
     }
 
     @Override
-    public void onAttach(Context context) {
+    public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         if (context instanceof FeedFragment.OnFragmentInteractionListener) {
             mListener = (FeedFragment.OnFragmentInteractionListener) context;

@@ -32,33 +32,33 @@ public class MyEventAdapter extends RecyclerView.Adapter<MyEventAdapter.MyViewHo
         public TextView nameEventTV;
         public TextView dateEventTV;
 
-        public MyViewHolder(View v) {
-            super(v);
-            view = v;
-            nameEventTV = v.findViewById(R.id.name_event);
-            dateEventTV = v.findViewById(R.id.date_event);
+        public MyViewHolder(View view) {
+            super(view);
+            this.view = view;
+            nameEventTV = view.findViewById(R.id.name_event);
+            dateEventTV = view.findViewById(R.id.date_event);
         }
     }
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext())
+        View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.element_cell_event, parent, false);
-        MyViewHolder vh = new MyViewHolder(v);
-        ImageButton buttonDetailShow = v.findViewById(R.id.button_event_view);
-        buttonDetailShow.setOnClickListener(new View.OnClickListener() {
+        MyViewHolder myViewHolder = new MyViewHolder(view);
+        ImageButton detailShowButton = view.findViewById(R.id.button_event_view);
+        detailShowButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                Event newEvent = listEvents.get(vh.getAdapterPosition()) ;
+            public void onClick(View view) {
+                Event newEvent = listEvents.get(myViewHolder.getAdapterPosition()) ;
 
-                EventDetailsFragment edFragment = new EventDetailsFragment(newEvent);
-                ((FragmentActivity) v.getContext()).getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.frame_event, edFragment)
+                EventDetailsFragment eventDetailsFragment = new EventDetailsFragment(newEvent);
+                ((FragmentActivity) view.getContext()).getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.frame_event, eventDetailsFragment)
                         .addToBackStack(null)
                         .commit();
             }
         });
-        return vh;
+        return myViewHolder;
     }
 
     @Override

@@ -42,6 +42,7 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import static android.app.Activity.RESULT_OK;
 import static android.content.Context.MODE_PRIVATE;
@@ -66,15 +67,15 @@ public class ProfilFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_profil, container, false);
+        View view = inflater.inflate(R.layout.fragment_profil, container, false);
         UserApi userApi = retrofit.create(UserApi.class);
-        Button modifbtn = v.findViewById(R.id.button_submit);
-        Button supprbtn = v.findViewById(R.id.button_delete);
-        Button uploadimg = v.findViewById(R.id.button_upload);
-        SharedPreferences pref = this.getActivity().getSharedPreferences("login", MODE_PRIVATE);
+        Button modifButton = view.findViewById(R.id.button_submit);
+        Button supprButton = view.findViewById(R.id.button_delete);
+        Button uploadimgButton = view.findViewById(R.id.button_upload);
+        SharedPreferences pref = Objects.requireNonNull(this.getActivity()).getSharedPreferences("login", MODE_PRIVATE);
         int iduser = pref.getInt("userid", 0);
 
-        uploadimg.setOnClickListener(new View.OnClickListener() {
+        uploadimgButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent galleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
@@ -88,10 +89,10 @@ public class ProfilFragment extends Fragment {
             public void onResponse(Call<List<User>> call, Response<List<User>> response) {
                 if(response.code()==200){
                     currentUser = response.body().get(0);
-                    nameprofilTV = v.findViewById(R.id.profil_name);
-                    pictureprofilTV = v.findViewById(R.id.profil_picture);
-                    firstnameprofilTV = v.findViewById(R.id.profil_firstname);
-                    phoneprofilTV = v.findViewById(R.id.profil_phone);
+                    nameprofilTV = view.findViewById(R.id.profil_name);
+                    pictureprofilTV = view.findViewById(R.id.profil_picture);
+                    firstnameprofilTV = view.findViewById(R.id.profil_firstname);
+                    phoneprofilTV = view.findViewById(R.id.profil_phone);
 
                     nameprofilTV.setText(currentUser.getName());
                     firstnameprofilTV.setText(currentUser.getFirstname());
@@ -103,7 +104,7 @@ public class ProfilFragment extends Fragment {
                         URL url = new URL(currentUser.getProfilpicture());
                         Bitmap bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
                         pictureprofilTV.setImageBitmap(bmp);
-                    } catch (IOException | NetworkOnMainThreadException e) {
+                    } catch (IOException | NetworkOnMainThreadException ignored) {
                     }
                 }
             }
@@ -114,7 +115,7 @@ public class ProfilFragment extends Fragment {
             }
         });
 
-        modifbtn.setOnClickListener(new View.OnClickListener() {
+        modifButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -122,7 +123,7 @@ public class ProfilFragment extends Fragment {
                 call.enqueue(new Callback<String>() {
                     @Override
                     public void onResponse(Call<String> call, Response<String> response) {
-                        Toast.makeText(getActivity().getApplicationContext(), "Vos modifications ont bien ete pris en compte", Toast.LENGTH_LONG).show();
+                        Toast.makeText(Objects.requireNonNull(getActivity()).getApplicationContext(), "Vos modifications ont bien ete pris en compte", Toast.LENGTH_LONG).show();
                         SharedPreferences pref = getActivity().getSharedPreferences("login", MODE_PRIVATE);
                         SharedPreferences.Editor editor = pref.edit();
                         editor.putString("username", currentUser.getFirstname() + " " + currentUser.getName());
@@ -133,12 +134,13 @@ public class ProfilFragment extends Fragment {
 
                     @Override
                     public void onFailure(Call<String> call, Throwable t) {
-                        Toast.makeText(getActivity().getApplicationContext(), "Erreur", Toast.LENGTH_LONG).show();
+                        Toast.makeText(Objects.requireNonNull(getActivity()).getApplicationContext(), "Erreur", Toast.LENGTH_LONG).show();
                     }
                 });
             }
         });
-        supprbtn.setOnClickListener(new View.OnClickListener() {
+
+        supprButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -154,7 +156,7 @@ public class ProfilFragment extends Fragment {
                         call.enqueue(new Callback<String>() {
                             @Override
                             public void onResponse(Call<String> call, Response<String> response) {
-                                Toast.makeText(getActivity().getApplicationContext(), "Votre compte vient d'etre supprimé ", Toast.LENGTH_LONG).show();
+                                Toast.makeText(Objects.requireNonNull(getActivity()).getApplicationContext(), "Votre compte vient d'etre supprimé ", Toast.LENGTH_LONG).show();
                                 Intent intent = new Intent(getActivity().getApplicationContext(), SigninActivity.class);
                                 startActivity(intent);
                             }
@@ -180,7 +182,7 @@ public class ProfilFragment extends Fragment {
             }
         });
 
-        return v;
+        return view;
     }
 
     @Override
@@ -215,18 +217,18 @@ public class ProfilFragment extends Fragment {
                 }
 
             } else {
-                Toast.makeText(getActivity().getApplicationContext(), "You haven't picked Image",Toast.LENGTH_LONG).show();
+                Toast.makeText(Objects.requireNonNull(getActivity()).getApplicationContext(), "You haven't picked Image",Toast.LENGTH_LONG).show();
             }
         } catch (Exception e)
         {
-            Toast.makeText(getActivity().getApplicationContext(), "Something went wrong", Toast.LENGTH_LONG) .show();
+            Toast.makeText(Objects.requireNonNull(getActivity()).getApplicationContext(), "Something went wrong", Toast.LENGTH_LONG) .show();
         }
     }
 
     public String getPath(Uri uri) {
         String[] projection = { MediaStore.Images.Media.BUCKET_DISPLAY_NAME,
                 MediaStore.Images.Media.DATA };
-        Cursor cursor = getActivity().getContentResolver().query(uri,
+        Cursor cursor = Objects.requireNonNull(getActivity()).getContentResolver().query(uri,
                 projection, null, null, null);
         int column_index = cursor
                 .getColumnIndexOrThrow(MediaStore.Images.Media.DATA);

@@ -27,8 +27,7 @@ import retrofit2.Retrofit;
 public class CategoryFragment extends Fragment {
 
     private RecyclerView recyclerView;
-    private LinearLayoutManager LLM;
-    List<Category> listcategory = new ArrayList<>();
+    List<Category> listCategory = new ArrayList<>();
     Retrofit retrofit = NetworkClient.getRetrofitClient();
 
     @Override
@@ -39,25 +38,24 @@ public class CategoryFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_category, container, false);
+        View view = inflater.inflate(R.layout.fragment_category, container, false);
 
-        recyclerView = root.findViewById(R.id.recycler_category);
-
-        CategoryApi event = retrofit.create(CategoryApi.class);
-        Call callCat = event.getCat();
+        recyclerView = view.findViewById(R.id.recycler_category);
 
         final FragmentActivity Event = getActivity();
-        LLM = new LinearLayoutManager(Event);
-        recyclerView.setLayoutManager(LLM);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(Event);
+        recyclerView.setLayoutManager(linearLayoutManager);
+        CategoryApi categoryApi = retrofit.create(CategoryApi.class);
+        Call callCat = categoryApi.getCat();
         callCat.enqueue(
                 new Callback<List<Category>>() {
 
                     @Override
                     public void onResponse(Call<List<Category>> call, Response<List<Category>> response) {
-                        if(response.code()==200) {
+                        if (response.code() == 200) {
                             List<Category> category = response.body();
-                            listcategory.addAll(category);
-                            MyCategoryAdapter adapter = new MyCategoryAdapter(listcategory);
+                            listCategory.addAll(category);
+                            MyCategoryAdapter adapter = new MyCategoryAdapter(listCategory);
                             recyclerView.setAdapter(adapter);
                         }
                     }
@@ -67,7 +65,7 @@ public class CategoryFragment extends Fragment {
                     }
                 }
         );
-        return root;
+        return view;
 
     }
 }

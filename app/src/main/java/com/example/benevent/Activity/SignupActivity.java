@@ -13,7 +13,6 @@ import android.os.Bundle;
 import android.os.NetworkOnMainThreadException;
 import android.os.StrictMode;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -46,16 +45,15 @@ import retrofit2.Retrofit;
 
 public class SignupActivity extends AppCompatActivity {
 
-    public Button chooseImageButton;
-    public ImageView userImageIV;
-    public Signup signup = new Signup();
+    private ImageView userImageIV;
+    private Signup signup = new Signup();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
 
-        chooseImageButton = findViewById(R.id.upload_button_signup);
+        Button chooseImageButton = findViewById(R.id.upload_button_signup);
         userImageIV = findViewById(R.id.profil_picture_signup);
 
         chooseImageButton.setOnClickListener(view -> {
@@ -99,7 +97,7 @@ public class SignupActivity extends AppCompatActivity {
                     signup.setPhone(phone);
                     signup.setEmail(email);
                     signup.setPassword(md5(password));
-                    signUser(signup);
+                    signupUser(signup);
                 } catch (IllegalStateException | ParseException e) {
                     Toast.makeText(getApplicationContext(), "la date de naissance doit etre sous le format JJ/MM/AAAA", Toast.LENGTH_LONG).show();
                 }
@@ -113,14 +111,13 @@ public class SignupActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void signUser(Signup signup) {
+    private void signupUser(Signup signup) {
         Retrofit retrofit = NetworkClient.getRetrofitClient();
         UserApi userApi = retrofit.create(UserApi.class);
-        Call call = userApi.signUser(signup);
-
-        call.enqueue(new Callback<String>() {
+        Call call = userApi.signupUser(signup);
+        call.enqueue(new Callback() {
             @Override
-            public void onResponse(Call<String> call, Response<String> response) {
+            public void onResponse(Call call, Response response) {
                 if (response.code() == 201) {
                     Toast.makeText(getApplicationContext(), "L'utilisateur a bien été enregistré !", Toast.LENGTH_LONG).show();
                     Intent intent = new Intent(SignupActivity.this, SigninActivity.class);
@@ -130,7 +127,7 @@ public class SignupActivity extends AppCompatActivity {
                 }
             }
             @Override
-            public void onFailure(Call<String> call, Throwable t) {
+            public void onFailure(Call call, Throwable t) {
                 Toast.makeText(getApplicationContext(), t.toString(), Toast.LENGTH_LONG).show();
             }
         });

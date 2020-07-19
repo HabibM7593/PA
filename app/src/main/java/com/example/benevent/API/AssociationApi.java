@@ -15,6 +15,4 @@ public interface AssociationApi {
     @GET("associations")
     Call<List<Association>> getAllAssos();
 
-    @GET("associations/category/{idcategory}")
-    Call<List<Association>> getAllAssosCat(@Path("idcategory") int id);
 }

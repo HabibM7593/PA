@@ -48,9 +48,9 @@ public class MyAssoAdapter extends RecyclerView.Adapter<MyAssoAdapter.MyViewHold
         buttonDetailShow.setOnClickListener(loadingView -> {
             Association newAssociation = listAssos.get(viewHolder.getAdapterPosition());
 
-            AssociationDetailsFragment adFragment = new AssociationDetailsFragment(newAssociation, category);
+            AssociationDetailsFragment associationDetailsFragment = new AssociationDetailsFragment(newAssociation, category);
             ((FragmentActivity) loadingView.getContext()).getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.frame_asso, adFragment)
+                    .replace(R.id.frame_asso, associationDetailsFragment)
                     .addToBackStack(null)
                     .commit();
         });

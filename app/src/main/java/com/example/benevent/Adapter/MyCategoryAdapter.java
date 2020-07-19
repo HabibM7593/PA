@@ -29,23 +29,23 @@ public class MyCategoryAdapter extends RecyclerView.Adapter<MyCategoryAdapter.My
         public View view;
         public TextView nameCategoryTV;
 
-        public MyViewHolder(View v) {
-            super(v);
-            view = v;
-            nameCategoryTV = v.findViewById(R.id.name_category);
+        public MyViewHolder(View view) {
+            super(view);
+            this.view = view;
+            nameCategoryTV = view.findViewById(R.id.name_category);
         }
     }
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext())
+        View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.element_cell_category, parent, false);
-        MyViewHolder vh = new MyViewHolder(v);
-        ImageButton buttonDetailShow = v.findViewById(R.id.button_category_view);
-        buttonDetailShow.setOnClickListener(new View.OnClickListener() {
+        MyViewHolder myViewHolder = new MyViewHolder(view);
+        ImageButton detailShowButton = view.findViewById(R.id.button_category_view);
+        detailShowButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Category category = listCategory.get(vh.getAdapterPosition());
+                Category category = listCategory.get(myViewHolder.getAdapterPosition());
                 AssociationFragment aFragment = new AssociationFragment(category.getName());
 
                 ((FragmentActivity) v.getContext()).getSupportFragmentManager().beginTransaction()
@@ -54,7 +54,7 @@ public class MyCategoryAdapter extends RecyclerView.Adapter<MyCategoryAdapter.My
                         .commit();
             }
         });
-        return vh;
+        return myViewHolder;
     }
 
     @Override

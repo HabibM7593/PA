@@ -17,10 +17,6 @@ public class Signup {
         this.phone = phone;
     }
 
-    public String getProfilpicture() {
-        return profilpicture;
-    }
-
     public void setProfilpicture(String profilpicture) {
         this.profilpicture = profilpicture;
     }

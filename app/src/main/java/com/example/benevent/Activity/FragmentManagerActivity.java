@@ -2,7 +2,6 @@ package com.example.benevent.Activity;
 
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -10,7 +9,7 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.NetworkOnMainThreadException;
 import android.os.StrictMode;
-import android.util.Log;
+
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
@@ -38,7 +37,6 @@ import java.net.URL;
 
 public class FragmentManagerActivity extends AppCompatActivity implements FeedFragment.OnFragmentInteractionListener, NavigationView.OnNavigationItemSelectedListener {
     Context context = this;
-    int countFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,9 +60,8 @@ public class FragmentManagerActivity extends AppCompatActivity implements FeedFr
 
     @Override
     public void onBackPressed() {
-        countFragment = getSupportFragmentManager().getBackStackEntryCount();
+        int countFragment = getSupportFragmentManager().getBackStackEntryCount();
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        Log.d("TAG", "onBackPressed: "+countFragment);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -123,27 +120,22 @@ public class FragmentManagerActivity extends AppCompatActivity implements FeedFr
 
         switch (id) {
             case R.id.nav_feed :
-                countFragment = 0;
                 fragment = new FeedFragment();
                 setTitle("Feed");
                 break;
             case R.id.nav_asso :
-                countFragment = 0;
                 fragment = new CategoryFragment();
                 setTitle("Associations");
                 break;
             case R.id.nav_feedback :
-                countFragment = 0;
                 fragment = new FeedbackFragment();
                 setTitle("Feedback");
                 break;
             case R.id.nav_event :
-                countFragment = 0;
                 fragment = new EventFragment();
                 setTitle("Event");
                 break;
             case R.id.nav_profil :
-                countFragment = 0;
                 fragment = new ProfilFragment();
                 setTitle("Mon Profil");
                 break;
@@ -164,16 +156,16 @@ public class FragmentManagerActivity extends AppCompatActivity implements FeedFr
         builder.setTitle("Déconnexion");
         builder.setMessage("Voulez-vous vraiment vous déconnecter ?");
         builder.setPositiveButton("Déconnexion", (dialog, which) -> {
-            SharedPreferences pref = getApplicationContext().getSharedPreferences("login", MODE_PRIVATE);
-            SharedPreferences.Editor editor = pref.edit();
+            SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("login", MODE_PRIVATE);
+            SharedPreferences.Editor sharedPrefEditor = sharedPreferences.edit();
 
-            editor.putInt("userid", 0);
-            editor.putString("username", "");
-            editor.putString("email", "");
-            editor.putString("profilpicture", "");
-            editor.putString("password", "");
+            sharedPrefEditor.putInt("userid", 0);
+            sharedPrefEditor.putString("username", "");
+            sharedPrefEditor.putString("email", "");
+            sharedPrefEditor.putString("profilpicture", "");
+            sharedPrefEditor.putString("password", "");
 
-            editor.apply();
+            sharedPrefEditor.apply();
             Intent intent = new Intent(context, SigninActivity.class);
             startActivity(intent);
         });

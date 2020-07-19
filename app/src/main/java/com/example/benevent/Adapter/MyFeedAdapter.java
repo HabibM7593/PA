@@ -4,7 +4,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.NetworkOnMainThreadException;
 import android.os.StrictMode;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,23 +36,23 @@ public class MyFeedAdapter extends RecyclerView.Adapter<MyFeedAdapter.MyViewHold
         public TextView contentPostTV;
         public ImageView imageView;
 
-        public MyViewHolder(View v) {
-            super(v);
-            view = v;
-            namePostTV = v.findViewById(R.id.name_feed);
-            contentPostTV = v.findViewById(R.id.content_feed);
-            imageView = v.findViewById(R.id.image_feed);
+        public MyViewHolder(View view) {
+            super(view);
+            this.view = view;
+            namePostTV = view.findViewById(R.id.name_feed);
+            contentPostTV = view.findViewById(R.id.content_feed);
+            imageView = view.findViewById(R.id.image_feed);
         }
     }
 
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext())
+        View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.element_cell_feed, parent, false);
-        MyFeedAdapter.MyViewHolder vh = new MyFeedAdapter.MyViewHolder(v);
 
-        return vh;
+        MyViewHolder myViewHolder = new MyViewHolder(view);
+        return myViewHolder;
     }
 
     @Override
@@ -71,7 +70,7 @@ public class MyFeedAdapter extends RecyclerView.Adapter<MyFeedAdapter.MyViewHold
                 URL url = new URL(post.getPictureprofiluser());
                 Bitmap bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
                 holder.imageView.setImageBitmap(bmp);
-            } catch (IOException | NetworkOnMainThreadException e) {
+            } catch (IOException | NetworkOnMainThreadException ignored) {
             }
         } else {
             if (post.getEventname().equals("")) {
@@ -94,7 +93,7 @@ public class MyFeedAdapter extends RecyclerView.Adapter<MyFeedAdapter.MyViewHold
                 URL url = new URL(post.getPictureprofilasso());
                 Bitmap bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
                 holder.imageView.setImageBitmap(bmp);
-            } catch (IOException | NetworkOnMainThreadException e) {
+            } catch (IOException | NetworkOnMainThreadException ignored) {
             }
         }
     }

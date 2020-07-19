@@ -36,10 +36,9 @@ import retrofit2.Retrofit;
 public class AssociationFragment extends Fragment {
 
     private RecyclerView recyclerView;
-    private LinearLayoutManager LLM;
     String filter = "";
-    List<Association> listAsso = new ArrayList<>();
-    List<Category> listCat = new ArrayList<>();
+    List<Association> listAssociation = new ArrayList<>();
+    List<Category> listCategories = new ArrayList<>();
     Retrofit retrofit = NetworkClient.getRetrofitClient();
 
     public AssociationFragment(String filter) {
@@ -55,53 +54,52 @@ public class AssociationFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_association, container, false);
-        recyclerView = root.findViewById(R.id.recycler_asso);
-
-        AssociationApi assoApi = retrofit.create(AssociationApi.class);
-        CategoryApi categoryApi = retrofit.create(CategoryApi.class);
-
-        Call callAsso = assoApi.getAllAssos();
-
-        TextView labelEmpty = root.findViewById(R.id.no_asso_label);
+        View view = inflater.inflate(R.layout.fragment_association, container, false);
+        recyclerView = view.findViewById(R.id.recycler_asso);
+        TextView labelEmpty = view.findViewById(R.id.no_asso_label);
 
         final FragmentActivity Association = getActivity();
-        LLM = new LinearLayoutManager(Association);
-        recyclerView.setLayoutManager(LLM);
-        listAsso.clear();
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(Association);
+        recyclerView.setLayoutManager(linearLayoutManager);
+        listAssociation.clear();
+        AssociationApi associationApi = retrofit.create(AssociationApi.class);
+        Call callAsso = associationApi.getAllAssos();
         callAsso.enqueue(
                 new Callback<List<Association>>() {
                     @Override
                     public void onResponse(Call<List<Association>> call, Response<List<Association>> responseAsso) {
-                        if(responseAsso.code()==200) {
+                        if (responseAsso.code() == 200) {
+                            CategoryApi categoryApi = retrofit.create(CategoryApi.class);
                             Call callCat = categoryApi.getCat();
                             callCat.enqueue(
                                     new Callback<List<Category>>() {
                                         @Override
                                         public void onResponse(Call<List<Category>> call, Response<List<Category>> responseCat) {
-                                            if(responseCat.code()==200) {   List<Category> curCat =responseCat.body();
-                                                Predicate<Category> filtercat = category -> category.getName().equals(filter);
-                                                List<Category> result = curCat.stream()
-                                                        .filter(filtercat)
+                                            if (responseCat.code() == 200) {
+                                                List<Category> currentCategory = responseCat.body();
+                                                Predicate<Category> filtercategory = category -> category.getName().equals(filter);
+                                                List<Category> result = currentCategory.stream()
+                                                        .filter(filtercategory)
                                                         .collect(Collectors.toList());
                                                 List<Association> associations = responseAsso.body();
-                                                Predicate<Association> byIdcat = association -> association.getIdcat()==result.get(0).getIdcat();
-                                                List<Association> filteredAsso = associations.stream()
+                                                Predicate<Association> byIdcat = association -> association.getIdcat() == result.get(0).getIdcat();
+                                                List<Association> filteredAssociation = associations.stream()
                                                         .filter(byIdcat)
                                                         .collect(Collectors.toList());
-                                                listAsso.addAll(filteredAsso);
-                                                listCat.addAll(curCat);
+                                                listAssociation.addAll(filteredAssociation);
+                                                listCategories.addAll(currentCategory);
 
-                                                if(listAsso.size() == 0) {
+                                                if (listAssociation.size() == 0) {
                                                     labelEmpty.setVisibility(View.VISIBLE);
                                                 } else {
                                                     labelEmpty.setVisibility(View.INVISIBLE);
                                                 }
 
-                                                MyAssoAdapter adapter = new MyAssoAdapter(listAsso,result.get(0));
-                                                recyclerView.setAdapter(adapter);
+                                                MyAssoAdapter myAssoAdapter = new MyAssoAdapter(listAssociation, result.get(0));
+                                                recyclerView.setAdapter(myAssoAdapter);
                                             }
                                         }
+
                                         @Override
                                         public void onFailure(Call call, Throwable t) {
                                         }
@@ -115,6 +113,6 @@ public class AssociationFragment extends Fragment {
                     }
                 }
         );
-        return root;
+        return view;
     }
 }
