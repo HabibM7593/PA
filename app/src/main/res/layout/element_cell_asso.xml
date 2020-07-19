@@ -1,7 +1,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="80dp"
+    android:layout_height="wrap_content"
     android:layout_marginTop="5dp"
     android:layout_marginRight="3dp"
     android:layout_marginLeft="3dp"
@@ -12,13 +12,14 @@
         android:id="@+id/name_asso"
 
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
 
         tools:text="Label Asso"
         android:textSize="25sp"
         android:textColor="@color/colorBlack"
 
-        android:layout_marginStart="10dp" />
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="15dp" />
 
     <ImageButton
         android:id="@+id/button_asso_view"
@@ -26,7 +27,7 @@
 
         android:layout_width="20dp"
         android:layout_height="20dp"
-        android:background="@android:color/white"
+        android:background="@color/colorWhite"
         android:src="@drawable/right_chevron"
 
         android:layout_marginEnd="10dp"
@@ -37,14 +38,17 @@
         android:id="@+id/category_asso"
 
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
 
         tools:text="Label Category"
-        android:textSize="15sp"
         android:textColor="@color/colorBlack"
+        android:textSize="15sp"
+        android:textStyle="italic"
 
+        android:layout_below="@+id/name_asso"
+        android:layout_marginTop="1dp"
         android:layout_marginStart="25dp"
-        android:layout_marginTop="35dp" />
+        android:layout_marginBottom="10dp"/>
 
 </RelativeLayout>
 

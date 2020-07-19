@@ -18,7 +18,8 @@
             android:textSize="25sp"
             android:textColor="@color/colorBlack"
 
-            android:layout_marginStart="10dp" />
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp" />
 
         <ImageButton
             android:id="@+id/button_event_view"
@@ -39,13 +40,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
-            android:layout_below="@+id/name_event"
-            android:layout_marginStart="25dp"
-            android:layout_marginTop="1dp"
-
+            tools:text="Label Date"
             android:textColor="@color/colorBlack"
             android:textSize="15sp"
-            tools:text="Label Date" />
+
+            android:layout_below="@+id/name_event"
+            android:layout_marginTop="1dp"
+            android:layout_marginStart="25dp"
+            android:layout_marginBottom="10dp"/>
 
 </RelativeLayout>
 
