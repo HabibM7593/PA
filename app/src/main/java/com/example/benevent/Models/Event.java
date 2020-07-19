@@ -55,4 +55,8 @@ public class Event {
         return idassociation;
     }
 
+    @Override
+    public String toString() {
+        return name;
+    }
 }

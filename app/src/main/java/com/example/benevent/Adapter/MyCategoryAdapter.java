@@ -40,26 +40,25 @@ public class MyCategoryAdapter extends RecyclerView.Adapter<MyCategoryAdapter.My
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.element_cell_category, parent, false);
-        MyViewHolder myViewHolder = new MyViewHolder(view);
-        ImageButton detailShowButton = view.findViewById(R.id.button_category_view);
-        detailShowButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Category category = listCategory.get(myViewHolder.getAdapterPosition());
-                AssociationFragment aFragment = new AssociationFragment(category.getName());
-
-                ((FragmentActivity) v.getContext()).getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.frame_category, aFragment)
-                        .addToBackStack(null)
-                        .commit();
-            }
-        });
-        return myViewHolder;
+        return new MyViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         Category category = listCategory.get(position);
+
+        holder.view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Category category = listCategory.get(position);
+                AssociationFragment aFragment = new AssociationFragment(category.getName());
+
+                ((FragmentActivity) view.getContext()).getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.frame_category, aFragment)
+                        .addToBackStack(null)
+                        .commit();
+            }
+        });
 
         holder.nameCategoryTV.setText(category.getName());
     }

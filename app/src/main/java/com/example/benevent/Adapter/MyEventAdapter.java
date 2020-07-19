@@ -44,12 +44,16 @@ public class MyEventAdapter extends RecyclerView.Adapter<MyEventAdapter.MyViewHo
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.element_cell_event, parent, false);
-        MyViewHolder myViewHolder = new MyViewHolder(view);
-        ImageButton detailShowButton = view.findViewById(R.id.button_event_view);
-        detailShowButton.setOnClickListener(new View.OnClickListener() {
+        return new MyViewHolder(view);
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+
+        holder.view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Event newEvent = listEvents.get(myViewHolder.getAdapterPosition()) ;
+                Event newEvent = listEvents.get(position) ;
 
                 EventDetailsFragment eventDetailsFragment = new EventDetailsFragment(newEvent);
                 ((FragmentActivity) view.getContext()).getSupportFragmentManager().beginTransaction()
@@ -58,11 +62,7 @@ public class MyEventAdapter extends RecyclerView.Adapter<MyEventAdapter.MyViewHo
                         .commit();
             }
         });
-        return myViewHolder;
-    }
 
-    @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         Event event = listEvents.get(position);
 
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");

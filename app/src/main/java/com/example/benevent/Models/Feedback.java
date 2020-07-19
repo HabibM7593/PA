@@ -5,7 +5,6 @@ public class Feedback {
     String title;
     String content;
     String date;
-    String status;
     int note;
     int idtype;
     String plateform;

@@ -1,15 +1,12 @@
 package com.example.benevent.Models;
 
 public class Post {
-    int idpost;
     String message;
     String date;
     int iduser;
-    int idassociation;
     int idevent;
     String eventname;
     String assoacro;
-    String nameuser;
     String pictureprofilasso;
     String pictureprofiluser;
     String nomprenom;
@@ -36,10 +33,6 @@ public class Post {
 
     public String getAssoname() {
         return assoname;
-    }
-
-    public void setAssoname(String assoname) {
-        this.assoname = assoname;
     }
 
     public String getPictureprofilasso() {
