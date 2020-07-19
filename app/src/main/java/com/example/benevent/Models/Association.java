@@ -25,6 +25,10 @@ public class Association {
         this.idcategory = idcategory;
     }
 
+    public String getLogo() {
+        return logo;
+    }
+
     public int getIdas() {
         return idassociation;
     }

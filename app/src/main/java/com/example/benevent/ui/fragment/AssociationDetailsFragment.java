@@ -2,16 +2,21 @@
 package com.example.benevent.ui.fragment;
 
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.os.NetworkOnMainThreadException;
+import android.os.StrictMode;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,6 +27,8 @@ import com.example.benevent.Models.Category;
 import com.example.benevent.Models.Follow;
 import com.example.benevent.R;
 
+import java.io.IOException;
+import java.net.URL;
 import java.util.List;
 import java.util.Objects;
 
@@ -43,6 +50,7 @@ public class AssociationDetailsFragment extends Fragment {
     public TextView phoneTV;
     public TextView websiteTV;
     public TextView supportTV;
+    public ImageView logoIV;
 
     Retrofit retrofit = NetworkClient.getRetrofitClient();
 
@@ -127,6 +135,7 @@ public class AssociationDetailsFragment extends Fragment {
         phoneTV = view.findViewById(R.id.phone_asso_details);
         websiteTV = view.findViewById(R.id.website_asso_details);
         supportTV = view.findViewById(R.id.support_asso_details);
+        logoIV = view.findViewById(R.id.image_asso_details);
 
         nameAssoTV.setText(selectedAssociation.getName() + " / " + selectedAssociation.getAcronym());
         nameCategoryTV.setText(categoryAssociation.getName());
@@ -134,6 +143,16 @@ public class AssociationDetailsFragment extends Fragment {
         phoneTV.setText(selectedAssociation.getPhone());
         websiteTV.setText(selectedAssociation.getWebsite());
         supportTV.setText(selectedAssociation.getSupport());
+
+        try {
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
+                    .permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+            URL url = new URL(selectedAssociation.getLogo());
+            Bitmap bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+            logoIV.setImageBitmap(bmp);
+        } catch (IOException | NetworkOnMainThreadException ignored) {
+        }
 
         websiteTV.setClickable(true);
         websiteTV.setMovementMethod(LinkMovementMethod.getInstance());

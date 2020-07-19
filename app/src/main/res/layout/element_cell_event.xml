@@ -19,7 +19,7 @@
             android:textColor="@color/colorBlack"
 
             android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp" />
+            android:layout_marginEnd="15dp" />
 
         <ImageButton
             android:id="@+id/button_event_view"
