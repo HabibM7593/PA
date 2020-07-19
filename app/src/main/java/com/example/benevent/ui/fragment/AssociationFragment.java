@@ -68,7 +68,7 @@ public class AssociationFragment extends Fragment {
         final FragmentActivity Association = getActivity();
         LLM = new LinearLayoutManager(Association);
         recyclerView.setLayoutManager(LLM);
-
+        listAsso.clear();
         callAsso.enqueue(
                 new Callback<List<Association>>() {
                     @Override

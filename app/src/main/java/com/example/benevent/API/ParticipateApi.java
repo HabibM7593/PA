@@ -7,6 +7,7 @@ import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.PATCH;
 import retrofit2.http.POST;
@@ -19,10 +20,13 @@ public interface ParticipateApi {
     @PATCH("participate/status")
     Call<Void> UpdateParticipation(@Body Participation participation);
 
-    @PATCH("participate/refuse")
-    Call<Void> RefuseParticipation(@Body Participation participation);
+    @DELETE("participate/refuse/{idevent}/{iduser}")
+    Call<Void> RefuseParticipation(@Path("idevent") int idevent, @Path("iduser") int iduser);
 
     @GET("participate/{idevent}/{iduser}")
     Call<List<Participation>> checkParticipation(@Path("idevent") int idevent, @Path("iduser") int iduser);
+
+    @GET("participate/{idevent}")
+    Call<List<Participation>> checkNumberParticipation(@Path("idevent") int idevent);
 
 }

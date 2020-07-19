@@ -9,7 +9,7 @@ public class Event {
     Date startdate;
     Date enddate;
     String location;
-    int maxBenevole;
+    int maxbenevole;
     int idassociation;
     int fakeevent;
 
@@ -49,7 +49,7 @@ public class Event {
         return location;
     }
 
-    public int getMaxbenevole() { return maxBenevole; }
+    public int getMaxbenevole() { return maxbenevole; }
 
     public int getIdas() {
         return idassociation;

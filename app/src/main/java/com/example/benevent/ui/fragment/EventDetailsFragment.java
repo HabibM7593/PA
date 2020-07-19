@@ -50,6 +50,7 @@ public class EventDetailsFragment extends Fragment {
     public TextView maxBEventTV;
     public TextView assoTV;
     int valideParticipation = 0;
+    int numberParticipation =0 ;
 
     Retrofit retrofit = NetworkClient.getRetrofitClient();
 
@@ -104,12 +105,31 @@ public class EventDetailsFragment extends Fragment {
             }
         });
 
+        Call callcheck = participateApi.checkNumberParticipation(selectedEvent.getIdev());
+        callcheck.enqueue(new Callback<List<Participation>>() {
+            @Override
+            public void onResponse(Call<List<Participation>> call, Response<List<Participation>> response) {
+                if (response.code()==200){
+                    numberParticipation =  response.body().size();
+                    if(selectedEvent.getMaxbenevole()-numberParticipation <1 && valideParticipation==0){
+                        buttoninscription.setVisibility(View.INVISIBLE);
+                        Toast.makeText(getActivity().getApplicationContext(), "Cet événement a deja atteint le nombre de participant limite", Toast.LENGTH_LONG).show();
+                    }
+                }else{
+                    Toast.makeText(getActivity().getApplicationContext(), "Impossible de récuperer le nombre de participant", Toast.LENGTH_LONG).show();
+                }
+            }
+            @Override
+            public void onFailure(Call<List<Participation>> call, Throwable t) {
+            }
+        });
+
         buttoninscription.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Participation participation;
                 ParticipateApi participateApi = retrofit.create(ParticipateApi.class);
-                if (buttoninscription.getText().equals("Inscription")){
+                if (buttoninscription.getText().equals("S'inscrire")){
                     participation = new Participation(selectedEvent.getIdev(),iduser,0,1);
                     buttoninscription.setText("Se Désinscrire");
                     buttoninscription.setBackgroundResource(R.drawable.round_corner_red);
@@ -125,10 +145,10 @@ public class EventDetailsFragment extends Fragment {
                         }
                     });
                 }else{
-                    participation = new Participation(selectedEvent.getIdev(),iduser,0,0);
-                    buttoninscription.setText("Inscription");
+                    participation = new Participation(selectedEvent.getIdev(),iduser);
+                    buttoninscription.setText("S'inscrire");
                     buttoninscription.setBackgroundResource(R.drawable.round_corner_blue);
-                    Call call = participateApi.RefuseParticipation(participation);
+                    Call call = participateApi.RefuseParticipation(participation.getIdev(),participation.getIdu());
                     call.enqueue(new Callback<String>(){
                         @Override
                         public void onResponse(Call<String> call, Response<String> response) {
@@ -200,7 +220,6 @@ public class EventDetailsFragment extends Fragment {
         descEventTV.setText(selectedEvent.getDescription());
         maxBEventTV.setText(String.valueOf(selectedEvent.getMaxbenevole()));
 
-
         return v;
     }
 
@@ -239,7 +258,6 @@ public class EventDetailsFragment extends Fragment {
                             }
                         }
                 );
-            }else {
             }
         }
         super.onActivityResult(requestCode, resultCode, data);

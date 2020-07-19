@@ -61,7 +61,6 @@ public class MyAssoAdapter extends RecyclerView.Adapter<MyAssoAdapter.MyViewHold
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         Association association = listAssos.get(position);
 
-
         holder.nameAssoTV.setText(association.getName());
         holder.catAssoTV.setText(category.getName());
     }
@@ -70,5 +69,7 @@ public class MyAssoAdapter extends RecyclerView.Adapter<MyAssoAdapter.MyViewHold
     public int getItemCount() {
         return listAssos.size();
     }
+
+
 }
 

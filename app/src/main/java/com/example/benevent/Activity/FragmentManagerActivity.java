@@ -10,6 +10,7 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.NetworkOnMainThreadException;
 import android.os.StrictMode;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
@@ -37,6 +38,7 @@ import java.net.URL;
 
 public class FragmentManagerActivity extends AppCompatActivity implements FeedFragment.OnFragmentInteractionListener, NavigationView.OnNavigationItemSelectedListener {
     Context context = this;
+    int countFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,9 +62,9 @@ public class FragmentManagerActivity extends AppCompatActivity implements FeedFr
 
     @Override
     public void onBackPressed() {
-        int countFragment = getSupportFragmentManager().getBackStackEntryCount();
+        countFragment = getSupportFragmentManager().getBackStackEntryCount();
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
-
+        Log.d("TAG", "onBackPressed: "+countFragment);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -121,22 +123,27 @@ public class FragmentManagerActivity extends AppCompatActivity implements FeedFr
 
         switch (id) {
             case R.id.nav_feed :
+                countFragment = 0;
                 fragment = new FeedFragment();
                 setTitle("Feed");
                 break;
             case R.id.nav_asso :
+                countFragment = 0;
                 fragment = new CategoryFragment();
                 setTitle("Associations");
                 break;
             case R.id.nav_feedback :
+                countFragment = 0;
                 fragment = new FeedbackFragment();
                 setTitle("Feedback");
                 break;
             case R.id.nav_event :
+                countFragment = 0;
                 fragment = new EventFragment();
                 setTitle("Event");
                 break;
             case R.id.nav_profil :
+                countFragment = 0;
                 fragment = new ProfilFragment();
                 setTitle("Mon Profil");
                 break;

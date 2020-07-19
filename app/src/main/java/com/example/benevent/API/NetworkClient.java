@@ -5,7 +5,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class NetworkClient {
     public static final String BASE_URL = "https://benevent-esgi.herokuapp.com/";
-    //public static final String BASE_URL = "http://10.0.2.2/";
+    //public static final String BASE_URL = "http://10.0.2.2:3000/";
     public static Retrofit retrofit;
 
     public static Retrofit getRetrofitClient() {
