@@ -3,6 +3,7 @@ package com.example.benevent.Adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -43,16 +44,12 @@ public class MyEventAdapter extends RecyclerView.Adapter<MyEventAdapter.MyViewHo
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.element_cell_event, parent, false);
-        return new MyViewHolder(view);
-    }
-
-    @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-
-        holder.view.setOnClickListener(new View.OnClickListener() {
+        MyViewHolder myViewHolder = new MyViewHolder(view);
+        ImageButton detailShowButton = view.findViewById(R.id.button_event_view);
+        detailShowButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Event newEvent = listEvents.get(position) ;
+                Event newEvent = listEvents.get(myViewHolder.getAdapterPosition());
 
                 EventDetailsFragment eventDetailsFragment = new EventDetailsFragment(newEvent);
                 ((FragmentActivity) view.getContext()).getSupportFragmentManager().beginTransaction()
@@ -61,6 +58,11 @@ public class MyEventAdapter extends RecyclerView.Adapter<MyEventAdapter.MyViewHo
                         .commit();
             }
         });
+        return myViewHolder;
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
 
         Event event = listEvents.get(position);
 

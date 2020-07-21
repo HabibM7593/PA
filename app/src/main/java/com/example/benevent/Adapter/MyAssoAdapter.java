@@ -3,6 +3,7 @@ package com.example.benevent.Adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -42,23 +43,23 @@ public class MyAssoAdapter extends RecyclerView.Adapter<MyAssoAdapter.MyViewHold
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.element_cell_asso, parent, false);
-        return new MyViewHolder(view);
+        MyViewHolder viewHolder = new MyViewHolder(view);
+        ImageButton buttonDetailShow = view.findViewById(R.id.button_asso_view);
+        buttonDetailShow.setOnClickListener(loadingView -> {
+            Association newAssociation = listAssos.get(viewHolder.getAdapterPosition());
+
+            AssociationDetailsFragment associationDetailsFragment = new AssociationDetailsFragment(newAssociation, category);
+            ((FragmentActivity) loadingView.getContext()).getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.frame_asso, associationDetailsFragment)
+                    .addToBackStack(null)
+                    .commit();
+        });
+        return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
 
-        holder.view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Association newAssociation = listAssos.get(position);
-                AssociationDetailsFragment associationDetailsFragment = new AssociationDetailsFragment(newAssociation, category);
-                ((FragmentActivity) view.getContext()).getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.frame_asso, associationDetailsFragment)
-                        .addToBackStack(null)
-                        .commit();
-            }
-        });
         Association association = listAssos.get(position);
 
         holder.nameAssoTV.setText(association.getName());

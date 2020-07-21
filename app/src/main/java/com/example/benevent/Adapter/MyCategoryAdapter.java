@@ -3,6 +3,7 @@ package com.example.benevent.Adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -39,25 +40,26 @@ public class MyCategoryAdapter extends RecyclerView.Adapter<MyCategoryAdapter.My
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.element_cell_category, parent, false);
-        return new MyViewHolder(view);
-    }
-
-    @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        Category category = listCategory.get(position);
-
-        holder.view.setOnClickListener(new View.OnClickListener() {
+        MyViewHolder myViewHolder = new MyViewHolder(view);
+        ImageButton detailShowButton = view.findViewById(R.id.button_category_view);
+        detailShowButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                Category category = listCategory.get(position);
+            public void onClick(View v) {
+                Category category = listCategory.get(myViewHolder.getAdapterPosition());
                 AssociationFragment aFragment = new AssociationFragment(category.getName());
 
-                ((FragmentActivity) view.getContext()).getSupportFragmentManager().beginTransaction()
+                ((FragmentActivity) v.getContext()).getSupportFragmentManager().beginTransaction()
                         .replace(R.id.frame_category, aFragment)
                         .addToBackStack(null)
                         .commit();
             }
         });
+        return myViewHolder;
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+        Category category = listCategory.get(position);
 
         holder.nameCategoryTV.setText(category.getName());
     }
